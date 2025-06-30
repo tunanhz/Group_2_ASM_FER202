@@ -399,6 +399,30 @@
       "email": "tranmai@gmail.com",
       "img": "default.png",
       "status": "Enable"
+    },
+    {
+      "id": "51",
+      "username": "j97",
+      "password": "123455",
+      "email": "j97@gmail.com",
+      "img": "default.png",
+      "status": "Enable"
+    },
+    {
+      "id": 52,
+      "username": "xu",
+      "password": "123456",
+      "email": "u@gmail.com",
+      "img": "default.png",
+      "status": "Enable"
+    },
+    {
+      "id": 53,
+      "username": "suy",
+      "password": "123456",
+      "email": "suy@gmail.com",
+      "img": "default.png",
+      "status": "Enable"
     }
   ],
   "Patient": [
@@ -800,6 +824,30 @@
       "gender": "Nữ",
       "phone": "0948586148",
       "address": "87 Lý Nam Đế"
+    },
+    {
+      "id": "51",
+      "full_name": "Trịnh Trần Phương Tuấn",
+      "dob": "2025-06-11",
+      "gender": "Nam",
+      "phone": "0234567899",
+      "address": "Bến Tre"
+    },
+    {
+      "id": 52,
+      "full_name": "Lê Văn Xu",
+      "dob": "2025-06-02",
+      "gender": "Nam",
+      "phone": "0233456791",
+      "address": "Bắc Ninh"
+    },
+    {
+      "id": 53,
+      "full_name": "Lê Văn Xu",
+      "dob": "2025-06-02",
+      "gender": "Nam",
+      "phone": "0233456791",
+      "address": "Bắc Ninh"
     }
   ],
   "AccountStaff": [
