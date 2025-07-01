@@ -1,11 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
 
 const Home = () => {
     return (
         <div>
-            <Header />
             
             {/* Hero Section */}
             <section className="position-relative overflow-hidden" style={{
@@ -379,8 +376,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-            <Footer />
 
             {/* Custom Animations */}
             <style jsx>{`
