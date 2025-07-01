@@ -3,7 +3,7 @@
     {
       "id": "1",
       "username": "phamvannha",
-      "password": "P@ss123",
+      "password": "Trangcr7",
       "email": "pham.nha@gmail.com",
       "img": "default.png",
       "status": "Enable"
@@ -397,6 +397,14 @@
       "username": "tranthimai",
       "password": "MaiTran2024",
       "email": "tranmai@gmail.com",
+      "img": "default.png",
+      "status": "Enable"
+    },
+    {
+      "id": 51,
+      "username": "trangbo",
+      "password": "P@ss123",
+      "email": "nguyenkhactrang2911@gmail.com",
       "img": "default.png",
       "status": "Enable"
     }
@@ -800,6 +808,14 @@
       "gender": "Nữ",
       "phone": "0948586148",
       "address": "87 Lý Nam Đế"
+    },
+    {
+      "id": 51,
+      "full_name": "Nguyen Khac Trang",
+      "dob": "2004-02-09",
+      "gender": "Nam",
+      "phone": "0968537367",
+      "address": "Khu 10"
     }
   ],
   "AccountStaff": [
@@ -2185,7 +2201,7 @@
       "full_name": "Đỗ Quốc Đạt",
       "department": "Nội tổng quát",
       "phone": "0903001001",
-      "eduLevel": "Tiến sĩ"
+      "eduLevel": "Thạc sĩ"
     },
     {
       "id": "2",
