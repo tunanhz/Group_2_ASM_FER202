@@ -281,21 +281,6 @@ const Header = () => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a className="dropdown-item py-2 px-3" href="/doctor-dashboard" style={{
-                                                    transition: 'all 0.3s ease'
-                                                }}
-                                                onMouseEnter={(e) => {
-                                                    e.target.style.backgroundColor = '#f3f4f6';
-                                                    e.target.style.color = '#2563eb';
-                                                }}
-                                                onMouseLeave={(e) => {
-                                                    e.target.style.backgroundColor = 'transparent';
-                                                    e.target.style.color = '#374151';
-                                                }}>
-                                                    <i className="fas fa-user-md me-2"></i>Doctor Dashboard
-                                                </a>
-                                            </li>
-                                            <li>
                                                 <a className="dropdown-item py-2 px-3" href="/appointments" style={{
                                                     transition: 'all 0.3s ease'
                                                 }}
@@ -409,6 +394,6 @@ const Header = () => {
             `}</style>
         </>
     );
-};
+    };
 
 export default Header;  

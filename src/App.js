@@ -13,6 +13,7 @@ import EditInforNurse from './components/editInforNurse';
 import EditInforPatient from './components/editInforPatient';
 import EditInforReceptionist from './components/editInforReceptionist';
 import DoctorDashboard from './components/DoctorDashboard';
+import PatientDashboard from './components/PatientDashboard';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Route path="/appointment" element={<BookAppointment />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+            <Route path="/patient-dashboard" element={<PatientDashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/appointments" element={<MyAppointments />} />

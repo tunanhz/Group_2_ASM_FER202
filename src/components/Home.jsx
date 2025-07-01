@@ -54,7 +54,7 @@ const Home = () => {
                                         Book Appointment
                                     </button>
                                     
-                                </div>
+            </div>
                             </div>
                         </div>
                         <div className="col-lg-6" data-aos="fade-left">
@@ -70,7 +70,7 @@ const Home = () => {
                                     border: '2px solid rgba(255,255,255,0.3)'
                                 }}>
                                     <i className="fas fa-heartbeat text-white" style={{fontSize: '8rem', opacity: 0.8}}></i>
-                                </div>
+                    </div>
                                 {/* Floating elements */}
                                 <div className="position-absolute" style={{
                                     top: '10%',
@@ -82,7 +82,7 @@ const Home = () => {
                                     animation: 'float 3s ease-in-out infinite'
                                 }}>
                                     <i className="fas fa-user-md text-white fs-3"></i>
-                                </div>
+                            </div>
                                 <div className="position-absolute" style={{
                                     bottom: '20%',
                                     left: '5%',
@@ -93,7 +93,7 @@ const Home = () => {
                                     animation: 'float 3s ease-in-out infinite 1s'
                                 }}>
                                     <i className="fas fa-ambulance text-white fs-3"></i>
-                                </div>
+                    </div>
                             </div>
                         </div>
                     </div>
@@ -136,11 +136,11 @@ const Home = () => {
                                         background: `linear-gradient(45deg, ${stat.color}, ${stat.color}dd)`
                                     }}>
                                         <i className={`fas ${stat.icon} text-white fs-4`}></i>
-                                    </div>
+                        </div>
                                     <h3 className="fw-bold mb-2" style={{color: stat.color, fontSize: '2.5rem'}}>{stat.number}</h3>
                                     <p className="text-muted mb-0 fw-semibold">{stat.label}</p>
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                         ))}
                     </div>
                 </div>
@@ -244,8 +244,8 @@ const Home = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                </div>
+                            </div>
+                        </div>
             </section>
 
             {/* Testimonials Section */}
@@ -319,7 +319,7 @@ const Home = () => {
                                                 className="rounded-circle me-3"
                                                 style={{width: '60px', height: '60px', objectFit: 'cover'}}
                                             />
-                                            <div>
+                                    <div>
                                                 <h6 className="mb-0 fw-bold">{testimonial.name}</h6>
                                                 <small className="text-muted">{testimonial.role}</small>
                                             </div>
@@ -329,7 +329,7 @@ const Home = () => {
                             </div>
                         ))}
                     </div>
-                </div>
+                                    </div>
             </section>
 
             {/* CTA Section */}

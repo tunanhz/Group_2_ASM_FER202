@@ -28,6 +28,7 @@ export const apiService = {
     getAppointmentsByDoctorId: (doctorId) => api.get(`/Appointment?doctor_id=${doctorId}`),
     getAppointmentsByDate: (date) => api.get(`/Appointment?appointment_datetime_like=${date}`),
     updateAppointmentStatus: (id, status) => api.patch(`/Appointment/${id}`, { status }),
+    createAppointment: (appointmentData) => api.post('/Appointment', appointmentData),
     
     // Diagnosis related APIs
     getDiagnosis: () => api.get('/Diagnosis'),
@@ -152,6 +153,40 @@ export const handleApiSuccess = (response) => {
         success: true,
         message: 'Thành công',
         data: response.data
+    };
+};
+
+// Simplified export functions for components
+export const getDoctors = () => apiService.getDoctors().then(handleApiSuccess).catch(handleApiError);
+export const getPatients = () => apiService.getPatients().then(handleApiSuccess).catch(handleApiError);
+export const getAppointments = () => apiService.getAppointments().then(handleApiSuccess).catch(handleApiError);
+export const getDiagnosis = () => apiService.getDiagnosis().then(handleApiSuccess).catch(handleApiError);
+export const updateAppointmentStatus = (id, status) => apiService.updateAppointmentStatus(id, status).then(handleApiSuccess).catch(handleApiError);
+export const createAppointment = (appointmentData) => apiService.createAppointment(appointmentData).then(handleApiSuccess).catch(handleApiError);
+
+// Patient-specific helper functions
+export const getPatientAppointments = (appointments, patientId) => {
+    return appointments
+        .filter(appointment => appointment.patient_id === patientId)
+        .sort((a, b) => new Date(b.appointment_datetime) - new Date(a.appointment_datetime));
+};
+
+export const getPatientDiagnosis = (diagnosis, patientId) => {
+    // For diagnosis, we need to find matching through medicineRecord_id or patient relation
+    // Since we don't have direct patient_id in diagnosis, we'll return all for now
+    return diagnosis.slice(0, 5); // Return first 5 diagnosis as example
+};
+
+export const getPatientStats = (appointments, diagnosis, patientId) => {
+    const patientAppointments = getPatientAppointments(appointments, patientId);
+    const patientDiagnosis = getPatientDiagnosis(diagnosis, patientId);
+    
+    return {
+        totalAppointments: patientAppointments.length,
+        completedAppointments: patientAppointments.filter(apt => apt.status === 'Completed').length,
+        pendingAppointments: patientAppointments.filter(apt => apt.status === 'Pending').length,
+        confirmedAppointments: patientAppointments.filter(apt => apt.status === 'Confirmed').length,
+        totalDiagnosis: patientDiagnosis.length
     };
 };
 
