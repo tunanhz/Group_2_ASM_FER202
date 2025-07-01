@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import Components
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -13,26 +12,20 @@ import EditInforNurse from './components/editInforNurse';
 import EditInforPatient from './components/editInforPatient';
 import EditInforReceptionist from './components/editInforReceptionist';
 import DoctorDashboard from './components/DoctorDashboard';
+import ServiceManager from './components/ServiceManager';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* Header - Always visible */}
         <Header />
         
-        {/* Main Content with Routes */}
         <main className="main-content" style={{minHeight: '80vh'}}>
           <Routes>
-            {/* Home Page */}
             <Route path="/" element={<Home />} />
-            
-            {/* Authentication Pages */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<RegisterPatient />} />
             <Route path="/forgot-password" element={<ForgetPassword />} />
-            
-            {/* Edit Information Pages */}
             <Route path="/edit/doctor" element={<EditInforDoctor />} />
             <Route path="/edit/doctor/:id" element={<EditInforDoctor />} />
             
@@ -46,6 +39,7 @@ function App() {
             <Route path="/edit/receptionist/:id" element={<EditInforReceptionist />} />
             
             {/* Management Pages */}
+            <Route path="/services" element={<ServiceManager />} />
             <Route path="/doctors" element={<DoctorsList />} />
             <Route path="/nurses" element={<NursesList />} />
             <Route path="/patients" element={<PatientsList />} />

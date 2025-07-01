@@ -5647,16 +5647,6 @@
       "price": "230000"
     },
     {
-      "id": "15",
-      "name": "Khám nội tiết",
-      "description": "Tư vấn và chẩn đoán các bệnh về nội tiết.",
-      "price": "230000"
-    },
-    {
-      "id": "16",
-      "name": "Đo điện tim (ECG"
-    },
-    {
       "id": "17",
       "name": "Chụp X-quang phổi",
       "description": "Chẩn đoán các bệnh lý phổi.",
@@ -5669,10 +5659,10 @@
       "price": "180000"
     },
     {
-      "id": "19",
       "name": "Siêu âm tổng quát",
+      "price": "2300000",
       "description": "Siêu âm ổ bụng",
-      "price": "gan"
+      "id": "19"
     },
     {
       "id": "20",
