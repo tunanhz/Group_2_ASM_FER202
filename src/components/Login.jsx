@@ -64,16 +64,22 @@ const Login = () => {
                 case "Receptionist":
                   window.location.href = "/receptionist-dashboard";
                   break;
-                  case "AdminSys":
+                case "AdminSys":
                   window.location.href = "/dashboard";
+                  break;
+                case "AdminBusiness":
+                  window.location.href = "/business-dashboard";
+                  break;
+                case "Pharmacist":
+                  window.location.href = "/pharmacist-dashboard";
                   break;
                 default:
                   window.location.href = "/staff-dashboard";
               }
             } else if (userType === "pharmacist") {
-              window.location.href = "/doctor-dashboard";
+              window.location.href = "/pharmacist-dashboard";
             }
-             else {
+            else {
               window.location.href = "/patient-dashboard";
             }
           }, 1000);
