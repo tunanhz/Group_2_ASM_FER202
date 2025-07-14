@@ -30,6 +30,8 @@ const Dashboard = () => {
     lastBackup: "2024-01-15 02:00:00",
     nextBackup: "2024-01-16 02:00:00"
   });
+  const [accountStaff, setAccountStaff] = useState([]);
+  const [patients, setPatients] = useState([]);
 
   useEffect(() => {
     // Lấy thông tin user từ localStorage
@@ -88,6 +90,8 @@ const Dashboard = () => {
         disabledUsers: disabledUsers
       });
 
+      setAccountStaff(accountStaff);
+      setPatients(patients);
       // Lấy 10 log gần nhất
       //const recentLogs = logs.slice(0, 10);
       setSystemLogs(logs);
@@ -374,32 +378,50 @@ const Dashboard = () => {
                         <Card.Body style={{maxHeight: '400px', overflowY: 'auto'}}>
                           {systemLogs.length > 0 ? (
                             <div>
-                              {(showAllLogs ? systemLogs : systemLogs.slice(0, 10)).map((log) => (
-                                <div key={log.id} className="d-flex align-items-start mb-3 p-2 border-bottom">
-                                  <div className="me-3">
-                                    <i className={`${getLogLevelIcon(log.level)} text-${getLogLevelColor(log.level)}`}></i>
-                                  </div>
-                                  <div className="flex-grow-1">
-                                    <div className="d-flex justify-content-between align-items-start">
-                                      <div>
-                                        <strong>{log.message}</strong>
-                                        <br />
-                                        <small className="text-muted">
-                                          <i className={`${dataHelpers.getActionIcon(log.action)} me-1`}></i>
-                                          {log.action} | User: {log.user}
-                                          {getUserTypeBadge(log.userType)}
-                                        </small>
-                                      </div>
-                                      <Badge bg={getLogLevelColor(log.level)} className="ms-2">
-                                        {log.level}
-                                      </Badge>
+                              {(showAllLogs ? systemLogs : systemLogs.slice(0, 10)).map((log) => {
+                                // Lấy tên user và loại user
+                                let userName = "Không rõ";
+                                let userType = "";
+                                if (log.account_staff_id) {
+                                  const staff = accountStaff.find(s => String(s.id) === String(log.account_staff_id));
+                                  userName = staff ? (staff.full_name || staff.username) : "Không rõ";
+                                  userType = staff ? staff.role : "Staff";
+                                } else if (log.account_patient_id) {
+                                  const patient = patients.find(p => String(p.id) === String(log.account_patient_id));
+                                  userName = patient ? (patient.full_name || patient.username) : "Không rõ";
+                                  userType = "Patient";
+                                } else if (log.account_pharmacist_id) {
+                                  const pharmacist = accountStaff.find(s => String(s.id) === String(log.account_pharmacist_id));
+                                  userName = pharmacist ? (pharmacist.full_name || pharmacist.username) : "Không rõ";
+                                  userType = "Pharmacist";
+                                }
+
+                                // Lấy ngày giờ
+                                const logTime = log.log_time
+                                  ? new Date(log.log_time.replace(" ", "T")).toLocaleString("vi-VN")
+                                  : "Không rõ";
+
+                                return (
+                                  <div key={log.id} className="d-flex align-items-start mb-3 p-2 border-bottom">
+                                    <div className="me-3">
+                                      <i className={`${dataHelpers.getActionIcon(log.action_type)} me-1`}></i>
                                     </div>
-                                    <small className="text-muted">
-                                      {new Date(log.timestamp).toLocaleString('vi-VN')}
-                                    </small>
+                                    <div className="flex-grow-1">
+                                      <div className="d-flex justify-content-between align-items-start">
+                                        <div>
+                                          <strong>{log.action}</strong>
+                                          <br />
+                                          <small className="text-muted">
+                                            {log.action_type} | User: {userName}
+                                            {getUserTypeBadge(userType)}
+                                          </small>
+                                        </div>
+                                      </div>
+                                      <small className="text-muted">{logTime}</small>
+                                    </div>
                                   </div>
-                                </div>
-                              ))}
+                                );
+                              })}
 
                               {/* Nút Xem thêm/Thu gọn */}
                               {systemLogs.length > 10 && (

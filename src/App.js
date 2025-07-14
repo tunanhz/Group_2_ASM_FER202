@@ -27,18 +27,24 @@ import EditMedicine from './components/EditMedicine';
 import PrescriptionList from './components/Prescriptions';
 import Stock from './components/Stock';
 import AdminBusinessDashboard from './components/AdminBusinessDashboard';
+import DashboardAdmin from './components/Dashboard_Admin';
+
 import InvoiceList from './components/InvoiceList';
 import RevenueStatistics from './components/RevenueStatistics';
+import AccountList from './components/AccountList';
 
 const AppContent = () => {
   const location = useLocation();
   const doctorRoutes = ['/doctor-dashboard', '/assign-service', '/result-page'];
   const isDoctorPage = doctorRoutes.includes(location.pathname) || location.pathname.startsWith('/service-assignment');
 
+  const adminHideHeaderFooterRoutes = ['/dashboard', '/accounts'];
+  const hideHeaderFooter = adminHideHeaderFooterRoutes.includes(location.pathname);
+
   return (
     <div className="App">
-      {/* Header - Hidden for doctor pages */}
-      {!isDoctorPage && <Header />}
+      {/* Header - Hidden for doctor pages and admin/account pages */}
+      {!isDoctorPage && !hideHeaderFooter && <Header />}
       
       {/* Main Content with Routes */}
       <main className="main-content" style={{minHeight: '80vh'}}>
@@ -75,7 +81,7 @@ const AppContent = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/appointment" element={<BookAppointment />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<DashboardAdmin />} />
             <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
             <Route path="/patient-dashboard" element={<PatientDashboard />} />
             <Route path="/service-assignment/:patientId/:waitlistId" element={<ServiceAssignment />} />
@@ -99,6 +105,7 @@ const AppContent = () => {
             <Route path="/business-dashboard" element={<AdminBusinessDashboard />} />
             <Route path="/invoice-list" element={<InvoiceList />} />
             <Route path="/revenue-statistics" element={<RevenueStatistics />} />
+            <Route path="/accounts" element={<AccountList />} />
 
             
             {/* 404 Page */}
@@ -106,8 +113,8 @@ const AppContent = () => {
           </Routes>
         </main>
         
-        {/* Footer - Always visible */}
-        <Footer />
+        {/* Footer - Always visible except doctor pages and admin/account pages */}
+        {!isDoctorPage && !hideHeaderFooter && <Footer />}
       </div>
   );
 };
