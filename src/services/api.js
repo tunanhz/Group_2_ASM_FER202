@@ -227,7 +227,20 @@ export const dataHelpers = {
             case 'evening': return 'Buổi tối';
             default: return 'Không xác định';
         }
-    }
+    },
+
+    getActionIcon: (action) => {
+        switch ((action || '').toLowerCase()) {
+            case 'login': return 'fas fa-sign-in-alt text-success';
+            case 'logout': return 'fas fa-sign-out-alt text-secondary';
+            case 'create': return 'fas fa-plus-circle text-primary';
+            case 'update': return 'fas fa-edit text-warning';
+            case 'delete': return 'fas fa-trash-alt text-danger';
+            case 'backup': return 'fas fa-database text-info';
+            case 'restore': return 'fas fa-undo text-info';
+            default: return 'fas fa-info-circle text-muted';
+        }
+    },
 };
 
 // Error handling wrapper
@@ -385,6 +398,27 @@ export const getPatientStats = (appointments, diagnosis, patientId) => {
         confirmedAppointments: patientAppointments.filter(apt => apt.status === 'Confirmed').length,
         totalDiagnosis: patientDiagnosis.length
     };
+};
+
+export const getSystemLogs = async () => {
+  try {
+    const [staffLogs, patientLogs, pharmacistLogs] = await Promise.all([
+      api.get('/SystemLog_Staff'),
+      api.get('/SystemLog_Patient'),
+      api.get('/SystemLog_Pharmacist'),
+    ]);
+    // Gộp và sắp xếp theo thời gian giảm dần (nếu có trường timestamp)
+    const allLogs = [
+      ...staffLogs.data.map(log => ({ ...log, type: 'staff' })),
+      ...patientLogs.data.map(log => ({ ...log, type: 'patient' })),
+      ...pharmacistLogs.data.map(log => ({ ...log, type: 'pharmacist' })),
+    ];
+    // Nếu có trường timestamp, sắp xếp giảm dần
+    allLogs.sort((a, b) => new Date(b.timestamp || b.time || 0) - new Date(a.timestamp || a.time || 0));
+    return { success: true, data: allLogs };
+  } catch (error) {
+    return handleApiError(error);
+  }
 };
 
 export default api; 
