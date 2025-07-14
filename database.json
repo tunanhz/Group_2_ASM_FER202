@@ -1,10 +1,10 @@
 {
   "AccountPatient": [
     {
-      "id": "1",
-      "username": "phamvannha",
+      "id": "11111",
+      "username": "phamvannhaaaaaaaaa",
       "password": "Trangcr7",
-      "email": "pham.nha@gmail.com",
+      "email": "admin@gmail.com",
       "img": "default.png",
       "status": "Enable"
     },
@@ -407,12 +407,20 @@
       "email": "nguyenkhactrang2911@gmail.com",
       "img": "default.png",
       "status": "Enable"
+    },
+    {
+      "id": "52",
+      "username": "trangbo1",
+      "password": "P@ss123",
+      "email": "nguyenkhactrang29111@gmail.com",
+      "img": "default.png",
+      "status": "Enable"
     }
   ],
   "Patient": [
     {
-      "id": "1",
-      "full_name": "Phạm Văn Nhã",
+      "id": "11111",
+      "full_name": "Phạm Văn Nhãaaaaaaaa",
       "dob": "2025-06-29",
       "gender": "Nam",
       "phone": "0945916397",
@@ -812,6 +820,14 @@
     {
       "id": "51",
       "full_name": "Nguyen Khac Trang",
+      "dob": "2004-02-09",
+      "gender": "Nam",
+      "phone": "0968537367",
+      "address": "Khu 10"
+    },
+    {
+      "id": "52",
+      "full_name": "Duong Tuan Anh",
       "dob": "2004-02-09",
       "gender": "Nam",
       "phone": "0968537367",
@@ -4303,6 +4319,42 @@
     {
       "id": "50",
       "patient_id": "50"
+    },
+    {
+      "id": "07cb",
+      "patient_id": "1"
+    },
+    {
+      "id": "a48c",
+      "patient_id": "51"
+    },
+    {
+      "id": "e0bb",
+      "patient_id": "51"
+    },
+    {
+      "id": "5ded",
+      "patient_id": "52"
+    },
+    {
+      "id": "7b4f",
+      "patient_id": "52"
+    },
+    {
+      "id": "fbd4",
+      "patient_id": "52"
+    },
+    {
+      "id": "ec83",
+      "patient_id": "52"
+    },
+    {
+      "id": "70ea",
+      "patient_id": "52"
+    },
+    {
+      "id": "7724",
+      "patient_id": "52"
     }
   ],
   "Appointment": [
@@ -4341,9 +4393,9 @@
       "doctor_id": "13",
       "patient_id": "32",
       "appointment_datetime": "2025-06-04 18:00:00",
-      "receptionist_id": "3",
+      "receptionist_id": "1",
       "shift": "Evening",
-      "status": "Pending",
+      "status": "Confirmed",
       "note": "Đặt lịch tái khám"
     },
     {
@@ -4815,760 +4867,99 @@
       "shift": "Morning",
       "status": "Pending",
       "note": "tốt"
+    },
+    {
+      "id": "5eb2",
+      "doctor_id": "3",
+      "patient_id": "1",
+      "appointment_datetime": "2025-07-18 13:00:00",
+      "receptionist_id": "1",
+      "shift": "Afternoon",
+      "status": "Pending",
+      "note": "Sốt huyết não"
     }
   ],
   "Diagnosis": [
     {
-      "id": "1",
-      "doctor_id": "7",
-      "medicineRecord_id": "1",
+      "id": "8",
+      "doctor_id": "8",
+      "medicineRecord_id": "8",
       "conclusion": "Khám sức khỏe tổng quát bình thường",
       "disease": "Không bệnh",
       "treatment_plan": "Duy trì sinh hoạt lành mạnh"
     },
     {
-      "id": "2",
-      "doctor_id": "3",
-      "medicineRecord_id": "12",
-      "conclusion": "Phát hiện huyết áp cao",
-      "disease": "Tăng huyết áp",
-      "treatment_plan": "Ăn nhạt"
-    },
-    {
-      "id": "3",
-      "doctor_id": "10",
-      "medicineRecord_id": "7",
-      "conclusion": "ghi ngờ đái tháo đường type 2",
-      "disease": "Đái tháo đường type 2",
-      "treatment_plan": "Thuốc kiểm soát đường huyết"
-    },
-    {
-      "id": "4",
-      "doctor_id": "2",
-      "medicineRecord_id": "25",
-      "conclusion": "hiễm khuẩn hô hấp nhẹ",
-      "disease": "Viêm họng cấp",
-      "treatment_plan": "Kháng sinh 7 ngày"
-    },
-    {
-      "id": "5",
-      "doctor_id": "11",
-      "medicineRecord_id": "18",
-      "conclusion": "Rối loạn tiêu hóa do ăn uống",
-      "disease": "Rối loạn tiêu hóa",
-      "treatment_plan": "Dùng men vi sinh"
-    },
-    {
-      "id": "6",
-      "doctor_id": "4",
-      "medicineRecord_id": "5",
-      "conclusion": "Viêm phổi nhẹ",
-      "disease": "Viêm phổi",
-      "treatment_plan": "Kháng sinh theo phác đồ"
-    },
-    {
-      "id": "7",
-      "doctor_id": "15",
-      "medicineRecord_id": "30",
-      "conclusion": "Cận thị tiến triển",
-      "disease": "Cận thị",
-      "treatment_plan": "Đeo kính đúng số"
-    },
-    {
-      "id": "8",
+      "id": "c6d8",
       "doctor_id": "1",
-      "medicineRecord_id": "41",
-      "conclusion": "Tăng cholesterol máu",
-      "disease": "Rối loạn mỡ máu",
-      "treatment_plan": "Dùng statin"
+      "medicineRecord_id": "e0bb",
+      "conclusion": "Điều trị trong thời gian ngắn ",
+      "disease": "Tràn dịch phổi ",
+      "treatment_plan": "Uống thuốc khử dịch "
     },
     {
-      "id": "9",
-      "doctor_id": "6",
-      "medicineRecord_id": "9",
-      "conclusion": "Phát hiện viêm khớp nhẹ",
-      "disease": "Viêm khớp",
-      "treatment_plan": "Tập vật lý trị liệu"
-    },
-    {
-      "id": "10",
-      "doctor_id": "8",
-      "medicineRecord_id": "21",
-      "conclusion": "Không phát hiện bệnh",
-      "disease": "Không bệnh",
-      "treatment_plan": "Khám lại sau 6 tháng nếu có triệu chứng"
-    },
-    {
-      "id": "11",
-      "doctor_id": "12",
-      "medicineRecord_id": "4",
-      "conclusion": "Rối loạn giấc ngủ",
-      "disease": "Mất ngủ mãn tính",
-      "treatment_plan": "Thay đổi lối sống"
-    },
-    {
-      "id": "12",
-      "doctor_id": "17",
-      "medicineRecord_id": "37",
-      "conclusion": "Viêm dạ dày mạn",
-      "disease": "Viêm dạ dày",
-      "treatment_plan": "Chế độ ăn phù hợp"
-    },
-    {
-      "id": "13",
-      "doctor_id": "13",
-      "medicineRecord_id": "11",
-      "conclusion": "Viêm amidan cấp",
-      "disease": "Viêm amidan",
-      "treatment_plan": "Súc họng"
-    },
-    {
-      "id": "14",
-      "doctor_id": "9",
-      "medicineRecord_id": "44",
-      "conclusion": "Bệnh lý về gan nhẹ",
-      "disease": "Viêm gan B",
-      "treatment_plan": "Theo dõi men gan định kỳ"
-    },
-    {
-      "id": "15",
-      "doctor_id": "20",
-      "medicineRecord_id": "15",
-      "conclusion": "Viêm phế quản mạn",
-      "disease": "Viêm phế quản",
-      "treatment_plan": "Dùng thuốc giãn phế quản"
-    },
-    {
-      "id": "16",
-      "doctor_id": "5",
-      "medicineRecord_id": "40",
-      "conclusion": "Đau lưng cơ học",
-      "disease": "Đau cột sống",
-      "treatment_plan": "Tập vật lý trị liệu"
-    },
-    {
-      "id": "17",
-      "doctor_id": "16",
-      "medicineRecord_id": "24",
-      "conclusion": "Phát hiện viêm xoang",
-      "disease": "Viêm xoang",
-      "treatment_plan": "Rửa mũi nước muối"
-    },
-    {
-      "id": "18",
-      "doctor_id": "14",
-      "medicineRecord_id": "2",
-      "conclusion": "Suy nhược cơ thể",
-      "disease": "Suy nhược cơ thể",
-      "treatment_plan": "Bổ sung vitamin"
-    },
-    {
-      "id": "19",
-      "doctor_id": "18",
-      "medicineRecord_id": "36",
-      "conclusion": "Đau dạ dày tái phát",
-      "disease": "Loét dạ dày",
-      "treatment_plan": "Điều trị bằng thuốc ức chế acid"
-    },
-    {
-      "id": "20",
-      "doctor_id": "3",
-      "medicineRecord_id": "8",
-      "conclusion": "Bệnh trĩ nội",
-      "disease": "Trĩ nội",
-      "treatment_plan": "Uống thuốc"
-    },
-    {
-      "id": "21",
-      "doctor_id": "12",
-      "medicineRecord_id": "35",
-      "conclusion": "Tăng cân không kiểm soát",
-      "disease": "Béo phì",
-      "treatment_plan": "Thực đơn giảm cân"
-    },
-    {
-      "id": "22",
-      "doctor_id": "8",
-      "medicineRecord_id": "14",
-      "conclusion": "hiễm siêu vi",
-      "disease": "Cảm cúm",
-      "treatment_plan": "ghỉ ngơi"
-    },
-    {
-      "id": "23",
-      "doctor_id": "19",
-      "medicineRecord_id": "29",
-      "conclusion": "Viêm tai giữa nhẹ",
-      "disease": "Viêm tai giữa",
-      "treatment_plan": "Kháng sinh"
-    },
-    {
-      "id": "24",
-      "doctor_id": "7",
-      "medicineRecord_id": "48",
-      "conclusion": "Phát hiện sỏi thận nhỏ",
-      "disease": "Sỏi thận",
-      "treatment_plan": "Uống nhiều nước"
-    },
-    {
-      "id": "25",
-      "doctor_id": "5",
-      "medicineRecord_id": "27",
-      "conclusion": "Rối loạn lipid máu",
-      "disease": "Rối loạn lipid",
-      "treatment_plan": "Thuốc statin"
-    },
-    {
-      "id": "26",
-      "doctor_id": "4",
-      "medicineRecord_id": "23",
-      "conclusion": "Hen phế quản nhẹ",
-      "disease": "Hen phế quản",
-      "treatment_plan": "Dùng thuốc giãn phế quản"
-    },
-    {
-      "id": "27",
-      "doctor_id": "15",
-      "medicineRecord_id": "19",
-      "conclusion": "Viêm bàng quang cấp",
-      "disease": "Viêm bàng quang",
-      "treatment_plan": "Kháng sinh"
-    },
-    {
-      "id": "28",
-      "doctor_id": "10",
-      "medicineRecord_id": "32",
-      "conclusion": "Đau đầu căng thẳng",
-      "disease": "Đau đầu căng thẳng",
-      "treatment_plan": "Thư giãn"
-    },
-    {
-      "id": "29",
-      "doctor_id": "2",
-      "medicineRecord_id": "13",
-      "conclusion": "Đau vai gáy mãn tính",
-      "disease": "Hội chứng vai gáy",
-      "treatment_plan": "Tập vật lý trị liệu"
-    },
-    {
-      "id": "30",
-      "doctor_id": "6",
-      "medicineRecord_id": "33",
-      "conclusion": "Phát hiện thiếu máu nhẹ",
-      "disease": "Thiếu máu",
-      "treatment_plan": "Sắt uống"
-    },
-    {
-      "id": "31",
-      "doctor_id": "17",
-      "medicineRecord_id": "50",
-      "conclusion": "Viêm phổi nhẹ",
-      "disease": "Viêm phổi",
-      "treatment_plan": "Kháng sinh"
-    },
-    {
-      "id": "32",
+      "id": "6116",
       "doctor_id": "1",
-      "medicineRecord_id": "16",
-      "conclusion": "Tăng huyết áp giai đoạn I",
-      "disease": "Tăng huyết áp",
-      "treatment_plan": "Thuốc hạ áp"
-    },
-    {
-      "id": "33",
-      "doctor_id": "13",
-      "medicineRecord_id": "46",
-      "conclusion": "Viêm ruột nhẹ",
-      "disease": "Viêm ruột",
-      "treatment_plan": "Ăn lỏng"
-    },
-    {
-      "id": "34",
-      "doctor_id": "9",
-      "medicineRecord_id": "39",
-      "conclusion": "Khó tiêu kéo dài",
-      "disease": "Rối loạn tiêu hóa",
-      "treatment_plan": "Chia nhỏ bữa ăn"
-    },
-    {
-      "id": "35",
-      "doctor_id": "11",
-      "medicineRecord_id": "6",
-      "conclusion": "Khám sức khỏe sinh sản",
-      "disease": "Không bệnh",
-      "treatment_plan": "Tư vấn sức khỏe"
-    },
-    {
-      "id": "36",
-      "doctor_id": "7",
-      "medicineRecord_id": "43",
-      "conclusion": "hiễm khuẩn tiết niệu",
-      "disease": "hiễm trùng tiết niệu",
-      "treatment_plan": "Kháng sinh đủ liều"
-    },
-    {
-      "id": "37",
-      "doctor_id": "18",
-      "medicineRecord_id": "26",
-      "conclusion": "Rối loạn lo âu",
-      "disease": "Rối loạn lo âu",
-      "treatment_plan": "Tư vấn tâm lý"
-    },
-    {
-      "id": "38",
-      "doctor_id": "14",
-      "medicineRecord_id": "38",
-      "conclusion": "Tiểu đường type 2",
-      "disease": "Đái tháo đường type 2",
-      "treatment_plan": "Kiểm soát chế độ ăn"
-    },
-    {
-      "id": "39",
-      "doctor_id": "19",
-      "medicineRecord_id": "31",
-      "conclusion": "Đau bụng cấp",
-      "disease": "Viêm ruột thừa",
-      "treatment_plan": "Phẫu thuật cắt ruột thừa"
-    },
-    {
-      "id": "40",
-      "doctor_id": "3",
-      "medicineRecord_id": "28",
-      "conclusion": "Chấn thương phần mềm",
-      "disease": "Tổn thương phần mềm",
-      "treatment_plan": "ghỉ ngơi"
-    },
-    {
-      "id": "41",
-      "doctor_id": "16",
-      "medicineRecord_id": "22",
-      "conclusion": "Khám lại định kỳ",
-      "disease": "Không bệnh",
-      "treatment_plan": "Không cần điều trị"
-    },
-    {
-      "id": "42",
-      "doctor_id": "2",
-      "medicineRecord_id": "10",
-      "conclusion": "Suy dinh dưỡng nhẹ",
-      "disease": "Suy dinh dưỡng",
-      "treatment_plan": "Tăng cường dinh dưỡng"
-    },
-    {
-      "id": "43",
-      "doctor_id": "12",
-      "medicineRecord_id": "49",
-      "conclusion": "hiễm giun sán",
-      "disease": "hiễm giun",
-      "treatment_plan": "Tẩy giun định kỳ"
-    },
-    {
-      "id": "44",
-      "doctor_id": "11",
-      "medicineRecord_id": "47",
-      "conclusion": "Viêm lợi nhẹ",
-      "disease": "Viêm lợi",
-      "treatment_plan": "Súc miệng"
-    },
-    {
-      "id": "45",
-      "doctor_id": "8",
-      "medicineRecord_id": "3",
-      "conclusion": "Sốt xuất huyết nghi ngờ",
-      "disease": "Sốt xuất huyết",
-      "treatment_plan": "Theo dõi"
-    },
-    {
-      "id": "46",
-      "doctor_id": "4",
-      "medicineRecord_id": "20",
-      "conclusion": "Đau lưng",
-      "disease": "Thóa cột sống",
-      "treatment_plan": "Tập vật lý trị liệu"
-    },
-    {
-      "id": "47",
-      "doctor_id": "10",
-      "medicineRecord_id": "42",
-      "conclusion": "Chóng mặt",
-      "disease": "hoa mắt",
-      "treatment_plan": "Thần kinh thực vật"
-    },
-    {
-      "id": "48",
-      "doctor_id": "6",
-      "medicineRecord_id": "34",
-      "conclusion": "Viêm phế quản cấp",
-      "disease": "Viêm phế quản",
-      "treatment_plan": "Kháng sinh"
-    },
-    {
-      "id": "49",
-      "doctor_id": "20",
-      "medicineRecord_id": "17",
-      "conclusion": "hiễm trùng da nhẹ",
-      "disease": "hiễm trùng da",
-      "treatment_plan": "Sát khuẩn"
-    },
-    {
-      "id": "50",
-      "doctor_id": "5",
-      "medicineRecord_id": "22",
-      "conclusion": "Khám sức khỏe tổng quát",
-      "disease": "Không bệnh",
-      "treatment_plan": "Chỉ dẫn sinh hoạt khoa học"
+      "medicineRecord_id": "7724",
+      "conclusion": "gggggg",
+      "disease": "fffffffff",
+      "treatment_plan": "fffffffff"
     }
   ],
   "ExamResult": [
     {
-      "id": "1",
-      "medicineRecord_id": "1",
+      "id": "11111",
+      "medicineRecord_id": "111",
       "symptoms": "Sốt cao",
       "preliminary_diagnosis": "ho",
       "doctor_id": "đau họng"
     },
     {
-      "id": "2",
-      "medicineRecord_id": "2",
-      "symptoms": "Huyết áp cao",
-      "preliminary_diagnosis": "đau đầu",
-      "doctor_id": "ghi tăng huyết áp"
+      "id": "67a5",
+      "medicineRecord_id": "a48c",
+      "symptoms": "Mệt mỏi ",
+      "preliminary_diagnosis": "Chuẩn đoán ngộ độc",
+      "doctor_id": "1",
+      "notes": ""
     },
     {
-      "id": "3",
-      "medicineRecord_id": "3",
-      "symptoms": "Khát nước",
-      "preliminary_diagnosis": "tiểu nhiều",
-      "doctor_id": "ghi đái tháo đường"
+      "id": "1e92",
+      "medicineRecord_id": "5ded",
+      "symptoms": "aaaaaaa",
+      "preliminary_diagnosis": "aaaaa",
+      "doctor_id": "1",
+      "notes": "aaaaaaaaaaa"
     },
     {
-      "id": "4",
-      "medicineRecord_id": "4",
-      "symptoms": "Sốt nhẹ",
-      "preliminary_diagnosis": "ho khan",
-      "doctor_id": "ghi cúm mùa"
+      "id": "3907",
+      "medicineRecord_id": "7b4f",
+      "symptoms": "aaa",
+      "preliminary_diagnosis": "aaa",
+      "doctor_id": "1",
+      "notes": "aaa"
     },
     {
-      "id": "5",
-      "medicineRecord_id": "5",
-      "symptoms": "Đau bụng",
-      "preliminary_diagnosis": "tiêu chảy",
-      "doctor_id": "ghi rối loạn tiêu hóa"
+      "id": "6eeb",
+      "medicineRecord_id": "fbd4",
+      "symptoms": "aaas",
+      "preliminary_diagnosis": "sss",
+      "doctor_id": "1",
+      "notes": "sxcsc"
     },
     {
-      "id": "6",
-      "medicineRecord_id": "6",
-      "symptoms": "Đau tức ngực",
-      "preliminary_diagnosis": "ho kéo dài",
-      "doctor_id": "ghi viêm phổi"
+      "id": "d49a",
+      "medicineRecord_id": "ec83",
+      "symptoms": "a",
+      "preliminary_diagnosis": "a",
+      "doctor_id": "1",
+      "notes": "a"
     },
     {
-      "id": "7",
-      "medicineRecord_id": "7",
-      "symptoms": "Mắt mờ",
-      "preliminary_diagnosis": "nhìn xa khó",
-      "doctor_id": "ghi cận thị"
-    },
-    {
-      "id": "8",
-      "medicineRecord_id": "8",
-      "symptoms": "Khó thở",
-      "preliminary_diagnosis": "mệt mỏi",
-      "doctor_id": "ghi rối loạn mỡ máu"
-    },
-    {
-      "id": "9",
-      "medicineRecord_id": "9",
-      "symptoms": "Đau khớp gối",
-      "preliminary_diagnosis": "cứng buổi sáng",
-      "doctor_id": "ghi viêm khớp"
-    },
-    {
-      "id": "10",
-      "medicineRecord_id": "10",
-      "symptoms": "Khám sức khỏe bình thường",
-      "preliminary_diagnosis": "Không phát hiện bệnh",
-      "doctor_id": "10"
-    },
-    {
-      "id": "11",
-      "medicineRecord_id": "11",
-      "symptoms": "Mất ngủ nhiều ngày",
-      "preliminary_diagnosis": "ghi rối loạn giấc ngủ",
-      "doctor_id": "11"
-    },
-    {
-      "id": "12",
-      "medicineRecord_id": "12",
-      "symptoms": "Đau bụng",
-      "preliminary_diagnosis": "ợ hơi",
-      "doctor_id": "ghi viêm dạ dày"
-    },
-    {
-      "id": "13",
-      "medicineRecord_id": "13",
-      "symptoms": "Họng sưng đỏ",
-      "preliminary_diagnosis": "sốt",
-      "doctor_id": "ghi viêm amidan"
-    },
-    {
-      "id": "14",
-      "medicineRecord_id": "14",
-      "symptoms": "Vàng da",
-      "preliminary_diagnosis": "mệt mỏi",
-      "doctor_id": "ghi viêm gan"
-    },
-    {
-      "id": "15",
-      "medicineRecord_id": "15",
-      "symptoms": "Ho dai dẳng",
-      "preliminary_diagnosis": "khó thở",
-      "doctor_id": "ghi viêm phế quản"
-    },
-    {
-      "id": "16",
-      "medicineRecord_id": "16",
-      "symptoms": "Đau lưng dưới khi vận động",
-      "preliminary_diagnosis": "ghi đau cột sống",
-      "doctor_id": "16"
-    },
-    {
-      "id": "17",
-      "medicineRecord_id": "17",
-      "symptoms": "Đau trán",
-      "preliminary_diagnosis": "nghẹt mũi",
-      "doctor_id": "ghi viêm xoang"
-    },
-    {
-      "id": "18",
-      "medicineRecord_id": "18",
-      "symptoms": "Gầy yếu",
-      "preliminary_diagnosis": "ăn kém",
-      "doctor_id": "ghi suy nhược cơ thể"
-    },
-    {
-      "id": "19",
-      "medicineRecord_id": "19",
-      "symptoms": "Đau vùng thượng vị",
-      "preliminary_diagnosis": "buồn nôn",
-      "doctor_id": "ghi loét dạ dày"
-    },
-    {
-      "id": "20",
-      "medicineRecord_id": "20",
-      "symptoms": "Đau hậu môn",
-      "preliminary_diagnosis": "chảy máu nhẹ",
-      "doctor_id": "ghi trĩ nội"
-    },
-    {
-      "id": "21",
-      "medicineRecord_id": "21",
-      "symptoms": "Tăng cân",
-      "preliminary_diagnosis": "khó thở",
-      "doctor_id": "ghi béo phì"
-    },
-    {
-      "id": "22",
-      "medicineRecord_id": "22",
-      "symptoms": "Hắt hơi",
-      "preliminary_diagnosis": "đau đầu",
-      "doctor_id": "ghi cảm cúm"
-    },
-    {
-      "id": "23",
-      "medicineRecord_id": "23",
-      "symptoms": "Đau tai",
-      "preliminary_diagnosis": "chảy dịch tai",
-      "doctor_id": "ghi viêm tai giữa"
-    },
-    {
-      "id": "24",
-      "medicineRecord_id": "24",
-      "symptoms": "Đau lưng",
-      "preliminary_diagnosis": "đái buốt",
-      "doctor_id": "ghi sỏi thận"
-    },
-    {
-      "id": "25",
-      "medicineRecord_id": "25",
-      "symptoms": "Khó thở",
-      "preliminary_diagnosis": "chóng mặt",
-      "doctor_id": "ghi rối loạn lipid máu"
-    },
-    {
-      "id": "26",
-      "medicineRecord_id": "26",
-      "symptoms": "Khò khè",
-      "preliminary_diagnosis": "khó thở khi gắng sức",
-      "doctor_id": "ghi hen phế quản"
-    },
-    {
-      "id": "27",
-      "medicineRecord_id": "27",
-      "symptoms": "Tiểu buốt",
-      "preliminary_diagnosis": "đau bụng dưới",
-      "doctor_id": "ghi viêm bàng quang"
-    },
-    {
-      "id": "28",
-      "medicineRecord_id": "28",
-      "symptoms": "Đau đầu sau khi căng thẳng",
-      "preliminary_diagnosis": "ghi đau đầu do căng thẳng",
-      "doctor_id": "8"
-    },
-    {
-      "id": "29",
-      "medicineRecord_id": "29",
-      "symptoms": "Đau vai gáy",
-      "preliminary_diagnosis": "cứng cổ",
-      "doctor_id": "ghi hội chứng vai gáy"
-    },
-    {
-      "id": "30",
-      "medicineRecord_id": "30",
-      "symptoms": "Hơi thở yếu",
-      "preliminary_diagnosis": "da xanh",
-      "doctor_id": "ghi thiếu máu"
-    },
-    {
-      "id": "31",
-      "medicineRecord_id": "31",
-      "symptoms": "Sốt",
-      "preliminary_diagnosis": "ho có đờm",
-      "doctor_id": "ghi viêm phổi"
-    },
-    {
-      "id": "32",
-      "medicineRecord_id": "32",
-      "symptoms": "Huyết áp tăng nhẹ",
-      "preliminary_diagnosis": "ghi tăng huyết áp",
-      "doctor_id": "12"
-    },
-    {
-      "id": "33",
-      "medicineRecord_id": "33",
-      "symptoms": "Đau bụng",
-      "preliminary_diagnosis": "tiêu lỏng",
-      "doctor_id": "ghi viêm ruột"
-    },
-    {
-      "id": "34",
-      "medicineRecord_id": "34",
-      "symptoms": "Đầy hơi",
-      "preliminary_diagnosis": "khó tiêu",
-      "doctor_id": "ghi rối loạn tiêu hóa"
-    },
-    {
-      "id": "35",
-      "medicineRecord_id": "35",
-      "symptoms": "Khám sức khỏe sinh sản",
-      "preliminary_diagnosis": "Không phát hiện bệnh",
-      "doctor_id": "15"
-    },
-    {
-      "id": "36",
-      "medicineRecord_id": "36",
-      "symptoms": "Tiểu buốt",
-      "preliminary_diagnosis": "nước tiểu đục",
-      "doctor_id": "ghi nhiễm trùng tiết niệu"
-    },
-    {
-      "id": "37",
-      "medicineRecord_id": "37",
-      "symptoms": "Lo lắng kéo dài",
-      "preliminary_diagnosis": "ghi rối loạn lo âu",
-      "doctor_id": "17"
-    },
-    {
-      "id": "38",
-      "medicineRecord_id": "38",
-      "symptoms": "Sụt cân",
-      "preliminary_diagnosis": "khát nước",
-      "doctor_id": "ghi tiểu đường"
-    },
-    {
-      "id": "39",
-      "medicineRecord_id": "39",
-      "symptoms": "Đau bụng dữ dội",
-      "preliminary_diagnosis": "ghi viêm ruột thừa",
-      "doctor_id": "19"
-    },
-    {
-      "id": "40",
-      "medicineRecord_id": "40",
-      "symptoms": "Sưng đau",
-      "preliminary_diagnosis": "bầm tím chân",
-      "doctor_id": "ghi tổn thương phần mềm"
-    },
-    {
-      "id": "41",
-      "medicineRecord_id": "41",
-      "symptoms": "Khám lại không có triệu chứng",
-      "preliminary_diagnosis": "Không phát hiện bệnh",
-      "doctor_id": "1"
-    },
-    {
-      "id": "42",
-      "medicineRecord_id": "42",
-      "symptoms": "Sút cân",
-      "preliminary_diagnosis": "kém ăn",
-      "doctor_id": "ghi suy dinh dưỡng"
-    },
-    {
-      "id": "43",
-      "medicineRecord_id": "43",
-      "symptoms": "gứa hậu môn",
-      "preliminary_diagnosis": "đau bụng",
-      "doctor_id": "ghi nhiễm giun"
-    },
-    {
-      "id": "44",
-      "medicineRecord_id": "44",
-      "symptoms": "Chảy máu lợi khi đánh răng",
-      "preliminary_diagnosis": "ghi viêm lợi",
-      "doctor_id": "4"
-    },
-    {
-      "id": "45",
-      "medicineRecord_id": "45",
-      "symptoms": "Sốt cao",
-      "preliminary_diagnosis": "nổi ban",
-      "doctor_id": "ghi sốt xuất huyết"
-    },
-    {
-      "id": "46",
-      "medicineRecord_id": "46",
-      "symptoms": "Đau lưng",
-      "preliminary_diagnosis": "tê chân",
-      "doctor_id": "ghi thoái hóa cột sống"
-    },
-    {
-      "id": "47",
-      "medicineRecord_id": "47",
-      "symptoms": "Chóng mặt khi thay đổi tư thế",
-      "preliminary_diagnosis": "ghi rối loạn thần kinh thực vật",
-      "doctor_id": "7"
-    },
-    {
-      "id": "48",
-      "medicineRecord_id": "48",
-      "symptoms": "Ho khan",
-      "preliminary_diagnosis": "sốt nhẹ",
-      "doctor_id": "ghi viêm phế quản"
-    },
-    {
-      "id": "49",
-      "medicineRecord_id": "49",
-      "symptoms": "Đỏ da",
-      "preliminary_diagnosis": "ngứa nhẹ",
-      "doctor_id": "ghi nhiễm trùng da"
-    },
-    {
-      "id": "50",
-      "medicineRecord_id": "50",
-      "symptoms": "Khám sức khỏe tổng quát",
-      "preliminary_diagnosis": "Không phát hiện bệnh",
-      "doctor_id": "10"
+      "id": "bf02",
+      "medicineRecord_id": "70ea",
+      "symptoms": "aaaa",
+      "preliminary_diagnosis": "bbbb",
+      "doctor_id": "1",
+      "notes": "cccc"
     }
   ],
   "ListOfMedicalService": [
@@ -6219,6 +5610,20 @@
       "doctor_id": "15",
       "prescription_date": "2025-05-18",
       "status": "Cancelled"
+    },
+    {
+      "id": "4018",
+      "medicineRecord_id": "e0bb",
+      "doctor_id": "1",
+      "prescription_date": "2025-07-13",
+      "status": "Pending"
+    },
+    {
+      "id": "6edc",
+      "medicineRecord_id": "7724",
+      "doctor_id": "1",
+      "prescription_date": "2025-07-13",
+      "status": "Pending"
     }
   ],
   "Invoice": [
@@ -6236,7 +5641,7 @@
       "medicineRecord_id": "33",
       "issue_date": "2025-06-05",
       "total_amount": "1140000",
-      "status": "Pending"
+      "status": "Paid"
     },
     {
       "id": "3",
@@ -6923,314 +6328,38 @@
       "invoice_id": "49",
       "pharmacist_id": "49",
       "prescription_id": "49"
+    },
+    {
+      "id": "2e05",
+      "invoice_id": "INV1752428987711",
+      "pharmacist_id": "1",
+      "prescription_id": "4018"
+    },
+    {
+      "id": "b944",
+      "invoice_id": "INV1752430570828",
+      "pharmacist_id": "1",
+      "prescription_id": "6edc"
     }
   ],
   "ServiceOrder": [
     {
-      "id": "1",
-      "doctor_id": "8",
+      "id": "1111111",
+      "doctor_id": "8666666",
       "order_date": "2025-06-06",
       "medicineRecord_id": "20"
     },
     {
-      "id": "2",
-      "doctor_id": "2",
-      "order_date": "2025-05-27",
-      "medicineRecord_id": "41"
-    },
-    {
-      "id": "3",
-      "doctor_id": "14",
-      "order_date": "2025-05-31",
-      "medicineRecord_id": "13"
-    },
-    {
-      "id": "4",
-      "doctor_id": "5",
-      "order_date": "2025-06-02",
-      "medicineRecord_id": "45"
-    },
-    {
-      "id": "5",
-      "doctor_id": "11",
-      "order_date": "2025-05-22",
-      "medicineRecord_id": "31"
-    },
-    {
-      "id": "6",
-      "doctor_id": "6",
-      "order_date": "2025-05-31",
-      "medicineRecord_id": "46"
-    },
-    {
-      "id": "7",
-      "doctor_id": "19",
-      "order_date": "2025-05-28",
-      "medicineRecord_id": "39"
-    },
-    {
-      "id": "8",
-      "doctor_id": "4",
-      "order_date": "2025-06-04",
-      "medicineRecord_id": "24"
-    },
-    {
-      "id": "9",
-      "doctor_id": "10",
-      "order_date": "2025-05-23",
-      "medicineRecord_id": "30"
-    },
-    {
-      "id": "10",
-      "doctor_id": "7",
-      "order_date": "2025-06-03",
-      "medicineRecord_id": "47"
-    },
-    {
-      "id": "11",
-      "doctor_id": "12",
-      "order_date": "2025-05-22",
-      "medicineRecord_id": "32"
-    },
-    {
-      "id": "12",
-      "doctor_id": "18",
-      "order_date": "2025-06-04",
-      "medicineRecord_id": "38"
-    },
-    {
-      "id": "13",
-      "doctor_id": "3",
-      "order_date": "2025-05-26",
-      "medicineRecord_id": "43"
-    },
-    {
-      "id": "14",
-      "doctor_id": "17",
-      "order_date": "2025-06-05",
-      "medicineRecord_id": "37"
-    },
-    {
-      "id": "15",
-      "doctor_id": "15",
-      "order_date": "2025-05-30",
-      "medicineRecord_id": "15"
-    },
-    {
-      "id": "16",
-      "doctor_id": "20",
-      "order_date": "2025-05-18",
-      "medicineRecord_id": "40"
-    },
-    {
-      "id": "17",
-      "doctor_id": "16",
-      "order_date": "2025-05-20",
-      "medicineRecord_id": "36"
-    },
-    {
-      "id": "18",
+      "id": "bd28",
       "doctor_id": "1",
-      "order_date": "2025-05-27",
-      "medicineRecord_id": "21"
+      "order_date": "2025-07-13",
+      "medicineRecord_id": "e0bb"
     },
     {
-      "id": "19",
-      "doctor_id": "13",
-      "order_date": "2025-06-01",
-      "medicineRecord_id": "33"
-    },
-    {
-      "id": "20",
-      "doctor_id": "9",
-      "order_date": "2025-06-02",
-      "medicineRecord_id": "9"
-    },
-    {
-      "id": "21",
-      "doctor_id": "4",
-      "order_date": "2025-05-26",
-      "medicineRecord_id": "4"
-    },
-    {
-      "id": "22",
-      "doctor_id": "3",
-      "order_date": "2025-06-03",
-      "medicineRecord_id": "3"
-    },
-    {
-      "id": "23",
-      "doctor_id": "7",
-      "order_date": "2025-05-24",
-      "medicineRecord_id": "7"
-    },
-    {
-      "id": "24",
-      "doctor_id": "18",
-      "order_date": "2025-05-19",
-      "medicineRecord_id": "18"
-    },
-    {
-      "id": "25",
-      "doctor_id": "10",
-      "order_date": "2025-05-27",
-      "medicineRecord_id": "50"
-    },
-    {
-      "id": "26",
-      "doctor_id": "12",
-      "order_date": "2025-06-01",
-      "medicineRecord_id": "12"
-    },
-    {
-      "id": "27",
-      "doctor_id": "17",
-      "order_date": "2025-05-19",
-      "medicineRecord_id": "17"
-    },
-    {
-      "id": "28",
-      "doctor_id": "5",
-      "order_date": "2025-06-04",
-      "medicineRecord_id": "5"
-    },
-    {
-      "id": "29",
-      "doctor_id": "6",
-      "order_date": "2025-05-25",
-      "medicineRecord_id": "26"
-    },
-    {
-      "id": "30",
-      "doctor_id": "15",
-      "order_date": "2025-05-23",
-      "medicineRecord_id": "35"
-    },
-    {
-      "id": "31",
-      "doctor_id": "11",
-      "order_date": "2025-06-01",
-      "medicineRecord_id": "11"
-    },
-    {
-      "id": "32",
-      "doctor_id": "8",
-      "order_date": "2025-05-29",
-      "medicineRecord_id": "48"
-    },
-    {
-      "id": "33",
-      "doctor_id": "2",
-      "order_date": "2025-06-04",
-      "medicineRecord_id": "42"
-    },
-    {
-      "id": "34",
+      "id": "7a4f",
       "doctor_id": "1",
-      "order_date": "2025-06-06",
-      "medicineRecord_id": "1"
-    },
-    {
-      "id": "35",
-      "doctor_id": "13",
-      "order_date": "2025-05-21",
-      "medicineRecord_id": "34"
-    },
-    {
-      "id": "36",
-      "doctor_id": "16",
-      "order_date": "2025-05-30",
-      "medicineRecord_id": "16"
-    },
-    {
-      "id": "37",
-      "doctor_id": "9",
-      "order_date": "2025-05-23",
-      "medicineRecord_id": "29"
-    },
-    {
-      "id": "38",
-      "doctor_id": "14",
-      "order_date": "2025-06-05",
-      "medicineRecord_id": "14"
-    },
-    {
-      "id": "39",
-      "doctor_id": "19",
-      "order_date": "2025-05-28",
-      "medicineRecord_id": "19"
-    },
-    {
-      "id": "40",
-      "doctor_id": "4",
-      "order_date": "2025-06-05",
-      "medicineRecord_id": "4"
-    },
-    {
-      "id": "41",
-      "doctor_id": "10",
-      "order_date": "2025-06-02",
-      "medicineRecord_id": "10"
-    },
-    {
-      "id": "42",
-      "doctor_id": "7",
-      "order_date": "2025-06-03",
-      "medicineRecord_id": "7"
-    },
-    {
-      "id": "43",
-      "doctor_id": "12",
-      "order_date": "2025-06-01",
-      "medicineRecord_id": "12"
-    },
-    {
-      "id": "44",
-      "doctor_id": "18",
-      "order_date": "2025-05-29",
-      "medicineRecord_id": "38"
-    },
-    {
-      "id": "45",
-      "doctor_id": "3",
-      "order_date": "2025-06-05",
-      "medicineRecord_id": "3"
-    },
-    {
-      "id": "46",
-      "doctor_id": "17",
-      "order_date": "2025-05-29",
-      "medicineRecord_id": "17"
-    },
-    {
-      "id": "47",
-      "doctor_id": "15",
-      "order_date": "2025-05-30",
-      "medicineRecord_id": "35"
-    },
-    {
-      "id": "48",
-      "doctor_id": "20",
-      "order_date": "2025-05-28",
-      "medicineRecord_id": "40"
-    },
-    {
-      "id": "49",
-      "doctor_id": "16",
-      "order_date": "2025-05-20",
-      "medicineRecord_id": "36"
-    },
-    {
-      "id": "50",
-      "doctor_id": "1",
-      "order_date": "2025-06-05",
-      "medicineRecord_id": "41"
-    },
-    {
-      "id": "51",
-      "doctor_id": "8",
-      "order_date": "2025-06-03",
-      "medicineRecord_id": "8"
+      "order_date": "2025-07-13",
+      "medicineRecord_id": "7724"
     }
   ],
   "ServiceOrderItem": [
@@ -7241,298 +6370,16 @@
       "doctor_id": "3"
     },
     {
-      "id": "2",
-      "service_order_id": "1",
-      "service_id": "6",
-      "doctor_id": "20"
-    },
-    {
-      "id": "3",
-      "service_order_id": "12",
-      "service_id": "8",
-      "doctor_id": "8"
-    },
-    {
-      "id": "4",
-      "service_order_id": "7",
-      "service_id": "3",
-      "doctor_id": "15"
-    },
-    {
-      "id": "5",
-      "service_order_id": "10",
-      "service_id": "15",
+      "id": "c51d",
+      "service_order_id": "bd28",
+      "service_id": "17",
       "doctor_id": "1"
     },
     {
-      "id": "6",
-      "service_order_id": "8",
+      "id": "f1f6",
+      "service_order_id": "7a4f",
       "service_id": "2",
-      "doctor_id": "12"
-    },
-    {
-      "id": "7",
-      "service_order_id": "15",
-      "service_id": "27",
-      "doctor_id": "7"
-    },
-    {
-      "id": "8",
-      "service_order_id": "3",
-      "service_id": "19",
-      "doctor_id": "2"
-    },
-    {
-      "id": "9",
-      "service_order_id": "17",
-      "service_id": "4",
-      "doctor_id": "16"
-    },
-    {
-      "id": "10",
-      "service_order_id": "21",
-      "service_id": "10",
-      "doctor_id": "4"
-    },
-    {
-      "id": "11",
-      "service_order_id": "9",
-      "service_id": "22",
-      "doctor_id": "13"
-    },
-    {
-      "id": "12",
-      "service_order_id": "2",
-      "service_id": "5",
-      "doctor_id": "18"
-    },
-    {
-      "id": "13",
-      "service_order_id": "13",
-      "service_id": "1",
-      "doctor_id": "11"
-    },
-    {
-      "id": "14",
-      "service_order_id": "20",
-      "service_id": "7",
-      "doctor_id": "5"
-    },
-    {
-      "id": "15",
-      "service_order_id": "6",
-      "service_id": "25",
-      "doctor_id": "10"
-    },
-    {
-      "id": "16",
-      "service_order_id": "4",
-      "service_id": "14",
-      "doctor_id": "19"
-    },
-    {
-      "id": "17",
-      "service_order_id": "25",
-      "service_id": "21",
-      "doctor_id": "14"
-    },
-    {
-      "id": "18",
-      "service_order_id": "14",
-      "service_id": "9",
-      "doctor_id": "6"
-    },
-    {
-      "id": "19",
-      "service_order_id": "18",
-      "service_id": "18",
-      "doctor_id": "8"
-    },
-    {
-      "id": "20",
-      "service_order_id": "11",
-      "service_id": "13",
-      "doctor_id": "9"
-    },
-    {
-      "id": "21",
-      "service_order_id": "19",
-      "service_id": "17",
-      "doctor_id": "17"
-    },
-    {
-      "id": "22",
-      "service_order_id": "23",
-      "service_id": "11",
-      "doctor_id": "3"
-    },
-    {
-      "id": "23",
-      "service_order_id": "24",
-      "service_id": "28",
-      "doctor_id": "7"
-    },
-    {
-      "id": "24",
-      "service_order_id": "30",
-      "service_id": "24",
-      "doctor_id": "11"
-    },
-    {
-      "id": "25",
-      "service_order_id": "26",
-      "service_id": "20",
-      "doctor_id": "20"
-    },
-    {
-      "id": "26",
-      "service_order_id": "16",
-      "service_id": "16",
-      "doctor_id": "12"
-    },
-    {
-      "id": "27",
-      "service_order_id": "22",
-      "service_id": "29",
-      "doctor_id": "5"
-    },
-    {
-      "id": "28",
-      "service_order_id": "28",
-      "service_id": "23",
-      "doctor_id": "4"
-    },
-    {
-      "id": "29",
-      "service_order_id": "29",
-      "service_id": "30",
-      "doctor_id": "13"
-    },
-    {
-      "id": "30",
-      "service_order_id": "31",
-      "service_id": "26",
-      "doctor_id": "10"
-    },
-    {
-      "id": "31",
-      "service_order_id": "27",
-      "service_id": "17",
-      "doctor_id": "15"
-    },
-    {
-      "id": "32",
-      "service_order_id": "32",
-      "service_id": "3",
-      "doctor_id": "2"
-    },
-    {
-      "id": "33",
-      "service_order_id": "34",
-      "service_id": "14",
-      "doctor_id": "9"
-    },
-    {
-      "id": "34",
-      "service_order_id": "35",
-      "service_id": "18",
-      "doctor_id": "6"
-    },
-    {
-      "id": "35",
-      "service_order_id": "33",
-      "service_id": "5",
-      "doctor_id": "18"
-    },
-    {
-      "id": "36",
-      "service_order_id": "38",
-      "service_id": "12",
       "doctor_id": "1"
-    },
-    {
-      "id": "37",
-      "service_order_id": "39",
-      "service_id": "7",
-      "doctor_id": "14"
-    },
-    {
-      "id": "38",
-      "service_order_id": "40",
-      "service_id": "13",
-      "doctor_id": "8"
-    },
-    {
-      "id": "39",
-      "service_order_id": "36",
-      "service_id": "16",
-      "doctor_id": "5"
-    },
-    {
-      "id": "40",
-      "service_order_id": "37",
-      "service_id": "2",
-      "doctor_id": "19"
-    },
-    {
-      "id": "41",
-      "service_order_id": "41",
-      "service_id": "21",
-      "doctor_id": "16"
-    },
-    {
-      "id": "42",
-      "service_order_id": "42",
-      "service_id": "24",
-      "doctor_id": "17"
-    },
-    {
-      "id": "43",
-      "service_order_id": "43",
-      "service_id": "1",
-      "doctor_id": "11"
-    },
-    {
-      "id": "44",
-      "service_order_id": "44",
-      "service_id": "9",
-      "doctor_id": "20"
-    },
-    {
-      "id": "45",
-      "service_order_id": "45",
-      "service_id": "22",
-      "doctor_id": "7"
-    },
-    {
-      "id": "46",
-      "service_order_id": "46",
-      "service_id": "28",
-      "doctor_id": "3"
-    },
-    {
-      "id": "47",
-      "service_order_id": "47",
-      "service_id": "19",
-      "doctor_id": "15"
-    },
-    {
-      "id": "48",
-      "service_order_id": "48",
-      "service_id": "27",
-      "doctor_id": "12"
-    },
-    {
-      "id": "49",
-      "service_order_id": "49",
-      "service_id": "4",
-      "doctor_id": "8"
-    },
-    {
-      "id": "50",
-      "service_order_id": "50",
-      "service_id": "8",
-      "doctor_id": "6"
     }
   ],
   "ServiceInvoice": [
@@ -7889,304 +6736,22 @@
   ],
   "ResultsOfParaclinicalServices": [
     {
-      "id": "1",
-      "service_order_item_id": "1",
+      "id": "111",
+      "service_order_item_id": "111",
       "result_description": "Xét nghiệm máu bình thường. Không phát hiện bất thường.",
       "created_at": "2025-06-06 08:20:00"
     },
     {
-      "id": "2",
-      "service_order_item_id": "2",
-      "result_description": "Chụp X-quang phổi: không thấy tổn thương",
-      "created_at": "phổi thông khí tốt."
+      "id": "644c",
+      "service_order_item_id": "c51d",
+      "result_description": "Có dịch thừa ở màng phổi ",
+      "created_at": "2025-07-13T17:48:42.896Z"
     },
     {
-      "id": "3",
-      "service_order_item_id": "3",
-      "result_description": "Siêu âm bụng: gan không to",
-      "created_at": "nhu mô đều."
-    },
-    {
-      "id": "4",
-      "service_order_item_id": "4",
-      "result_description": "ECG: nhịp xoang",
-      "created_at": "không rối loạn dẫn truyền."
-    },
-    {
-      "id": "5",
-      "service_order_item_id": "5",
-      "result_description": "Siêu âm tuyến giáp: kích thước bình thường",
-      "created_at": "không có nhân."
-    },
-    {
-      "id": "6",
-      "service_order_item_id": "6",
-      "result_description": "Xét nghiệm nước tiểu: pH 6.0",
-      "created_at": "không thấy protein niệu."
-    },
-    {
-      "id": "7",
-      "service_order_item_id": "7",
-      "result_description": "Đo loãng xương: mật độ xương giảm nhẹ",
-      "created_at": "cần bổ sung canxi."
-    },
-    {
-      "id": "8",
-      "service_order_item_id": "8",
-      "result_description": "Chụp MRI não: cấu trúc bình thường",
-      "created_at": "không phát hiện khối u."
-    },
-    {
-      "id": "9",
-      "service_order_item_id": "9",
-      "result_description": "Đo hô hấp ký: chức năng phổi tốt.",
-      "created_at": "2025-06-02 09:30:00"
-    },
-    {
-      "id": "10",
-      "service_order_item_id": "10",
-      "result_description": "Nội soi dạ dày: phát hiện viêm nhẹ",
-      "created_at": "không loét."
-    },
-    {
-      "id": "11",
-      "service_order_item_id": "11",
-      "result_description": "Xét nghiệm viêm gan B: âm tính.",
-      "created_at": "2025-06-02 07:55:00"
-    },
-    {
-      "id": "12",
-      "service_order_item_id": "12",
-      "result_description": "Xét nghiệm viêm gan C: âm tính.",
-      "created_at": "2025-06-01 10:15:00"
-    },
-    {
-      "id": "13",
-      "service_order_item_id": "13",
-      "result_description": "Đo điện não: sóng bình thường",
-      "created_at": "không phát hiện động kinh."
-    },
-    {
-      "id": "14",
-      "service_order_item_id": "14",
-      "result_description": "Siêu âm thai: phát triển đúng tuổi thai",
-      "created_at": "tim thai đều."
-    },
-    {
-      "id": "15",
-      "service_order_item_id": "15",
-      "result_description": "Chụp X-quang xương: không phát hiện gãy xương.",
-      "created_at": "2025-05-31 09:25:00"
-    },
-    {
-      "id": "16",
-      "service_order_item_id": "16",
-      "result_description": "Xét nghiệm đường huyết: 5.2 mmol/L",
-      "created_at": "trong giới hạn bình thường."
-    },
-    {
-      "id": "17",
-      "service_order_item_id": "17",
-      "result_description": "Siêu âm tim: chức năng thất trái tốt.",
-      "created_at": "2025-05-30 17:40:00"
-    },
-    {
-      "id": "18",
-      "service_order_item_id": "18",
-      "result_description": "Xét nghiệm mỡ máu: cholesterol toàn phần tăng nhẹ.",
-      "created_at": "2025-05-29 11:00:00"
-    },
-    {
-      "id": "19",
-      "service_order_item_id": "19",
-      "result_description": "Nội soi đại tràng: niêm mạc đại tràng không viêm loét.",
-      "created_at": "2025-05-29 13:45:00"
-    },
-    {
-      "id": "20",
-      "service_order_item_id": "20",
-      "result_description": "Chụp CT-scan ổ bụng: không phát hiện bất thường.",
-      "created_at": "2025-05-28 16:20:00"
-    },
-    {
-      "id": "21",
-      "service_order_item_id": "21",
-      "result_description": "Chụp CT-scan sọ não: cấu trúc bình thường.",
-      "created_at": "2025-05-28 14:10:00"
-    },
-    {
-      "id": "22",
-      "service_order_item_id": "22",
-      "result_description": "Xét nghiệm HIV: âm tính.",
-      "created_at": "2025-05-27 09:40:00"
-    },
-    {
-      "id": "23",
-      "service_order_item_id": "23",
-      "result_description": "Test dị ứng: không phản ứng với 10 dị nguyên thường gặp.",
-      "created_at": "2025-05-27 08:15:00"
-    },
-    {
-      "id": "24",
-      "service_order_item_id": "24",
-      "result_description": "Test nhanh COVID-19: âm tính.",
-      "created_at": "2025-05-26 19:10:00"
-    },
-    {
-      "id": "25",
-      "service_order_item_id": "25",
-      "result_description": "Đo điện tim: không phát hiện ngoại tâm thu.",
-      "created_at": "2025-05-26 10:05:00"
-    },
-    {
-      "id": "26",
-      "service_order_item_id": "26",
-      "result_description": "Khám mắt: thị lực 10/10",
-      "created_at": "không cần chỉnh kính."
-    },
-    {
-      "id": "27",
-      "service_order_item_id": "27",
-      "result_description": "Xét nghiệm chức năng gan: AST",
-      "created_at": "ALT bình thường."
-    },
-    {
-      "id": "28",
-      "service_order_item_id": "28",
-      "result_description": "Siêu âm tổng quát: các cơ quan ổ bụng không bất thường.",
-      "created_at": "2025-05-24 16:30:00"
-    },
-    {
-      "id": "29",
-      "service_order_item_id": "29",
-      "result_description": "Chụp MRI khớp gối: không rách dây chằng",
-      "created_at": "sụn khớp tốt."
-    },
-    {
-      "id": "30",
-      "service_order_item_id": "30",
-      "result_description": "Xét nghiệm chức năng thận: creatinin 85 µmol/L.",
-      "created_at": "2025-05-23 10:55:00"
-    },
-    {
-      "id": "31",
-      "service_order_item_id": "31",
-      "result_description": "Chụp X-quang răng hàm mặt: không sâu răng.",
-      "created_at": "2025-05-23 08:25:00"
-    },
-    {
-      "id": "32",
-      "service_order_item_id": "32",
-      "result_description": "Xét nghiệm vi khuẩn HP: dương tính nhẹ.",
-      "created_at": "2025-05-22 11:10:00"
-    },
-    {
-      "id": "33",
-      "service_order_item_id": "33",
-      "result_description": "Khám sản phụ khoa: không phát hiện viêm nhiễm.",
-      "created_at": "2025-05-22 16:40:00"
-    },
-    {
-      "id": "34",
-      "service_order_item_id": "34",
-      "result_description": "Đo mật độ xương: bình thường.",
-      "created_at": "2025-05-21 09:35:00"
-    },
-    {
-      "id": "35",
-      "service_order_item_id": "35",
-      "result_description": "Siêu âm tuyến giáp: có nhân nhỏ",
-      "created_at": "theo dõi thêm."
-    },
-    {
-      "id": "36",
-      "service_order_item_id": "36",
-      "result_description": "Xét nghiệm máu: giảm nhẹ hồng cầu.",
-      "created_at": "2025-05-20 17:55:00"
-    },
-    {
-      "id": "37",
-      "service_order_item_id": "37",
-      "result_description": "Đo điện tim: rối loạn nhịp nhẹ.",
-      "created_at": "2025-05-20 14:20:00"
-    },
-    {
-      "id": "38",
-      "service_order_item_id": "38",
-      "result_description": "Khám tâm thần: không phát hiện bất thường lớn.",
-      "created_at": "2025-05-19 13:15:00"
-    },
-    {
-      "id": "39",
-      "service_order_item_id": "39",
-      "result_description": "Siêu âm ổ bụng: phát hiện sỏi thận nhỏ.",
-      "created_at": "2025-05-19 10:45:00"
-    },
-    {
-      "id": "40",
-      "service_order_item_id": "40",
-      "result_description": "Chụp CT tim: không phát hiện tổn thương mạch vành.",
-      "created_at": "2025-05-18 15:20:00"
-    },
-    {
-      "id": "41",
-      "service_order_item_id": "41",
-      "result_description": "Nội soi dạ dày: loét nhẹ hành tá tràng.",
-      "created_at": "2025-05-18 09:00:00"
-    },
-    {
-      "id": "42",
-      "service_order_item_id": "42",
-      "result_description": "Xét nghiệm nước tiểu: bạch cầu niệu tăng nhẹ.",
-      "created_at": "2025-06-04 18:22:00"
-    },
-    {
-      "id": "43",
-      "service_order_item_id": "43",
-      "result_description": "Siêu âm tim: van hai lá dày nhẹ.",
-      "created_at": "2025-06-05 07:10:00"
-    },
-    {
-      "id": "44",
-      "service_order_item_id": "44",
-      "result_description": "Đo hô hấp ký: phát hiện hen nhẹ.",
-      "created_at": "2025-05-30 13:33:00"
-    },
-    {
-      "id": "45",
-      "service_order_item_id": "45",
-      "result_description": "Xét nghiệm máu: đường huyết tăng",
-      "created_at": "cần kiểm soát."
-    },
-    {
-      "id": "46",
-      "service_order_item_id": "46",
-      "result_description": "Đo điện não: sóng chậm khu trú.",
-      "created_at": "2025-06-06 12:40:00"
-    },
-    {
-      "id": "47",
-      "service_order_item_id": "47",
-      "result_description": "Khám tiền hôn nhân: sức khỏe bình thường.",
-      "created_at": "2025-05-25 17:15:00"
-    },
-    {
-      "id": "48",
-      "service_order_item_id": "48",
-      "result_description": "Khám da liễu: viêm da dị ứng nhẹ.",
-      "created_at": "2025-05-29 08:25:00"
-    },
-    {
-      "id": "49",
-      "service_order_item_id": "49",
-      "result_description": "Chụp X-quang ngực: phổi thông khí kém.",
-      "created_at": "2025-06-03 10:45:00"
-    },
-    {
-      "id": "50",
-      "service_order_item_id": "50",
-      "result_description": "Chụp X-quang xương chậu: không phát hiện bất thường.",
-      "created_at": "2025-05-28 13:02:00"
+      "id": "3d68",
+      "service_order_item_id": "f1f6",
+      "result_description": "dddd",
+      "created_at": "2025-07-13T18:15:24.033Z"
     }
   ],
   "Warehouse": [
@@ -9947,6 +8512,20 @@
       "medicine_id": "48",
       "quantity": "12",
       "dosage": "1 viên/ngày"
+    },
+    {
+      "id": "fa82",
+      "prescription_invoice_id": "2e05",
+      "medicine_id": "2",
+      "quantity": "20",
+      "dosage": "1 viên x 3 lần/ngày"
+    },
+    {
+      "id": "f9f6",
+      "prescription_invoice_id": "b944",
+      "medicine_id": "2",
+      "quantity": "15",
+      "dosage": "1 viên x 3 lần/ngày"
     }
   ],
   "Payment": [
@@ -12144,503 +10723,43 @@
   "Waitlist": [
     {
       "id": "1",
-      "patient_id": "1",
-      "doctor_id": "3",
+      "patient_id": "51",
+      "doctor_id": "1",
       "room_id": "5",
       "registered_at": "2025-06-01 07:30:00",
       "estimated_time": "2025-06-01 08:30:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "2",
-      "patient_id": "2",
-      "doctor_id": "7",
-      "room_id": "10",
-      "registered_at": "2025-06-01 07:55:00",
-      "estimated_time": "2025-06-01 09:10:00",
       "visittype": "Result",
       "status": "InProgress"
     },
     {
+      "id": "2",
+      "patient_id": "52",
+      "doctor_id": "1",
+      "room_id": "5",
+      "registered_at": "2025-07-14 00:30:00",
+      "estimated_time": "2025-07-14 00:35:00",
+      "visittype": "Result",
+      "status": "Complete"
+    },
+    {
       "id": "3",
-      "patient_id": "3",
-      "doctor_id": "10",
-      "room_id": "2",
-      "registered_at": "2025-06-01 08:02:00",
-      "estimated_time": "2025-06-01 09:00:00",
+      "patient_id": "11111",
+      "doctor_id": "1",
+      "room_id": "5",
+      "registered_at": "2025-07-14 00:30:00",
+      "estimated_time": "2025-07-14 00:35:00",
       "visittype": "Initial",
       "status": "Waiting"
     },
     {
       "id": "4",
-      "patient_id": "4",
-      "doctor_id": "12",
-      "room_id": "18",
-      "registered_at": "2025-06-01 08:10:00",
-      "estimated_time": "2025-06-01 09:35:00",
-      "visittype": "Result",
-      "status": "Skipped"
-    },
-    {
-      "id": "5",
-      "patient_id": "5",
-      "doctor_id": "15",
-      "room_id": "1",
-      "registered_at": "2025-06-01 08:25:00",
-      "estimated_time": "2025-06-01 09:40:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "6",
-      "patient_id": "6",
-      "doctor_id": "19",
-      "room_id": "9",
-      "registered_at": "2025-06-01 08:33:00",
-      "estimated_time": "2025-06-01 09:33:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "7",
-      "patient_id": "7",
-      "doctor_id": "23",
-      "room_id": "11",
-      "registered_at": "2025-06-01 08:41:00",
-      "estimated_time": "2025-06-01 10:00:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "8",
-      "patient_id": "8",
-      "doctor_id": "2",
-      "room_id": "16",
-      "registered_at": "2025-06-02 07:35:00",
-      "estimated_time": "2025-06-02 09:00:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "9",
-      "patient_id": "9",
-      "doctor_id": "5",
-      "room_id": "13",
-      "registered_at": "2025-06-02 07:40:00",
-      "estimated_time": "2025-06-02 08:50:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "10",
-      "patient_id": "10",
-      "doctor_id": "8",
-      "room_id": "24",
-      "registered_at": "2025-06-02 08:05:00",
-      "estimated_time": "2025-06-02 09:35:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "11",
-      "patient_id": "11",
-      "doctor_id": "11",
-      "room_id": "17",
-      "registered_at": "2025-06-02 08:19:00",
-      "estimated_time": "2025-06-02 09:39:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "12",
-      "patient_id": "12",
-      "doctor_id": "14",
-      "room_id": "4",
-      "registered_at": "2025-06-02 08:27:00",
-      "estimated_time": "2025-06-02 10:00:00",
-      "visittype": "Result",
-      "status": "Skipped"
-    },
-    {
-      "id": "13",
-      "patient_id": "13",
-      "doctor_id": "17",
-      "room_id": "15",
-      "registered_at": "2025-06-02 08:33:00",
-      "estimated_time": "2025-06-02 10:11:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "14",
-      "patient_id": "14",
-      "doctor_id": "20",
-      "room_id": "7",
-      "registered_at": "2025-06-02 08:48:00",
-      "estimated_time": "2025-06-02 09:55:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "15",
-      "patient_id": "15",
-      "doctor_id": "24",
-      "room_id": "21",
-      "registered_at": "2025-06-02 09:02:00",
-      "estimated_time": "2025-06-02 10:15:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "16",
-      "patient_id": "16",
-      "doctor_id": "1",
-      "room_id": "26",
-      "registered_at": "2025-06-03 07:25:00",
-      "estimated_time": "2025-06-03 08:25:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "17",
-      "patient_id": "17",
-      "doctor_id": "4",
-      "room_id": "6",
-      "registered_at": "2025-06-03 07:43:00",
-      "estimated_time": "2025-06-03 08:50:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "18",
-      "patient_id": "18",
-      "doctor_id": "8",
-      "room_id": "12",
-      "registered_at": "2025-06-03 08:00:00",
-      "estimated_time": "2025-06-03 09:00:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "19",
-      "patient_id": "19",
-      "doctor_id": "13",
-      "room_id": "3",
-      "registered_at": "2025-06-03 08:12:00",
-      "estimated_time": "2025-06-03 09:22:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "20",
-      "patient_id": "20",
-      "doctor_id": "16",
-      "room_id": "20",
-      "registered_at": "2025-06-03 08:19:00",
-      "estimated_time": "2025-06-03 10:00:00",
-      "visittype": "Result",
-      "status": "Skipped"
-    },
-    {
-      "id": "21",
-      "patient_id": "21",
-      "doctor_id": "21",
-      "room_id": "8",
-      "registered_at": "2025-06-03 08:27:00",
-      "estimated_time": "2025-06-03 09:50:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "22",
-      "patient_id": "22",
-      "doctor_id": "25",
-      "room_id": "22",
-      "registered_at": "2025-06-03 08:38:00",
-      "estimated_time": "2025-06-03 10:02:00",
-      "visittype": "Result",
-      "status": "InProgress"
-    },
-    {
-      "id": "23",
-      "patient_id": "23",
-      "doctor_id": "3",
-      "room_id": "14",
-      "registered_at": "2025-06-04 07:50:00",
-      "estimated_time": "2025-06-04 09:05:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "24",
-      "patient_id": "24",
-      "doctor_id": "6",
-      "room_id": "27",
-      "registered_at": "2025-06-04 07:58:00",
-      "estimated_time": "2025-06-04 09:11:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "25",
-      "patient_id": "25",
-      "doctor_id": "9",
-      "room_id": "19",
-      "registered_at": "2025-06-04 08:05:00",
-      "estimated_time": "2025-06-04 09:32:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "26",
-      "patient_id": "26",
-      "doctor_id": "12",
-      "room_id": "2",
-      "registered_at": "2025-06-04 08:18:00",
-      "estimated_time": "2025-06-04 09:38:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "27",
-      "patient_id": "27",
-      "doctor_id": "15",
-      "room_id": "25",
-      "registered_at": "2025-06-04 08:30:00",
-      "estimated_time": "2025-06-04 10:00:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "28",
-      "patient_id": "28",
-      "doctor_id": "18",
-      "room_id": "23",
-      "registered_at": "2025-06-04 08:41:00",
-      "estimated_time": "2025-06-04 09:41:00",
-      "visittype": "Result",
-      "status": "Skipped"
-    },
-    {
-      "id": "29",
-      "patient_id": "29",
-      "doctor_id": "22",
-      "room_id": "28",
-      "registered_at": "2025-06-04 09:09:00",
-      "estimated_time": "2025-06-04 10:19:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "30",
-      "patient_id": "30",
-      "doctor_id": "26",
-      "room_id": "30",
-      "registered_at": "2025-06-04 09:22:00",
-      "estimated_time": "2025-06-04 10:10:00",
-      "visittype": "Result",
-      "status": "InProgress"
-    },
-    {
-      "id": "31",
-      "patient_id": "31",
-      "doctor_id": "5",
-      "room_id": "1",
-      "registered_at": "2025-06-05 07:30:00",
-      "estimated_time": "2025-06-05 09:00:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "32",
       "patient_id": "32",
-      "doctor_id": "7",
-      "room_id": "5",
-      "registered_at": "2025-06-05 07:45:00",
-      "estimated_time": "2025-06-05 09:07:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "33",
-      "patient_id": "33",
-      "doctor_id": "11",
-      "room_id": "9",
-      "registered_at": "2025-06-05 08:03:00",
-      "estimated_time": "2025-06-05 10:00:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "34",
-      "patient_id": "34",
-      "doctor_id": "14",
-      "room_id": "13",
-      "registered_at": "2025-06-05 08:10:00",
-      "estimated_time": "2025-06-05 09:23:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "35",
-      "patient_id": "35",
-      "doctor_id": "17",
-      "room_id": "17",
-      "registered_at": "2025-06-05 08:21:00",
-      "estimated_time": "2025-06-05 09:21:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "36",
-      "patient_id": "36",
-      "doctor_id": "20",
-      "room_id": "21",
-      "registered_at": "2025-06-05 08:38:00",
-      "estimated_time": "2025-06-05 09:50:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "37",
-      "patient_id": "37",
-      "doctor_id": "24",
-      "room_id": "29",
-      "registered_at": "2025-06-05 08:47:00",
-      "estimated_time": "2025-06-05 09:55:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "38",
-      "patient_id": "38",
-      "doctor_id": "2",
-      "room_id": "7",
-      "registered_at": "2025-06-06 07:15:00",
-      "estimated_time": "2025-06-06 08:30:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "39",
-      "patient_id": "39",
-      "doctor_id": "5",
-      "room_id": "11",
-      "registered_at": "2025-06-06 07:27:00",
-      "estimated_time": "2025-06-06 08:30:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "40",
-      "patient_id": "40",
-      "doctor_id": "8",
-      "room_id": "15",
-      "registered_at": "2025-06-06 07:44:00",
-      "estimated_time": "2025-06-06 09:15:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "41",
-      "patient_id": "41",
-      "doctor_id": "12",
-      "room_id": "19",
-      "registered_at": "2025-06-06 07:53:00",
-      "estimated_time": "2025-06-06 09:53:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "42",
-      "patient_id": "42",
-      "doctor_id": "16",
-      "room_id": "23",
-      "registered_at": "2025-06-06 08:10:00",
-      "estimated_time": "2025-06-06 09:35:00",
-      "visittype": "Result",
-      "status": "Skipped"
-    },
-    {
-      "id": "43",
-      "patient_id": "43",
-      "doctor_id": "20",
+      "doctor_id": "13",
       "room_id": "27",
-      "registered_at": "2025-06-06 08:20:00",
-      "estimated_time": "2025-06-06 09:40:00",
+      "registered_at": "2025-07-14T14:00:02.089Z",
+      "estimated_time": "2025-07-14T15:00:02.089Z",
       "visittype": "Initial",
       "status": "Waiting"
-    },
-    {
-      "id": "44",
-      "patient_id": "44",
-      "doctor_id": "24",
-      "room_id": "3",
-      "registered_at": "2025-06-06 08:35:00",
-      "estimated_time": "2025-06-06 09:35:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "45",
-      "patient_id": "45",
-      "doctor_id": "28",
-      "room_id": "6",
-      "registered_at": "2025-06-06 08:47:00",
-      "estimated_time": "2025-06-06 10:00:00",
-      "visittype": "Initial",
-      "status": "Completed"
-    },
-    {
-      "id": "46",
-      "patient_id": "46",
-      "doctor_id": "32",
-      "room_id": "10",
-      "registered_at": "2025-06-06 09:00:00",
-      "estimated_time": "2025-06-06 10:10:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "47",
-      "patient_id": "47",
-      "doctor_id": "36",
-      "room_id": "14",
-      "registered_at": "2025-06-06 09:11:00",
-      "estimated_time": "2025-06-06 10:22:00",
-      "visittype": "Initial",
-      "status": "InProgress"
-    },
-    {
-      "id": "48",
-      "patient_id": "48",
-      "doctor_id": "40",
-      "room_id": "18",
-      "registered_at": "2025-06-06 09:20:00",
-      "estimated_time": "2025-06-06 10:18:00",
-      "visittype": "Result",
-      "status": "Waiting"
-    },
-    {
-      "id": "49",
-      "patient_id": "49",
-      "doctor_id": "44",
-      "room_id": "22",
-      "registered_at": "2025-06-06 09:33:00",
-      "estimated_time": "2025-06-06 10:45:00",
-      "visittype": "Initial",
-      "status": "Waiting"
-    },
-    {
-      "id": "50",
-      "patient_id": "50",
-      "doctor_id": "48",
-      "room_id": "26",
-      "registered_at": "2025-06-06 09:49:00",
-      "estimated_time": "2025-06-06 11:00:00",
-      "visittype": "Result",
-      "status": "InProgress"
     }
   ],
   "DoctorRoomAssignment": [

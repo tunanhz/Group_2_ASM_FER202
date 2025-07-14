@@ -18,7 +18,7 @@ const Login = () => {
       const endpoints = [
         { type: "patient", url: "http://localhost:9999/AccountPatient" },
         { type: "staff", url: "http://localhost:9999/AccountStaff" },
-        { type: "doctor", url: "http://localhost:9999/AccountPharmacist" },
+        { type: "pharmacist", url: "http://localhost:9999/AccountPharmacist" },
       ];
 
       let matchedUser = null;
@@ -64,12 +64,16 @@ const Login = () => {
                 case "Receptionist":
                   window.location.href = "/receptionist-dashboard";
                   break;
+                  case "AdminSys":
+                  window.location.href = "/dashboard";
+                  break;
                 default:
                   window.location.href = "/staff-dashboard";
               }
-            } else if (userType === "doctor") {
+            } else if (userType === "pharmacist") {
               window.location.href = "/doctor-dashboard";
-            } else {
+            }
+             else {
               window.location.href = "/patient-dashboard";
             }
           }, 1000);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Import Components
 import Header from './components/Header';
@@ -14,17 +14,35 @@ import EditInforPatient from './components/editInforPatient';
 import EditInforReceptionist from './components/editInforReceptionist';
 import DoctorDashboard from './components/DoctorDashboard';
 import PatientDashboard from './components/PatientDashboard';
+import Doctors from './components/Doctors';
+import ServiceAssignment from './components/ServiceAssignment';
+import AssignService from './components/AssignService';
+import ResultPage from './components/ResultPage';
+import Invoices from './components/AllinvoicePatient';
+import ReceptionistDashboard from './components/ReceptionistDashboard';
+import PharmacistDashboard from './components/PharmacistDashboard';
+import MedicineList from './components/MedicineList';
+import AddMedicine from './components/AddMedicine';
+import EditMedicine from './components/EditMedicine';
+import PrescriptionList from './components/Prescriptions';
+import Stock from './components/Stock';
+import AdminBusinessDashboard from './components/AdminBusinessDashboard';
+import InvoiceList from './components/InvoiceList';
+import RevenueStatistics from './components/RevenueStatistics';
 
-function App() {
+const AppContent = () => {
+  const location = useLocation();
+  const doctorRoutes = ['/doctor-dashboard', '/assign-service', '/result-page'];
+  const isDoctorPage = doctorRoutes.includes(location.pathname) || location.pathname.startsWith('/service-assignment');
+
   return (
-    <Router>
-      <div className="App">
-        {/* Header - Always visible */}
-        <Header />
-        
-        {/* Main Content with Routes */}
-        <main className="main-content" style={{minHeight: '80vh'}}>
-          <Routes>
+    <div className="App">
+      {/* Header - Hidden for doctor pages */}
+      {!isDoctorPage && <Header />}
+      
+      {/* Main Content with Routes */}
+      <main className="main-content" style={{minHeight: '80vh'}}>
+        <Routes>
             {/* Home Page */}
             <Route path="/" element={<Home />} />
             
@@ -47,7 +65,7 @@ function App() {
             <Route path="/edit/receptionist/:id" element={<EditInforReceptionist />} />
             
             {/* Management Pages */}
-            <Route path="/doctors" element={<DoctorsList />} />
+            <Route path="/doctors" element={<Doctors />} />
             <Route path="/nurses" element={<NursesList />} />
             <Route path="/patients" element={<PatientsList />} />
             <Route path="/receptionists" element={<ReceptionistsList />} />
@@ -60,9 +78,28 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
             <Route path="/patient-dashboard" element={<PatientDashboard />} />
+            <Route path="/service-assignment/:patientId/:waitlistId" element={<ServiceAssignment />} />
+            <Route path="/assign-service" element={<AssignService />} />
+            <Route path="/result-page" element={<ResultPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/appointments" element={<MyAppointments />} />
+            <Route path="/invoives" element={<Invoices />} />
+            <Route path="/receptionist-dashboard" element={<ReceptionistDashboard />} />
+            
+            {/* Pharmacist routes */}
+            <Route path="/pharmacist-dashboard" element={<PharmacistDashboard />} />
+            <Route path="/medicines" element={<MedicineList />} />
+            <Route path="/add-medicine" element={<AddMedicine />} />
+            <Route path="/edit-medicine/:id" element={<EditMedicine />} />
+            <Route path="/prescriptions" element={<PrescriptionList />} />
+            <Route path="/stock" element={<Stock />} />
+
+            {/* Business admin routes */}
+            <Route path="/business-dashboard" element={<AdminBusinessDashboard />} />
+            <Route path="/invoice-list" element={<InvoiceList />} />
+            <Route path="/revenue-statistics" element={<RevenueStatistics />} />
+
             
             {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
@@ -72,21 +109,18 @@ function App() {
         {/* Footer - Always visible */}
         <Footer />
       </div>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
 
 // Placeholder components for pages that don't exist yet
-const DoctorsList = () => (
-  <div className="container py-5">
-    <h2 className="text-center mb-4">Doctors List</h2>
-    <p className="text-center text-muted">This page will show list of all doctors.</p>
-    <div className="text-center">
-      <a href="/edit/doctor" className="btn btn-primary">Add New Doctor</a>
-    </div>
-  </div>
-);
-
 const NursesList = () => (
   <div className="container py-5">
     <h2 className="text-center mb-4">Nurses List</h2>
