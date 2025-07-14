@@ -48,36 +48,36 @@ const Footer = () => {
         <footer style={footerStyle}>
             <div style={containerStyle}>
                 <div style={sectionStyle}>
-                    <h3 style={titleStyle}>🏥 Medical Center</h3>
-                    <p>Providing quality healthcare services with compassion and expertise.</p>
-                    <p>📞 Emergency: 1800-123-456</p>
+                    <h3 style={titleStyle}>🏥 Trung Tâm Y Tế</h3>
+                    <p>Cung cấp dịch vụ chăm sóc sức khỏe chất lượng với sự tận tâm và chuyên môn.</p>
+                    <p>📞 Cấp cứu: 0968537367</p>
                 </div>
 
                 <div style={sectionStyle}>
-                    <h3 style={titleStyle}>Quick Links</h3>
-                    <a href="/about" style={linkStyle}>About Us</a>
-                    <a href="/services" style={linkStyle}>Our Services</a>
-                    <a href="/doctors" style={linkStyle}>Find a Doctor</a>
-                    <a href="/appointments" style={linkStyle}>Book Appointment</a>
+                    <h3 style={titleStyle}>Liên Kết Nhanh</h3>
+                    <a href="/about" style={linkStyle}>Về Chúng Tôi</a>
+                    <a href="/services" style={linkStyle}>Dịch Vụ</a>
+                    <a href="/doctors" style={linkStyle}>Tìm Bác Sĩ</a>
+                    <a href="/appointments" style={linkStyle}>Đặt Lịch Hẹn</a>
                 </div>
 
                 <div style={sectionStyle}>
-                    <h3 style={titleStyle}>Contact Us</h3>
-                    <p>📍 123 Medical Center Drive</p>
-                    <p>📧 info@medicalcenter.com</p>
-                    <p>☎️ +1 (555) 123-4567</p>
+                    <h3 style={titleStyle}>Liên Hệ</h3>
+                    <p>📍 123 Đường TrangBo</p>
+                    <p>📧 info@trangbo.com</p>
+                    <p>☎️ +84 (28) 123-4567</p>
                 </div>
 
                 <div style={sectionStyle}>
-                    <h3 style={titleStyle}>Working Hours</h3>
-                    <p>Monday - Friday: 8:00 AM - 8:00 PM</p>
-                    <p>Saturday: 9:00 AM - 6:00 PM</p>
-                    <p>Sunday: Emergency Only</p>
+                    <h3 style={titleStyle}>Giờ Làm Việc</h3>
+                    <p>Thứ Hai - Thứ Sáu: 8:00 - 20:00</p>
+                    <p>Thứ Bảy: 9:00 - 18:00</p>
+                    <p>Chủ Nhật: Chỉ Cấp Cứu</p>
                 </div>
             </div>
 
             <div style={bottomBarStyle}>
-                <p>© 2023 Medical Center. All rights reserved.</p>
+                <p>© 2025 Bệnh Viện TrangBo. Tất cả quyền được bảo lưu.</p>
             </div>
         </footer>
     );

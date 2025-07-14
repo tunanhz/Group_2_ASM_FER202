@@ -25,17 +25,17 @@ const Home = () => {
                                     textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
                                     lineHeight: '1.2'
                                 }}>
-                                    Your Health, Our 
+                                    Sức Khỏe Của Bạn, 
                                     <span style={{
                                         background: 'linear-gradient(45deg, #ffd700, #ffed4e)',
                                         WebkitBackgroundClip: 'text',
                                         WebkitTextFillColor: 'transparent',
                                         backgroundClip: 'text'
-                                    }}> Priority</span>
+                                    }}> Ưu Tiên Của Chúng Tôi</span>
                                 </h1>
                                 <p className="lead mb-4 fs-5" style={{opacity: 0.9}}>
-                                    Experience world-class healthcare with cutting-edge technology, 
-                                    compassionate care, and expert medical professionals dedicated to your wellbeing.
+                                    Trải nghiệm dịch vụ y tế đẳng cấp thế giới với công nghệ tiên tiến, 
+                                    sự chăm sóc tận tâm và đội ngũ chuyên gia y tế tận tụy vì sức khỏe của bạn.
                                 </p>
                                 <div className="d-flex flex-wrap gap-3">
                                     <button className="btn btn-light btn-lg px-4 py-3 rounded-pill fw-semibold" style={{
@@ -51,7 +51,7 @@ const Home = () => {
                                         e.target.style.boxShadow = '0 8px 25px rgba(255,255,255,0.3)';
                                     }}>
                                         <i className="fas fa-calendar-check me-2"></i>
-                                        Book Appointment
+                                        Đặt Lịch Hẹn
                                     </button>
                                     
             </div>
@@ -110,10 +110,10 @@ const Home = () => {
                 <div className="container">
                     <div className="row">
                         {[
-                            { number: '50+', label: 'Expert Doctors', icon: 'fa-user-md', color: '#3b82f6' },
-                            { number: '15K+', label: 'Happy Patients', icon: 'fa-smile', color: '#10b981' },
-                            { number: '20+', label: 'Years Experience', icon: 'fa-award', color: '#f59e0b' },
-                            { number: '24/7', label: 'Emergency Care', icon: 'fa-clock', color: '#ef4444' }
+                            { number: '50+', label: 'Bác Sĩ Chuyên Khoa', icon: 'fa-user-md', color: '#3b82f6' },
+                            { number: '15K+', label: 'Bệnh Nhân Hài Lòng', icon: 'fa-smile', color: '#10b981' },
+                            { number: '20+', label: 'Năm Kinh Nghiệm', icon: 'fa-award', color: '#f59e0b' },
+                            { number: '24/7', label: 'Cấp Cứu', icon: 'fa-clock', color: '#ef4444' }
                         ].map((stat, index) => (
                             <div key={index} className="col-md-3 col-6 mb-4">
                                 <div className="text-center p-4 rounded-4 h-100" style={{
@@ -155,9 +155,9 @@ const Home = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text'
-                        }}>Our Premium Services</h2>
+                        }}>Dịch Vụ Cao Cấp Của Chúng Tôi</h2>
                         <p className="lead text-muted mx-auto" style={{maxWidth: '600px'}}>
-                            Comprehensive healthcare solutions designed with your comfort and recovery in mind
+                            Các giải pháp chăm sóc sức khỏe toàn diện được thiết kế với sự thoải mái và phục hồi của bạn
                         </p>
                     </div>
                     
@@ -165,38 +165,38 @@ const Home = () => {
                         {[
                             {
                                 icon: 'fa-user-md',
-                                title: 'Expert Consultation',
-                                description: 'Get personalized medical advice from our board-certified specialists with years of experience.',
+                                title: 'Tư Vấn Chuyên Khoa',
+                                description: 'Nhận lời khuyên y tế cá nhân từ các chuyên gia được chứng nhận với nhiều năm kinh nghiệm.',
                                 color: '#3b82f6'
                             },
                             {
                                 icon: 'fa-heartbeat',
-                                title: 'Emergency Care',
-                                description: 'Round-the-clock emergency services with rapid response and state-of-the-art life support systems.',
+                                title: 'Cấp Cứu',
+                                description: 'Dịch vụ cấp cứu 24/7 với phản ứng nhanh và hệ thống hỗ trợ sự sống hiện đại.',
                                 color: '#ef4444'
                             },
                             {
                                 icon: 'fa-microscope',
-                                title: 'Advanced Diagnostics',
-                                description: 'Cutting-edge diagnostic equipment for accurate results and early disease detection.',
+                                title: 'Chẩn Đoán Tiên Tiến',
+                                description: 'Thiết bị chẩn đoán tiên tiến để có kết quả chính xác và phát hiện bệnh sớm.',
                                 color: '#10b981'
                             },
                             {
                                 icon: 'fa-procedures',
-                                title: 'Surgical Excellence',
-                                description: 'Minimally invasive procedures with the latest surgical technology for faster recovery.',
+                                title: 'Phẫu Thuật Xuất Sắc',
+                                description: 'Các thủ thuật xâm lấn tối thiểu với công nghệ phẫu thuật mới nhất để phục hồi nhanh hơn.',
                                 color: '#f59e0b'
                             },
                             {
                                 icon: 'fa-pills',
-                                title: 'Pharmacy Services',
-                                description: 'Complete pharmaceutical care with medication counseling and home delivery options.',
+                                title: 'Dịch Vụ Dược Phẩm',
+                                description: 'Chăm sóc dược phẩm hoàn chỉnh với tư vấn thuốc và tùy chọn giao hàng tận nhà.',
                                 color: '#8b5cf6'
                             },
                             {
                                 icon: 'fa-spa',
-                                title: 'Wellness Programs',
-                                description: 'Holistic wellness programs including nutrition counseling and mental health support.',
+                                title: 'Chương Trình Sức Khỏe',
+                                description: 'Các chương trình sức khỏe tổng thể bao gồm tư vấn dinh dưỡng và hỗ trợ sức khỏe tâm thần.',
                                 color: '#06b6d4'
                             }
                         ].map((service, index) => (
@@ -238,7 +238,7 @@ const Home = () => {
                                             e.target.style.color = service.color;
                                             e.target.style.transform = 'scale(1)';
                                         }}>
-                                            Learn More
+                                            Tìm Hiểu Thêm
                                         </button>
                                     </div>
                                 </div>
@@ -259,31 +259,31 @@ const Home = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text'
-                        }}>What Our Patients Say</h2>
-                        <p className="lead text-muted">Real stories from people who trust us with their health</p>
+                        }}>Bệnh Nhân Nói Gì Về Chúng Tôi</h2>
+                        <p className="lead text-muted">Những câu chuyện thực tế từ những người tin tưởng chúng tôi với sức khỏe của họ</p>
                     </div>
                     
                     <div className="row g-4">
                         {[
                             {
-                                name: 'Sarah Johnson',
-                                role: 'Mother of Two',
+                                name: 'Nguyễn Thị Linh',
+                                role: 'Mẹ của hai con',
                                 rating: 5,
-                                text: 'The level of care and attention my family received was exceptional. The doctors took time to explain everything and made us feel comfortable throughout the entire process.',
+                                text: 'Mức độ chăm sóc và sự quan tâm mà gia đình tôi nhận được thật đặc biệt. Các bác sĩ đã dành thời gian để giải thích mọi thứ và khiến chúng tôi cảm thấy thoải mái trong suốt quá trình điều trị.',
                                 avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
                             },
                             {
-                                name: 'Michael Chen',
-                                role: 'Business Executive',
+                                name: 'Trần Văn Minh',
+                                role: 'Giám đốc điều hành',
                                 rating: 5,
-                                text: 'Professional, efficient, and caring. The online appointment system is fantastic and the staff always goes above and beyond to accommodate my busy schedule.',
+                                text: 'Chuyên nghiệp, hiệu quả và chu đáo. Hệ thống đặt lịch hẹn trực tuyến rất tuyệt vời và nhân viên luôn cố gắng hết sức để phù hợp với lịch trình bận rộn của tôi.',
                                 avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
                             },
                             {
-                                name: 'Emma Rodriguez',
-                                role: 'Teacher',
+                                name: 'Lê Thị Hương',
+                                role: 'Giáo viên',
                                 rating: 5,
-                                text: 'I have been a patient here for over 5 years. The quality of care, modern facilities, and friendly staff make every visit a positive experience.',
+                                text: 'Tôi đã là bệnh nhân ở đây được hơn 5 năm. Chất lượng chăm sóc, cơ sở vật chất hiện đại và nhân viên thân thiện khiến mỗi lần đến khám đều là trải nghiệm tích cực.',
                                 avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
                             }
                         ].map((testimonial, index) => (
@@ -339,8 +339,8 @@ const Home = () => {
                         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                         color: 'white'
                     }}>
-                        <h2 className="display-5 fw-bold mb-3">Ready to Take Care of Your Health?</h2>
-                        <p className="lead mb-4">Book your appointment today and experience healthcare like never before</p>
+                        <h2 className="display-5 fw-bold mb-3">Sẵn Sàng Chăm Sóc Sức Khỏe Của Bạn?</h2>
+                        <p className="lead mb-4">Đặt lịch hẹn hôm nay và trải nghiệm dịch vụ chăm sóc sức khỏe như chưa từng có</p>
                         <div className="d-flex justify-content-center gap-3 flex-wrap">
                             <button className="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold" style={{
                                 boxShadow: '0 8px 25px rgba(255,255,255,0.3)',
@@ -355,7 +355,7 @@ const Home = () => {
                                 e.target.style.boxShadow = '0 8px 25px rgba(255,255,255,0.3)';
                             }}>
                                 <i className="fas fa-calendar-plus me-2"></i>
-                                Book Appointment Now
+                                Đặt Lịch Hẹn Ngay
                             </button>
                             <button className="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-semibold" style={{
                                 borderWidth: '2px',
@@ -370,7 +370,7 @@ const Home = () => {
                                 e.target.style.transform = 'translateY(0)';
                             }}>
                                 <i className="fas fa-phone me-2"></i>
-                                Call Us Now
+                                Gọi Cho Chúng Tôi
                             </button>
                         </div>
                     </div>
