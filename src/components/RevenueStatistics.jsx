@@ -1,4 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const formatDate = (isoDate) => {
     if (!isoDate) return "Không rõ";
@@ -52,9 +64,7 @@ const RevenueStatistics = () => {
 
     const filterData = (usernameKeyword, dateValue) => {
         const patientMatches = patients
-            .filter(p =>
-                (p.username || "").toLowerCase().includes(usernameKeyword.toLowerCase())
-            )
+            .filter(p => (p.username || "").toLowerCase().includes(usernameKeyword.toLowerCase()))
             .map(p => String(p.id));
 
         const result = invoices.filter(inv => {
@@ -70,10 +80,33 @@ const RevenueStatistics = () => {
     const totalPages = Math.ceil(filtered.length / pageSize);
     const pageData = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
+    const revenueByDate = filtered.reduce((acc, inv) => {
+        const date = inv.issue_date;
+        const amount = Number(inv.total_amount || 0);
+        acc[date] = (acc[date] || 0) + amount;
+        return acc;
+    }, {});
+
+    const chartLabels = Object.keys(revenueByDate).sort();
+    const chartData = {
+        labels: chartLabels,
+        datasets: [
+            {
+                label: 'Doanh thu theo ngày (VNĐ)',
+                data: chartLabels.map(date => revenueByDate[date]),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
     return (
         <div className="container py-4">
             <h3 className="text-center text-primary mb-4">📊 Thống kê doanh thu</h3>
 
+            <p><strong>Tổng hóa đơn:</strong> {filtered.length}</p>
+            <p><strong>Tổng doanh thu:</strong> {totalRevenue.toLocaleString()} VNĐ</p>
             <div className="row mb-3">
                 <div className="col-md-4">
                     <input
@@ -95,9 +128,6 @@ const RevenueStatistics = () => {
                 </div>
             </div>
 
-            <p><strong>Tổng hóa đơn:</strong> {filtered.length}</p>
-            <p><strong>Tổng doanh thu:</strong> {totalRevenue.toLocaleString()} VNĐ</p>
-
             <div className="table-responsive shadow-sm rounded-3 overflow-hidden">
                 <table className="table table-hover align-middle mb-0">
                     <thead className="table-primary text-center">
@@ -115,9 +145,7 @@ const RevenueStatistics = () => {
                                 <td className="text-center">{(currentPage - 1) * pageSize + idx + 1}</td>
                                 <td className="text-center">{getPatientName(inv.patient_id)}</td>
                                 <td className="text-center">{formatDate(inv.issue_date)}</td>
-                                <td className="text-center text-danger fw-bold">
-                                    {Number(inv.total_amount).toLocaleString()}
-                                </td>
+                                <td className="text-center text-danger fw-bold">{Number(inv.total_amount).toLocaleString()}</td>
                                 <td className="text-center">
                                     <span className={`badge rounded-pill px-3 py-2 ${inv.status === "Paid" ? "bg-success" : "bg-warning text-dark"}`}>
                                         {inv.status}
@@ -134,6 +162,44 @@ const RevenueStatistics = () => {
                         )}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="card shadow-sm mb-4 mt-5">
+                <div className="card-body">
+                    <h5 className="card-title">Biểu đồ doanh thu theo ngày</h5>
+                    <div className="overflow-auto" style={{ maxWidth: "100%" }}>
+                        <div style={{ width: `${chartLabels.length * 80}px`, minWidth: "600px" }}>
+                            <Bar
+                                data={chartData}
+                                options={{
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        legend: { display: false },
+                                        title: {
+                                            display: true,
+                                            text: 'Doanh thu (VNĐ)',
+                                            font: { size: 16 },
+                                        },
+                                    },
+                                    scales: {
+                                        x: {
+                                            title: { display: true, text: 'Ngày xuất hóa đơn' },
+                                            ticks: { maxRotation: 45, minRotation: 45 },
+                                        },
+                                        y: {
+                                            title: { display: true, text: 'Tổng tiền (VNĐ)' },
+                                            ticks: {
+                                                callback: (value) => value.toLocaleString("vi-VN"),
+                                            },
+                                        },
+                                    },
+                                }}
+                                height={300}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {totalPages > 1 && (
