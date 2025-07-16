@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { apiService, dataHelpers, handleApiError, handleApiSuccess, deleteAppointment } from '../services/api';
+import { getAppointments, getPatients, getReceptionists, getDoctors, getWaitlist, addWaitlist, updateAppointment } from '../services/api';
 import EditReceptionist from './editInforReceptionist';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { ToastContainer, toast } from 'react-toastify';
@@ -49,17 +49,12 @@ const ReceptionistDashboard = () => {
         setError(null);
 
         try {
-            const [appointmentsRes, patientsRes, receptionistsRes, doctorsRes] = await Promise.all([
-                apiService.getAppointments().catch(() => ({ data: [] })),
-                apiService.getPatients().catch(() => ({ data: [] })),
-                apiService.getReceptionists().catch(() => ({ data: [] })),
-                apiService.getDoctors().catch(() => ({ data: [] }))
+            const [appointmentsData, patientsData, receptionistsData, doctorsData] = await Promise.all([
+                getAppointments(),
+                getPatients(),
+                getReceptionists(),
+                getDoctors()
             ]);
-
-            const appointmentsData = handleApiSuccess(appointmentsRes).data || [];
-            const patientsData = handleApiSuccess(patientsRes).data || [];
-            const receptionistsData = handleApiSuccess(receptionistsRes).data || [];
-            const doctorsData = handleApiSuccess(doctorsRes).data || [];
 
             if (receptionistsData.length === 0) {
                 setError('Không có dữ liệu lễ tân. Vui lòng thêm dữ liệu vào Receptionist.');
@@ -123,8 +118,7 @@ const ReceptionistDashboard = () => {
                 completedToday: appointmentStatsData.todayCompleted
             });
         } catch (err) {
-            const errorResult = handleApiError(err);
-            setError(errorResult.message || 'Không thể tải dữ liệu. Vui lòng kiểm tra kết nối hoặc dữ liệu server.');
+            setError('Không thể tải dữ liệu. Vui lòng kiểm tra kết nối hoặc dữ liệu server.');
             console.error('Failed to fetch dashboard data:', err);
         } finally {
             setLoading(false);
@@ -133,7 +127,7 @@ const ReceptionistDashboard = () => {
 
     const handleCheckIn = async (appointmentId) => {
         try {
-            await apiService.checkInAppointment(appointmentId, {
+            await updateAppointment(appointmentId, {
                 status: 'Confirmed',
                 receptionist_id: currentReceptionist?.id
             });
@@ -144,7 +138,7 @@ const ReceptionistDashboard = () => {
             const now = new Date();
             const estimatedTime = new Date(now.getTime() + 60 * 60 * 1000);
 
-            const waitlistRes = await apiService.getWaitlist().catch(() => ({ data: [] }));
+            const waitlistRes = await getWaitlist().catch(() => ({ data: [] }));
             const existingWaitlistIds = waitlistRes.data.map(w => parseInt(w.id)) || [];
             const newWaitlistId = Math.max(...existingWaitlistIds, 0) + 1;
 
@@ -154,7 +148,7 @@ const ReceptionistDashboard = () => {
             const availableRooms = Array.from({ length: 30 }, (_, i) => i + 1).filter(r => !usedRooms.includes(r));
             const roomId = availableRooms[Math.floor(Math.random() * availableRooms.length)] || 1;
 
-            await apiService.addToWaitlist({
+            await addWaitlist({
                 id: newWaitlistId.toString(),
                 patient_id: appointment.patient_id,
                 doctor_id: appointment.doctor_id,
@@ -171,8 +165,7 @@ const ReceptionistDashboard = () => {
                 autoClose: 3000
             });
         } catch (err) {
-            const errorResult = handleApiError(err);
-            toast.error(`Lỗi check-in: ${errorResult.message}`);
+            toast.error(`Lỗi check-in: ${err.message || 'Không thể thực hiện check-in.'}`);
         }
     };
 
@@ -247,7 +240,7 @@ const ReceptionistDashboard = () => {
     const handleCancelAppointment = async (appointmentId) => {
         if (!window.confirm('Bạn có chắc chắn muốn hủy lịch hẹn này?')) return;
         try {
-            await deleteAppointment(appointmentId);
+            await updateAppointment(appointmentId, { status: 'Cancelled' });
             toast.success('Đã xóa lịch hẹn thành công!');
             fetchDashboardData();
         } catch (err) {

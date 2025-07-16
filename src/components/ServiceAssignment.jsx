@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DoctorHeader from './DoctorHeader';
-import { 
-    getMedicalServices,
-    getPatients,
-    getDoctors,
-    createMedicineRecord,
-    createServiceOrder,
-    createServiceOrderItem,
-    updateWaitlistStatusAndVisitType,
-    createInvoice,
-    createServiceInvoice
-} from '../services/api';
+import { getMedicalServices, getPatients, getDoctors, addMedicineRecord, addServiceOrder, addServiceOrderItem, updateWaitlist, addInvoice, addServiceInvoice } from '../services/api';
 
 const ServiceAssignment = () => {
     const { patientId, waitlistId } = useParams();
@@ -32,23 +22,23 @@ const ServiceAssignment = () => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [patientsRes, servicesRes, doctorsRes] = await Promise.all([
+            const [patientsData, servicesData, doctorsData] = await Promise.all([
                 getPatients(),
                 getMedicalServices(),
                 getDoctors()
             ]);
 
-            if (patientsRes.success) {
-                const foundPatient = patientsRes.data.find(p => p.id === patientId);
+            if (patientsData.success) {
+                const foundPatient = patientsData.data.find(p => p.id === patientId);
                 setPatient(foundPatient);
             }
 
-            if (servicesRes.success) {
-                setMedicalServices(servicesRes.data);
+            if (servicesData.success) {
+                setMedicalServices(servicesData.data);
             }
 
-            if (doctorsRes.success) {
-                setDoctors(doctorsRes.data);
+            if (doctorsData.success) {
+                setDoctors(doctorsData.data);
             }
 
         } catch (error) {
@@ -101,7 +91,7 @@ const ServiceAssignment = () => {
             // ALWAYS create NEW medicine record for service assignment
             // Luôn tạo MedicineRecord mới cho việc chỉ định dịch vụ
             console.log('🔄 Tạo MedicineRecord mới cho chỉ định dịch vụ...');
-            const newRecordRes = await createMedicineRecord({
+            const newRecordRes = await addMedicineRecord({
                 patient_id: patientId
             });
             
@@ -119,7 +109,7 @@ const ServiceAssignment = () => {
                 medicineRecord_id: medicineRecordId
             };
 
-            const serviceOrderRes = await createServiceOrder(serviceOrderData);
+            const serviceOrderRes = await addServiceOrder(serviceOrderData);
             if (!serviceOrderRes.success) {
                 throw new Error('Không thể tạo đơn chỉ định');
             }
@@ -134,7 +124,7 @@ const ServiceAssignment = () => {
                     doctor_id: service.doctorId
                 };
 
-                const itemRes = await createServiceOrderItem(itemData);
+                const itemRes = await addServiceOrderItem(itemData);
                 if (!itemRes.success) {
                     console.error('Failed to create service item:', service);
                 }
@@ -142,7 +132,7 @@ const ServiceAssignment = () => {
 
             // After service assignment: status=Waiting, visitType=Result (waiting for service results)
             if (waitlistId) {
-                await updateWaitlistStatusAndVisitType(waitlistId, 'Waiting', 'Result');
+                await updateWaitlist(waitlistId, 'Waiting', 'Result');
             }
 
             alert('✅ Chỉ định dịch vụ thành công!');

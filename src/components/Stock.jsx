@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { getMedicines } from '../services/api';
 
 const Stock = () => {
     const [stocks, setStocks] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:9999/Stocks")
-            .then((res) => res.json())
-            .then((data) => setStocks(data))
-            .catch((err) => console.error("Lỗi khi tải kho thuốc:", err));
+        getMedicines().then(setStocks);
     }, []);
 
     return (

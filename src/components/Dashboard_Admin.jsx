@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Alert, Badge, Spinner } from "react-bootstrap";
-import { apiService, dataHelpers, getSystemLogs } from "../services/api";
-
+import { getPatients, getDoctors, getAccountStaff, getSystemLogStaff } from '../services/api';
 
 
 const Dashboard = () => {
@@ -50,23 +49,18 @@ const Dashboard = () => {
       setDataLoading(true);
       
       // Load tất cả dữ liệu cần thiết
-      const [
-        patientsResponse,
-        doctorsResponse,
-        accountStaffResponse,
-        systemLogsResponse
-      ] = await Promise.all([
-        apiService.getPatients(),
-        apiService.getDoctors(),
-        apiService.getAccountStaff(),
-        getSystemLogs()
+      const [patientsData, doctorsData, accountStaffData, systemLogsData] = await Promise.all([
+        getPatients(),
+        getDoctors(),
+        getAccountStaff(),
+        getSystemLogStaff()
       ]);
 
       // Xử lý dữ liệu
-      const patients = patientsResponse.data || [];
-      const doctors = doctorsResponse.data || [];
-      const accountStaff = accountStaffResponse.data || [];
-      const logs = systemLogsResponse.data || [];
+      const patients = patientsData.data || [];
+      const doctors = doctorsData.data || [];
+      const accountStaff = accountStaffData.data || [];
+      const logs = systemLogsData.data || [];
 
       // Lọc các loại nhân viên từ AccountStaff
       const nurses = accountStaff.filter(staff => staff.role === "Nurse");

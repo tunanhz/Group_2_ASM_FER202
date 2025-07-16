@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { apiService, dataHelpers, handleApiError, handleApiSuccess } from '../services/api';
+import { getInvoices, getPatients } from '../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
@@ -34,13 +34,10 @@ const Invoices = () => {
         setError(null);
 
         try {
-            const [invoicesRes, patientsRes] = await Promise.all([
-                apiService.getInvoices().catch(() => ({ data: [] })),
-                apiService.getPatients().catch(() => ({ data: [] }))
+            const [invoicesData, patientsData] = await Promise.all([
+                getInvoices(),
+                getPatients()
             ]);
-
-            const invoicesData = handleApiSuccess(invoicesRes).data || [];
-            const patientsData = handleApiSuccess(patientsRes).data || [];
 
             if (invoicesData.length === 0) {
                 setError('Không có dữ liệu hóa đơn. Vui lòng thêm dữ liệu.');
@@ -68,8 +65,7 @@ const Invoices = () => {
             setInvoices(processedInvoices);
             setPatients(patientsData);
         } catch (err) {
-            const errorResult = handleApiError(err);
-            setError(errorResult.message || 'Không thể tải dữ liệu hóa đơn. Vui lòng kiểm tra kết nối hoặc dữ liệu server.');
+            setError('Không thể tải dữ liệu hóa đơn. Vui lòng kiểm tra kết nối hoặc dữ liệu server.');
             console.error('Failed to fetch invoices data:', err);
         } finally {
             setLoading(false);

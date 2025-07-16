@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { addAccountPatient, addPatient, getAccountPatients } from '../services/api';
 
 const styles = {
     container: {
@@ -130,24 +131,11 @@ const RegisterPatient = () => {
         e.preventDefault();
         if (!validate()) return;
         try {
-            const res = await fetch("http://localhost:9999/AccountPatient");
-            const accounts = await res.json();
+            const accounts = await getAccountPatients();
             const maxId = accounts.reduce((max, acc) => Math.max(max, acc.id || 0), 0);
             const newId = maxId + 1;
-
-            const accRes = await fetch("http://localhost:9999/AccountPatient", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: newId, ...account, img: "default.png", status: "Enable" })
-            });
-            if (!accRes.ok) throw new Error("Tạo tài khoản thất bại");
-
-            const patientRes = await fetch("http://localhost:9999/Patient", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...patient, id: newId })
-            });
-            if (!patientRes.ok) throw new Error("Lưu thông tin bệnh nhân thất bại");
+            await addAccountPatient({ id: newId, ...account, img: 'default.png', status: 'Enable' });
+            await addPatient({ ...patient, id: newId });
 
             alert("Đăng ký thành công!");
             navigate("/login");

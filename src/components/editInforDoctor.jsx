@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import imageCompression from 'browser-image-compression';
+import { getDoctors, getAccountStaff, updateDoctor, updateAccountStaff } from '../services/api';
 
 const EditDoctor = ({ doctorId, onSave = () => {}, onCancel = () => {} }) => {
   const [formData, setFormData] = useState({
@@ -20,62 +21,28 @@ const EditDoctor = ({ doctorId, onSave = () => {}, onCancel = () => {} }) => {
       try {
         setLoading(true);
         setError(null);
-        
-        // Kiểm tra nếu không có doctorId
-        if (!doctorId) {
-          throw new Error('Không tìm thấy ID bác sĩ');
-        }
-        
-        console.log('Fetching doctor data for ID:', doctorId);
-        
-        const doctorResponse = await fetch(`http://localhost:9999/Doctor/${doctorId}`);
-        if (!doctorResponse.ok) {
-          if (doctorResponse.status === 404) {
-            throw new Error(`Không tìm thấy bác sĩ với ID: ${doctorId}`);
-          }
-          throw new Error(`Lỗi server: ${doctorResponse.status} - ${doctorResponse.statusText}`);
-        }
-        const doctorData = await doctorResponse.json();
-        
-        console.log('Doctor data loaded:', doctorData);
-
-        // Khởi tạo dữ liệu cơ bản từ doctor
+        if (!doctorId) throw new Error('Không tìm thấy ID bác sĩ');
+        const doctors = await getDoctors();
+        const doctorData = doctors.find(d => d.id === doctorId);
         let accountData = { img: 'default.png' };
-        
-        // Chỉ fetch account data nếu có account_staff_id
-        if (doctorData.account_staff_id) {
-          try {
-            console.log('Fetching account data for ID:', doctorData.account_staff_id);
-            const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${doctorData.account_staff_id}`);
-            if (accountResponse.ok) {
-              accountData = await accountResponse.json();
-              console.log('Account data loaded:', accountData);
-            } else {
-              console.warn('Không thể tải thông tin tài khoản, sử dụng dữ liệu mặc định');
-            }
-          } catch (accountError) {
-            console.warn('Lỗi khi tải thông tin tài khoản:', accountError.message);
-            // Không throw error, chỉ sử dụng dữ liệu mặc định
-          }
+        if (doctorData?.account_staff_id) {
+          const accountStaff = await getAccountStaff();
+          accountData = accountStaff.find(a => a.id === doctorData.account_staff_id) || accountData;
         }
-
         setFormData({
-          full_name: doctorData.full_name || '',
-          department: doctorData.department || '',
-          phone: doctorData.phone || '',
-          eduLevel: doctorData.eduLevel || '',
+          full_name: doctorData?.full_name || '',
+          department: doctorData?.department || '',
+          phone: doctorData?.phone || '',
+          eduLevel: doctorData?.eduLevel || '',
           img: null,
           imgPreview: accountData.img || 'default.png',
         });
-        
       } catch (err) {
-        console.error('Fetch error:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [doctorId]);
 
@@ -153,61 +120,20 @@ const EditDoctor = ({ doctorId, onSave = () => {}, onCancel = () => {} }) => {
 
     try {
       setLoading(true);
-      const doctorResponse = await fetch(`http://localhost:9999/Doctor/${doctorId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: doctorId,
-          full_name: formData.full_name,
-          department: formData.department,
-          phone: formData.phone,
-          eduLevel: formData.eduLevel,
-        }),
+      await updateDoctor(doctorId, {
+        full_name: formData.full_name,
+        department: formData.department,
+        phone: formData.phone,
+        eduLevel: formData.eduLevel,
       });
-
-      if (!doctorResponse.ok) {
-        throw new Error('Không thể cập nhật thông tin bác sĩ');
-      }
-
       if (formData.img) {
-        const doctorData = await doctorResponse.json();
-        const formDataToSend = new FormData();
-        formDataToSend.append('img', formData.img);
-        const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${doctorData.account_staff_id}`, {
-          method: 'PUT',
-          body: formDataToSend,
-        });
-
-        if (!accountResponse.ok) {
-          throw new Error('Không thể cập nhật ảnh tài khoản');
+        const doctors = await getDoctors();
+        const doctorData = doctors.find(d => d.id === doctorId);
+        if (doctorData?.account_staff_id) {
+          await updateAccountStaff(doctorData.account_staff_id, { img: formData.img });
         }
       }
-
-      // Success notification
-      const notification = document.createElement('div');
-      notification.innerHTML = `
-        <div style="
-          position: fixed; 
-          top: 20px; 
-          right: 20px; 
-          background: linear-gradient(135deg, #10b981, #34d399); 
-          color: white; 
-          padding: 15px 25px; 
-          border-radius: 15px; 
-          box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-          z-index: 9999;
-          animation: slideIn 0.3s ease-out;
-        ">
-          ✅ Cập nhật thông tin thành công!
-        </div>
-      `;
-      document.body.appendChild(notification);
-      setTimeout(() => notification.remove(), 3000);
-
-      const updatedDoctor = await doctorResponse.json();
-      onSave(updatedDoctor);
+      onSave({ ...formData });
     } catch (err) {
       setError(err.message);
     } finally {

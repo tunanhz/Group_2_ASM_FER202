@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import imageCompression from 'browser-image-compression';
+import { getNurses, getAccountStaff, updateNurse } from '../services/api';
 
 const EditNurse = ({ nurseId = '1', onSave = () => {}, onCancel = () => {} }) => {
   const [formData, setFormData] = useState({
@@ -18,22 +19,16 @@ const EditNurse = ({ nurseId = '1', onSave = () => {}, onCancel = () => {} }) =>
     const fetchData = async () => {
       try {
         setLoading(true);
-        const nurseResponse = await fetch(`http://localhost:9999/Nurse/${nurseId}`);
-        if (!nurseResponse.ok) {
-          throw new Error(`Không thể tải thông tin y tá: ${nurseResponse.status}`);
-        }
-        const nurseData = await nurseResponse.json();
+        const nurses = await getNurses();
+        const nurseData = nurses.find(n => n.id === nurseId);
+        if (!nurseData) throw new Error('Không tìm thấy y tá');
 
         if (!nurseData.account_staff_id) {
           throw new Error('Không tìm thấy account_staff_id của y tá');
         }
 
-        const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${nurseData.account_staff_id}`);
-        if (!accountResponse.ok) {
-          const errorText = await accountResponse.text();
-          throw new Error(`Không thể tải thông tin tài khoản: ${accountResponse.status} - ${errorText}`);
-        }
-        const accountData = await accountResponse.json();
+        const accountStaff = await getAccountStaff();
+        const accountData = accountStaff.find(a => a.id === nurseData.account_staff_id);
 
         setFormData({
           full_name: nurseData.full_name || '',
@@ -86,41 +81,25 @@ const EditNurse = ({ nurseId = '1', onSave = () => {}, onCancel = () => {} }) =>
     e.preventDefault();
     try {
       setLoading(true);
-      const nurseResponse = await fetch(`http://localhost:9999/Nurse/${nurseId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: nurseId,
-          full_name: formData.full_name,
-          department: formData.department,
-          phone: formData.phone,
-          eduLevel: formData.eduLevel,
-        }),
+      const updatedNurse = await updateNurse(nurseId, {
+        full_name: formData.full_name,
+        department: formData.department,
+        phone: formData.phone,
+        eduLevel: formData.eduLevel,
       });
 
-      if (!nurseResponse.ok) {
-        throw new Error(`Không thể cập nhật thông tin y tá: ${nurseResponse.status}`);
-      }
-
-      const nurseData = await nurseResponse.json();
       if (formData.img) {
+        const accountStaff = await getAccountStaff();
+        const accountData = accountStaff.find(a => a.id === updatedNurse.account_staff_id);
         const formDataToSend = new FormData();
         formDataToSend.append('img', formData.img);
-        console.log('Uploading image for AccountStaff ID:', nurseData.account_staff_id);
-        const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${nurseData.account_staff_id}`, {
+        console.log('Uploading image for AccountStaff ID:', updatedNurse.account_staff_id);
+        await updateNurse(updatedNurse.account_staff_id, {}, {
           method: 'PUT',
           body: formDataToSend,
         });
-
-        if (!accountResponse.ok) {
-          const errorText = await accountResponse.text();
-          throw new Error(`Không thể cập nhật ảnh tài khoản: ${accountResponse.status} - ${errorText}`);
-        }
       }
 
-      const updatedNurse = nurseData;
       onSave(updatedNurse);
     } catch (err) {
       setError(err.message);

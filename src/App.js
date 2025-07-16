@@ -32,7 +32,6 @@ import DashboardAdmin from './components/Dashboard_Admin';
 import InvoiceList from './components/InvoiceList';
 import RevenueStatistics from './components/RevenueStatistics';
 import AccountList from './components/AccountList';
-import ChatBox from './components/ChatBox';
 
 const AppContent = () => {
   const location = useLocation();
@@ -124,7 +123,6 @@ function App() {
   return (
     <Router>
       <AppContent />
-      <ChatBox />
     </Router>
   );
 }

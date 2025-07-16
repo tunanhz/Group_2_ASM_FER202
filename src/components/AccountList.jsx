@@ -5,6 +5,7 @@ import EditDoctor from "./editInforDoctor";
 import EditNurse from "./editInforNurse";
 import EditReceptionist from "./editInforReceptionist";
 import { useLocation } from 'react-router-dom';
+import { getAccountPatients, getAccountStaff, addAccountStaff, updateAccountStaff, deleteAccountStaff } from '../services/api';
 
 const AccountList = () => {
   const [accounts, setAccounts] = useState({ patients: [], staff: [] });
@@ -44,12 +45,10 @@ const AccountList = () => {
 
   const fetchAccounts = async () => {
     try {
-      const [patientsRes, staffRes] = await Promise.all([
-        fetch('http://localhost:9999/AccountPatient'),
-        fetch('http://localhost:9999/AccountStaff')
+      const [patients, staff] = await Promise.all([
+        getAccountPatients(),
+        getAccountStaff()
       ]);
-      const patients = await patientsRes.json();
-      const staff = await staffRes.json();
       setAccounts({ patients, staff });
     } catch (error) {
       console.error("Error fetching accounts:", error);
@@ -138,13 +137,7 @@ const AccountList = () => {
   const confirmDelete = async () => {
     if (!deleteTarget) return;
     try {
-      let url = "";
-      if (deleteTarget.role === "patient") {
-        url = `http://localhost:9999/AccountPatient/${deleteTarget.account.id}`;
-      } else {
-        url = `http://localhost:9999/AccountStaff/${deleteTarget.account.id}`;
-      }
-      await fetch(url, { method: "DELETE" });
+      await deleteAccountStaff(deleteTarget.account.id);
     } catch (error) {
       console.error("Error deleting account:", error);
     } finally {
@@ -157,18 +150,7 @@ const AccountList = () => {
   const handleToggleStatus = async (account, role) => {
     setStatusLoadingId(account.id);
     try {
-      let url = "";
-      let newStatus = account.status === "Enable" ? "Disable" : "Enable";
-      if (role === "patient") {
-        url = `http://localhost:9999/AccountPatient/${account.id}`;
-      } else {
-        url = `http://localhost:9999/AccountStaff/${account.id}`;
-      }
-      await fetch(url, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus })
-      });
+      await updateAccountStaff(account.id, { status: account.status === "Enable" ? "Disable" : "Enable" });
       fetchAccounts();
     } catch (error) {
       console.error("Error toggling status:", error);
@@ -193,23 +175,7 @@ const AccountList = () => {
         setAddLoading(false);
         return;
       }
-      // Lấy id mới
-      const res = await fetch('http://localhost:9999/AccountStaff');
-      const staffList = await res.json();
-      const maxId = staffList.reduce((max, acc) => Math.max(max, Number(acc.id) || 0), 0);
-      const newId = maxId + 1;
-      // Gửi POST
-      const postRes = await fetch('http://localhost:9999/AccountStaff', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: newId,
-          ...addForm,
-          status: 'Enable', // Luôn mặc định Enable
-          img: 'default.png',
-        })
-      });
-      if (!postRes.ok) throw new Error('Thêm tài khoản thất bại');
+      await addAccountStaff(addForm);
       setShowModal(false);
       setAddForm({ username: '', email: '', password: '', role: 'Doctor' });
       fetchAccounts();

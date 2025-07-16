@@ -1,430 +1,684 @@
 import axios from 'axios';
 
-// Lấy BASE_URL từ biến môi trường, fallback về localhost nếu chưa có
-const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:9999';
+const BIN_ID = '687804bbc7f29633ab29e938';
+const BASE_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const API_KEY = '$2a$10$eoMup44jxUPqEc6cZyCuUuTxGevIzxtr3W6Ap7BHzZsIU2ywXCJ4G';
 
-// Create axios instance
 const api = axios.create({
     baseURL: BASE_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY,
     }
 });
 
-// API Service Functions
-export const apiService = {
-    // Doctor related APIs
-    getDoctors: () => api.get('/Doctor'),
-    getDoctorById: (id) => api.get(`/Doctor/${id}`),
-    
-    // Patient related APIs
-    getPatients: () => api.get('/Patient'),
-    getPatientById: (id) => api.get(`/Patient/${id}`),
-    
-    // Appointment related APIs
-    getAppointments: () => api.get('/Appointment'),
-    getAppointmentById: (id) => api.get(`/Appointment/${id}`),
-    getAppointmentsByDoctorId: (doctorId) => api.get(`/Appointment?doctor_id=${doctorId}`),
-    getAppointmentsByDate: (date) => api.get(`/Appointment?appointment_datetime_like=${date}`),
-    updateAppointmentStatus: (id, status) => api.patch(`/Appointment/${id}`, { status }),
-    createAppointment: (appointmentData) => api.post('/Appointment', appointmentData),
-    checkInAppointment: (id, updateData) => api.patch(`/Appointment/${id}`, updateData),
-    deleteAppointment: (id) => api.delete(`/Appointment/${id}`),
-    
-    // Waitlist related APIs
-    getWaitlist: () => api.get('/Waitlist'),
-    getWaitlistByDoctorId: (doctorId) => api.get(`/Waitlist?doctor_id=${doctorId}`),
-    updateWaitlistStatus: (id, status) => api.patch(`/Waitlist/${id}`, { status }),
-    updateWaitlistStatusAndVisitType: (id, status, visittype) => api.patch(`/Waitlist/${id}`, { status, visittype }),
-    addToWaitlist: (waitlistEntry) => api.post('/Waitlist', waitlistEntry),
-    
-    // ExamResult related APIs
-    getExamResults: () => api.get('/ExamResult'),
-    getExamResultsByDoctorId: (doctorId) => api.get(`/ExamResult?doctor_id=${doctorId}`),
-    getExamResultByMedicineRecordId: (medicineRecordId) => api.get(`/ExamResult?medicineRecord_id=${medicineRecordId}`),
-    createExamResult: (examData) => api.post('/ExamResult', examData),
-    updateExamResult: (id, examData) => api.patch(`/ExamResult/${id}`, examData),
-    
-    // Medicine Records related APIs
-    getMedicineRecords: () => api.get('/MedicineRecords'),
-    getMedicineRecordByPatientId: (patientId) => api.get(`/MedicineRecords?patient_id=${patientId}`),
-    createMedicineRecord: (recordData) => api.post('/MedicineRecords', recordData),
-    
-    // Room related APIs
-    getRooms: () => api.get('/Room'),
-    getRoomById: (id) => api.get(`/Room/${id}`),
-
-    // Medical Service related APIs
-    getMedicalServices: () => api.get('/ListOfMedicalService'),
-    getMedicalServiceById: (id) => api.get(`/ListOfMedicalService/${id}`),
-
-    // Service Order related APIs
-    getServiceOrders: () => api.get('/ServiceOrder'),
-    getServiceOrdersByDoctorId: (doctorId) => api.get(`/ServiceOrder?doctor_id=${doctorId}`),
-    createServiceOrder: (orderData) => api.post('/ServiceOrder', orderData),
-
-    // Service Order Item related APIs
-    getServiceOrderItems: () => api.get('/ServiceOrderItem'),
-    getServiceOrderItemsByDoctorId: (doctorId) => api.get(`/ServiceOrderItem?doctor_id=${doctorId}`),
-    getServiceOrderItemsByOrderId: (orderId) => api.get(`/ServiceOrderItem?service_order_id=${orderId}`),
-    createServiceOrderItem: (itemData) => api.post('/ServiceOrderItem', itemData),
-
-    // Results Of Paraclinical Services related APIs
-    getResultsOfParaclinicalServices: () => api.get('/ResultsOfParaclinicalServices'),
-    getResultByServiceOrderItemId: (serviceOrderItemId) => api.get(`/ResultsOfParaclinicalServices?service_order_item_id=${serviceOrderItemId}`),
-    createParaclinicalResult: (resultData) => api.post('/ResultsOfParaclinicalServices', resultData),
-
-    // Medicine related APIs
-    getMedicines: () => api.get('/Medicine'),
-    getMedicineById: (id) => api.get(`/Medicine/${id}`),
-
-    // Prescription related APIs
-    getPrescriptions: () => api.get('/Prescription'),
-    getPrescriptionsByDoctorId: (doctorId) => api.get(`/Prescription?doctor_id=${doctorId}`),
-    getPrescriptionsByMedicineRecordId: (medicineRecordId) => api.get(`/Prescription?medicineRecord_id=${medicineRecordId}`),
-    createPrescription: (prescriptionData) => api.post('/Prescription', prescriptionData),
-    updatePrescription: (id, prescriptionData) => api.patch(`/Prescription/${id}`, prescriptionData),
-
-    // Medicine Details (Medicines table) related APIs
-    getMedicineDetails: () => api.get('/Medicines'),
-    getMedicineDetailsByPrescriptionInvoiceId: (prescriptionInvoiceId) => api.get(`/Medicines?prescription_invoice_id=${prescriptionInvoiceId}`),
-    createMedicineDetail: (medicineDetailData) => api.post('/Medicines', medicineDetailData),
-
-    // Prescription Invoice related APIs
-    getPrescriptionInvoices: () => api.get('/PrescriptionInvoice'),
-    getPrescriptionInvoiceByPrescriptionId: (prescriptionId) => api.get(`/PrescriptionInvoice?prescription_id=${prescriptionId}`),
-    createPrescriptionInvoice: (invoiceData) => api.post('/PrescriptionInvoice', invoiceData),
-    
-    // Invoice related APIs
-    getInvoices: () => api.get('/Invoice'),
-    getInvoiceById: (id) => api.get(`/Invoice/${id}`),
-    getInvoicesByPatientId: (patientId) => api.get(`/Invoice?patient_id=${patientId}`),
-    getInvoicesByMedicineRecordId: (medicineRecordId) => api.get(`/Invoice?medicineRecord_id=${medicineRecordId}`),
-    createInvoice: (invoiceData) => api.post('/Invoice', invoiceData),
-    updateInvoice: (id, invoiceData) => api.patch(`/Invoice/${id}`, invoiceData),
-    updateInvoiceStatus: (invoiceId, status) => api.patch(`/Invoice/${invoiceId}`, { status }),
-
-    // Service Invoice related APIs
-    getServiceInvoices: () => api.get('/ServiceInvoice'),
-    getServiceInvoiceById: (id) => api.get(`/ServiceInvoice/${id}`),
-    getServiceInvoicesByInvoiceId: (invoiceId) => api.get(`/ServiceInvoice?invoice_id=${invoiceId}`),
-    getServiceInvoicesByServiceOrderItemId: (serviceOrderItemId) => api.get(`/ServiceInvoice?service_order_item_id=${serviceOrderItemId}`),
-    createServiceInvoice: (serviceInvoiceData) => api.post('/ServiceInvoice', serviceInvoiceData),
-    updateServiceInvoice: (id, serviceInvoiceData) => api.patch(`/ServiceInvoice/${id}`, serviceInvoiceData),
-
-    // Payment related APIs
-    getPayments: () => api.get('/Payment'),
-    getPaymentById: (id) => api.get(`/Payment/${id}`),
-    getPaymentsByInvoiceId: (invoiceId) => api.get(`/Payment?invoice_id=${invoiceId}`),
-    createPayment: (paymentData) => api.post('/Payment', paymentData),
-    updatePayment: (id, paymentData) => api.patch(`/Payment/${id}`, paymentData),
-    
-    // Diagnosis related APIs
-    getDiagnosis: () => api.get('/Diagnosis'),
-    getDiagnosisByPatientId: (patientId) => api.get(`/Diagnosis?patient_id=${patientId}`),
-    getDiagnosisByMedicineRecordId: (medicineRecordId) => api.get(`/Diagnosis?medicineRecord_id=${medicineRecordId}`),
-    createDiagnosis: (diagnosisData) => api.post('/Diagnosis', diagnosisData),
-    
-    // Prescription related APIs
-    getPrescriptions: () => api.get('/Prescription'),
-    getPrescriptionsByDoctorId: (doctorId) => api.get(`/Prescription?doctor_id=${doctorId}`),
-    
-    // Receptionist related APIs
-    getReceptionists: () => api.get('/Receptionist'),
-    getReceptionistById: (id) => api.get(`/Receptionist/${id}`),
-    
-    // Account related APIs
-    getAccountPatients: () => api.get('/AccountPatient'),
-    getAccountStaff: () => api.get('/AccountStaff'),
-};
-
-// Helper functions for data processing
-export const dataHelpers = {
-    // Get today's date in YYYY-MM-DD format
-    getTodayDate: () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    },
-    
-    // Filter appointments by date
-    filterAppointmentsByDate: (appointments, date) => {
-        return appointments.filter(appointment => 
-            appointment.appointment_datetime.startsWith(date)
-        );
-    },
-    
-    // Filter appointments by status
-    filterAppointmentsByStatus: (appointments, status) => {
-        return appointments.filter(appointment => 
-            appointment.status.toLowerCase() === status.toLowerCase()
-        );
-    },
-    
-    // Get appointment statistics
-    getAppointmentStats: (appointments) => {
-        const today = dataHelpers.getTodayDate();
-        const todayAppointments = dataHelpers.filterAppointmentsByDate(appointments, today);
-        
-        return {
-            todayTotal: todayAppointments.length,
-            todayCompleted: dataHelpers.filterAppointmentsByStatus(todayAppointments, 'Completed').length,
-            todayPending: dataHelpers.filterAppointmentsByStatus(todayAppointments, 'Pending').length,
-            todayConfirmed: dataHelpers.filterAppointmentsByStatus(todayAppointments, 'Confirmed').length,
-            totalAppointments: appointments.length
-        };
-    },
-    
-    // Format datetime for display
-    formatDateTime: (dateTimeString) => {
-        const date = new Date(dateTimeString);
-        return {
-            date: date.toLocaleDateString('vi-VN'),
-            time: date.toLocaleTimeString('vi-VN', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: false 
-            }),
-            dayOfWeek: date.toLocaleDateString('vi-VN', { weekday: 'long' })
-        };
-    },
-    
-    // Get status color
-    getStatusColor: (status) => {
-        switch(status?.toLowerCase()) {
-            case 'completed': return '#10b981';
-            case 'paid': return '#10b981';
-            case 'confirmed': return '#3b82f6';
-            case 'pending': return '#f59e0b';
-            case 'cancelled': return '#ef4444';
-            default: return '#6b7280';
-        }
-    },
-    
-    // Get status text in Vietnamese
-    getStatusText: (status) => {
-        switch(status?.toLowerCase()) {
-            case 'completed': return 'Hoàn thành';
-            case 'confirmed': return 'Đã xác nhận';
-            case 'pending': return 'Chờ xác nhận';
-            case 'cancelled': return 'Đã hủy';
-            default: return 'Không xác định';
-        }
-    },
-
-    // Get status text in Vietnamese for invoices
-    getStatusTextInvoice: (status) => {
-        switch(status?.toLowerCase()) {
-            case 'paid': return 'Đã Thanh Toán';
-            case 'pending': return 'Chờ thanh toán';
-            case 'cancelled': return 'Đã hủy';
-            default: return 'Không xác định';
-        }
-    },
-
-    // Get shift text in Vietnamese
-    getShift: (shift) => {
-        switch(shift?.toLowerCase()) {
-            case 'morning': return 'Buổi sáng';
-            case 'afternoon': return 'Buổi chiều';
-            case 'evening': return 'Buổi tối';
-            default: return 'Không xác định';
-        }
-    },
-
-    getActionIcon: (action) => {
-        switch ((action || '').toLowerCase()) {
-            case 'login': return 'fas fa-sign-in-alt text-success';
-            case 'logout': return 'fas fa-sign-out-alt text-secondary';
-            case 'create': return 'fas fa-plus-circle text-primary';
-            case 'update': return 'fas fa-edit text-warning';
-            case 'delete': return 'fas fa-trash-alt text-danger';
-            case 'backup': return 'fas fa-database text-info';
-            case 'restore': return 'fas fa-undo text-info';
-            default: return 'fas fa-info-circle text-muted';
-        }
-    },
-};
-
-// Error handling wrapper
-export const handleApiError = (error) => {
-    console.error('API Error:', error);
-    
-    if (error.response) {
-        // Server responded with error status
-        return {
-            success: false,
-            message: `Lỗi server: ${error.response.status} - ${error.response.statusText}`,
-            data: null
-        };
-    } else if (error.request) {
-        // Request was made but no response received
-        return {
-            success: false,
-            message: 'Không thể kết nối đến server. Vui lòng kiểm tra kết nối mạng.',
-            data: null
-        };
-    } else {
-        // Something else happened
-        return {
-            success: false,
-            message: `Lỗi không xác định: ${error.message}`,
-            data: null
-        };
+// Lấy toàn bộ database (object lớn)
+export const getDatabase = async () => {
+    try {
+        const res = await api.get('/latest');
+        // Nếu có metadata, chỉ lấy record
+        return res.data.record || res.data;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
     }
 };
 
-// Success response wrapper
-export const handleApiSuccess = (response) => {
+// Ghi đè toàn bộ database (object lớn)
+export const updateDatabase = async (newData) => {
+    try {
+        const res = await api.put('', newData);
+        return res.data.record || res.data;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
+};
+
+// Helper: Lấy bảng con từ database
+export const getTable = (db, tableName) => db[tableName] || [];
+
+// Helper: Thêm bản ghi vào bảng con
+export const addRecord = (db, tableName, record) => {
+    const table = db[tableName] || [];
+    db[tableName] = [...table, record];
+    return db;
+};
+
+// Helper: Sửa bản ghi trong bảng con (theo id)
+export const updateRecord = (db, tableName, id, newRecord) => {
+    const table = db[tableName] || [];
+    db[tableName] = table.map(item => item.id === id ? { ...item, ...newRecord } : item);
+    return db;
+};
+
+// Helper: Xóa bản ghi trong bảng con (theo id)
+export const deleteRecord = (db, tableName, id) => {
+    const table = db[tableName] || [];
+    db[tableName] = table.filter(item => item.id !== id);
+    return db;
+};
+
+// Ví dụ: các hàm thao tác với Doctor
+export const getDoctors = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Doctor');
+};
+export const addDoctor = async (doctor) => {
+    const db = await getDatabase();
+    addRecord(db, 'Doctor', doctor);
+    await updateDatabase(db);
+};
+export const updateDoctor = async (id, doctorData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Doctor', id, doctorData);
+    await updateDatabase(db);
+};
+export const deleteDoctor = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Doctor', id);
+    await updateDatabase(db);
+};
+
+// Tương tự cho Patient
+export const getPatients = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Patient');
+};
+export const addPatient = async (patient) => {
+    const db = await getDatabase();
+    addRecord(db, 'Patient', patient);
+    await updateDatabase(db);
+};
+export const updatePatient = async (id, patientData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Patient', id, patientData);
+    await updateDatabase(db);
+};
+export const deletePatient = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Patient', id);
+    await updateDatabase(db);
+};
+
+// Tương tự cho Appointment
+export const getAppointments = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Appointment');
+};
+export const addAppointment = async (appointment) => {
+    const db = await getDatabase();
+    addRecord(db, 'Appointment', appointment);
+    await updateDatabase(db);
+};
+export const updateAppointment = async (id, appointmentData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Appointment', id, appointmentData);
+    await updateDatabase(db);
+};
+export const deleteAppointment = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Appointment', id);
+    await updateDatabase(db);
+};
+
+// Medicine
+export const getMedicines = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Medicine');
+};
+export const addMedicine = async (medicine) => {
+    const db = await getDatabase();
+    addRecord(db, 'Medicine', medicine);
+    await updateDatabase(db);
+};
+export const updateMedicine = async (id, medicineData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Medicine', id, medicineData);
+    await updateDatabase(db);
+};
+export const deleteMedicine = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Medicine', id);
+    await updateDatabase(db);
+};
+
+// Invoice
+export const getInvoices = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Invoice');
+};
+export const addInvoice = async (invoice) => {
+    const db = await getDatabase();
+    addRecord(db, 'Invoice', invoice);
+    await updateDatabase(db);
+};
+export const updateInvoice = async (id, invoiceData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Invoice', id, invoiceData);
+    await updateDatabase(db);
+};
+export const deleteInvoice = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Invoice', id);
+    await updateDatabase(db);
+};
+
+// MedicineRecords
+export const getMedicineRecords = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'MedicineRecords');
+};
+export const addMedicineRecord = async (record) => {
+    const db = await getDatabase();
+    addRecord(db, 'MedicineRecords', record);
+    await updateDatabase(db);
+};
+export const updateMedicineRecord = async (id, recordData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'MedicineRecords', id, recordData);
+    await updateDatabase(db);
+};
+export const deleteMedicineRecord = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'MedicineRecords', id);
+    await updateDatabase(db);
+};
+
+// ServiceOrder
+export const getServiceOrders = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'ServiceOrder');
+};
+export const addServiceOrder = async (order) => {
+    const db = await getDatabase();
+    addRecord(db, 'ServiceOrder', order);
+    await updateDatabase(db);
+};
+export const updateServiceOrder = async (id, orderData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'ServiceOrder', id, orderData);
+    await updateDatabase(db);
+};
+export const deleteServiceOrder = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'ServiceOrder', id);
+    await updateDatabase(db);
+};
+
+// ServiceOrderItem
+export const getServiceOrderItems = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'ServiceOrderItem');
+};
+export const addServiceOrderItem = async (item) => {
+    const db = await getDatabase();
+    addRecord(db, 'ServiceOrderItem', item);
+    await updateDatabase(db);
+};
+export const updateServiceOrderItem = async (id, itemData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'ServiceOrderItem', id, itemData);
+    await updateDatabase(db);
+};
+export const deleteServiceOrderItem = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'ServiceOrderItem', id);
+    await updateDatabase(db);
+};
+
+// ServiceInvoice
+export const getServiceInvoices = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'ServiceInvoice');
+};
+export const addServiceInvoice = async (invoice) => {
+    const db = await getDatabase();
+    addRecord(db, 'ServiceInvoice', invoice);
+    await updateDatabase(db);
+};
+export const updateServiceInvoice = async (id, invoiceData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'ServiceInvoice', id, invoiceData);
+    await updateDatabase(db);
+};
+export const deleteServiceInvoice = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'ServiceInvoice', id);
+    await updateDatabase(db);
+};
+
+// Payment
+export const getPayments = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Payment');
+};
+export const addPayment = async (payment) => {
+    const db = await getDatabase();
+    addRecord(db, 'Payment', payment);
+    await updateDatabase(db);
+};
+export const updatePayment = async (id, paymentData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Payment', id, paymentData);
+    await updateDatabase(db);
+};
+export const deletePayment = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Payment', id);
+    await updateDatabase(db);
+};
+
+// Waitlist
+export const getWaitlist = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Waitlist');
+};
+export const addWaitlist = async (waitlist) => {
+    const db = await getDatabase();
+    addRecord(db, 'Waitlist', waitlist);
+    await updateDatabase(db);
+};
+export const updateWaitlist = async (id, waitlistData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Waitlist', id, waitlistData);
+    await updateDatabase(db);
+};
+export const deleteWaitlist = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Waitlist', id);
+    await updateDatabase(db);
+};
+
+// Receptionist
+export const getReceptionists = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Receptionist');
+};
+export const addReceptionist = async (receptionist) => {
+    const db = await getDatabase();
+    addRecord(db, 'Receptionist', receptionist);
+    await updateDatabase(db);
+};
+export const updateReceptionist = async (id, receptionistData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Receptionist', id, receptionistData);
+    await updateDatabase(db);
+};
+export const deleteReceptionist = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Receptionist', id);
+    await updateDatabase(db);
+};
+
+// AccountPatient
+export const getAccountPatients = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'AccountPatient');
+};
+export const addAccountPatient = async (account) => {
+    const db = await getDatabase();
+    addRecord(db, 'AccountPatient', account);
+    await updateDatabase(db);
+};
+export const updateAccountPatient = async (id, accountData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'AccountPatient', id, accountData);
+    await updateDatabase(db);
+};
+export const deleteAccountPatient = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'AccountPatient', id);
+    await updateDatabase(db);
+};
+
+// AccountStaff
+export const getAccountStaff = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'AccountStaff');
+};
+export const addAccountStaff = async (account) => {
+    const db = await getDatabase();
+    addRecord(db, 'AccountStaff', account);
+    await updateDatabase(db);
+};
+export const updateAccountStaff = async (id, accountData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'AccountStaff', id, accountData);
+    await updateDatabase(db);
+};
+export const deleteAccountStaff = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'AccountStaff', id);
+    await updateDatabase(db);
+};
+
+// Room
+export const getRooms = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Room');
+};
+export const addRoom = async (room) => {
+    const db = await getDatabase();
+    addRecord(db, 'Room', room);
+    await updateDatabase(db);
+};
+export const updateRoom = async (id, roomData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Room', id, roomData);
+    await updateDatabase(db);
+};
+export const deleteRoom = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Room', id);
+    await updateDatabase(db);
+};
+
+// Distributor
+export const getDistributors = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Distributor');
+};
+export const addDistributor = async (distributor) => {
+    const db = await getDatabase();
+    addRecord(db, 'Distributor', distributor);
+    await updateDatabase(db);
+};
+export const updateDistributor = async (id, distributorData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Distributor', id, distributorData);
+    await updateDatabase(db);
+};
+export const deleteDistributor = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Distributor', id);
+    await updateDatabase(db);
+};
+
+// ImportInfo
+export const getImportInfo = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'ImportInfo');
+};
+export const addImportInfo = async (importInfo) => {
+    const db = await getDatabase();
+    addRecord(db, 'ImportInfo', importInfo);
+    await updateDatabase(db);
+};
+export const updateImportInfo = async (id, importInfoData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'ImportInfo', id, importInfoData);
+    await updateDatabase(db);
+};
+export const deleteImportInfo = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'ImportInfo', id);
+    await updateDatabase(db);
+};
+
+// Medicines (chi tiết đơn thuốc)
+export const getMedicinesDetail = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Medicines');
+};
+export const addMedicineDetail = async (medicineDetail) => {
+    const db = await getDatabase();
+    addRecord(db, 'Medicines', medicineDetail);
+    await updateDatabase(db);
+};
+export const updateMedicineDetail = async (id, medicineDetailData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Medicines', id, medicineDetailData);
+    await updateDatabase(db);
+};
+export const deleteMedicineDetail = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Medicines', id);
+    await updateDatabase(db);
+};
+
+// Diagnosis
+export const getDiagnosis = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Diagnosis');
+};
+export const addDiagnosis = async (diagnosis) => {
+    const db = await getDatabase();
+    addRecord(db, 'Diagnosis', diagnosis);
+    await updateDatabase(db);
+};
+export const updateDiagnosis = async (id, diagnosisData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Diagnosis', id, diagnosisData);
+    await updateDatabase(db);
+};
+export const deleteDiagnosis = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Diagnosis', id);
+    await updateDatabase(db);
+};
+
+// Prescription
+export const getPrescriptions = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Prescription');
+};
+export const addPrescription = async (prescription) => {
+    const db = await getDatabase();
+    addRecord(db, 'Prescription', prescription);
+    await updateDatabase(db);
+};
+export const updatePrescription = async (id, prescriptionData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Prescription', id, prescriptionData);
+    await updateDatabase(db);
+};
+export const deletePrescription = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Prescription', id);
+    await updateDatabase(db);
+};
+
+// PDFExport (nếu cần lưu log xuất PDF)
+export const getPDFExports = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'PDFExport');
+};
+export const addPDFExport = async (pdfExport) => {
+    const db = await getDatabase();
+    addRecord(db, 'PDFExport', pdfExport);
+    await updateDatabase(db);
+};
+export const updatePDFExport = async (id, pdfExportData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'PDFExport', id, pdfExportData);
+    await updateDatabase(db);
+};
+export const deletePDFExport = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'PDFExport', id);
+    await updateDatabase(db);
+};
+
+// SystemLog_Staff
+export const getSystemLogStaff = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'SystemLog_Staff');
+};
+export const addSystemLogStaff = async (log) => {
+    const db = await getDatabase();
+    addRecord(db, 'SystemLog_Staff', log);
+    await updateDatabase(db);
+};
+export const updateSystemLogStaff = async (id, logData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'SystemLog_Staff', id, logData);
+    await updateDatabase(db);
+};
+export const deleteSystemLogStaff = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'SystemLog_Staff', id);
+    await updateDatabase(db);
+};
+
+// SystemLog_Patient
+export const getSystemLogPatient = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'SystemLog_Patient');
+};
+export const addSystemLogPatient = async (log) => {
+    const db = await getDatabase();
+    addRecord(db, 'SystemLog_Patient', log);
+    await updateDatabase(db);
+};
+export const updateSystemLogPatient = async (id, logData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'SystemLog_Patient', id, logData);
+    await updateDatabase(db);
+};
+export const deleteSystemLogPatient = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'SystemLog_Patient', id);
+    await updateDatabase(db);
+};
+
+// SystemLog_Pharmacist
+export const getSystemLogPharmacist = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'SystemLog_Pharmacist');
+};
+export const addSystemLogPharmacist = async (log) => {
+    const db = await getDatabase();
+    addRecord(db, 'SystemLog_Pharmacist', log);
+    await updateDatabase(db);
+};
+export const updateSystemLogPharmacist = async (id, logData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'SystemLog_Pharmacist', id, logData);
+    await updateDatabase(db);
+};
+export const deleteSystemLogPharmacist = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'SystemLog_Pharmacist', id);
+    await updateDatabase(db);
+};
+// Bạn có thể mở rộng tương tự cho các bảng khác: Medicine, Invoice, ...
+// Nếu cần hàm helper nào đặc biệt, hãy yêu cầu thêm! 
+
+// MedicalService
+export const getMedicalServices = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'MedicalService');
+};
+export const addMedicalService = async (service) => {
+    const db = await getDatabase();
+    addRecord(db, 'MedicalService', service);
+    await updateDatabase(db);
+};
+export const updateMedicalService = async (id, serviceData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'MedicalService', id, serviceData);
+    await updateDatabase(db);
+};
+export const deleteMedicalService = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'MedicalService', id);
+    await updateDatabase(db);
+};
+
+// ParaclinicalResult (add this table to your JSON if not present)
+export const getResultsOfParaclinicalServices = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'ParaclinicalResult');
+};
+export const addParaclinicalResult = async (result) => {
+    const db = await getDatabase();
+    addRecord(db, 'ParaclinicalResult', result);
+    await updateDatabase(db);
+};
+
+// ExamResult (add this table to your JSON if not present)
+export const getExamResultsByDoctorId = async (doctorId) => {
+    const results = await getResultsOfParaclinicalServices();
+    return results.filter(r => r.doctorId === doctorId);
+};
+export const createExamResult = addParaclinicalResult;
+
+// ServiceOrder filtered by doctorId
+export const getServiceOrdersByDoctorId = async (doctorId) => {
+    const orders = await getServiceOrders();
+    return orders.filter(o => o.doctorId === doctorId);
+};
+
+// Waitlist filtered by doctorId
+export const getWaitlistByDoctorId = async (doctorId) => {
+    const waitlist = await getWaitlist();
+    return waitlist.filter(w => w.doctorId === doctorId);
+};
+
+// Diagnosis filtered by medicineRecordId
+export const getDiagnosisByMedicineRecordId = async (medicineRecordId) => {
+    const diagnosis = await getDiagnosis();
+    return diagnosis.filter(d => d.medicineRecordId === medicineRecordId);
+};
+
+// updateWaitlistStatus
+export const updateWaitlistStatus = async (id, status) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Waitlist', id, { status });
+    await updateDatabase(db);
+};
+
+// createX aliases
+export const createDiagnosis = addDiagnosis;
+export const createPrescription = addPrescription;
+export const createMedicineRecord = addMedicineRecord;
+export const createMedicineDetail = addMedicineDetail;
+export const createPrescriptionInvoice = addInvoice;
+
+// Nurses
+export const getNurses = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'Nurse');
+};
+export const addNurse = async (nurse) => {
+    const db = await getDatabase();
+    addRecord(db, 'Nurse', nurse);
+    await updateDatabase(db);
+};
+export const updateNurse = async (id, nurseData) => {
+    const db = await getDatabase();
+    updateRecord(db, 'Nurse', id, nurseData);
+    await updateDatabase(db);
+};
+export const deleteNurse = async (id) => {
+    const db = await getDatabase();
+    deleteRecord(db, 'Nurse', id);
+    await updateDatabase(db);
+};
+
+// AccountPharmacist (add this table to your JSON if not present)
+export const getAccountPharmacist = async () => {
+    const db = await getDatabase();
+    return getTable(db, 'AccountPharmacist');
+};
+
+// PatientDashboard helpers
+export const getPatientAppointments = async (patientId) => {
+    const appointments = await getAppointments();
+    return appointments.filter(a => a.patientId === patientId);
+};
+export const getPatientDiagnosis = async (patientId) => {
+    const diagnosis = await getDiagnosis();
+    return diagnosis.filter(d => d.patientId === patientId);
+};
+export const getPatientStats = async (patientId) => {
+    // Example: return stats object, customize as needed
+    const appointments = await getPatientAppointments(patientId);
+    const diagnosis = await getPatientDiagnosis(patientId);
     return {
-        success: true,
-        message: 'Thành công',
-        data: response.data
+        appointmentCount: appointments.length,
+        diagnosisCount: diagnosis.length,
     };
-};
-
-// Simplified export functions for components
-export const getDoctors = () => apiService.getDoctors().then(handleApiSuccess).catch(handleApiError);
-export const getPatients = () => apiService.getPatients().then(handleApiSuccess).catch(handleApiError);
-export const getAppointments = () => apiService.getAppointments().then(handleApiSuccess).catch(handleApiError);
-export const getDiagnosis = () => apiService.getDiagnosis().then(handleApiSuccess).catch(handleApiError);
-export const getDiagnosisByMedicineRecordId = (medicineRecordId) => apiService.getDiagnosisByMedicineRecordId(medicineRecordId).then(handleApiSuccess).catch(handleApiError);
-export const createDiagnosis = (diagnosisData) => apiService.createDiagnosis(diagnosisData).then(handleApiSuccess).catch(handleApiError);
-export const updateAppointmentStatus = (id, status) => apiService.updateAppointmentStatus(id, status).then(handleApiSuccess).catch(handleApiError);
-export const createAppointment = (appointmentData) => apiService.createAppointment(appointmentData).then(handleApiSuccess).catch(handleApiError);
-export const deleteAppointment = (id) => apiService.deleteAppointment(id).then(handleApiSuccess).catch(handleApiError);
-
-// Waitlist simplified functions
-export const getWaitlist = () => apiService.getWaitlist().then(handleApiSuccess).catch(handleApiError);
-export const getWaitlistByDoctorId = (doctorId) => apiService.getWaitlistByDoctorId(doctorId).then(handleApiSuccess).catch(handleApiError);
-export const updateWaitlistStatus = (id, status) => apiService.updateWaitlistStatus(id, status).then(handleApiSuccess).catch(handleApiError);
-export const updateWaitlistStatusAndVisitType = (id, status, visittype) => apiService.updateWaitlistStatusAndVisitType(id, status, visittype).then(handleApiSuccess).catch(handleApiError);
-export const addToWaitlist = (waitlistEntry) => apiService.addToWaitlist(waitlistEntry).then(handleApiSuccess).catch(handleApiError);
-export const checkInAppointment = (id, updateData) => apiService.checkInAppointment(id, updateData).then(handleApiSuccess).catch(handleApiError);
-
-// ExamResult simplified functions
-export const getExamResults = () => apiService.getExamResults().then(handleApiSuccess).catch(handleApiError);
-export const getExamResultsByDoctorId = (doctorId) => apiService.getExamResultsByDoctorId(doctorId).then(handleApiSuccess).catch(handleApiError);
-export const getExamResultByMedicineRecordId = (medicineRecordId) => apiService.getExamResultByMedicineRecordId(medicineRecordId).then(handleApiSuccess).catch(handleApiError);
-export const createExamResult = (examData) => apiService.createExamResult(examData).then(handleApiSuccess).catch(handleApiError);
-
-// Medicine Records simplified functions
-export const getMedicineRecords = () => apiService.getMedicineRecords().then(handleApiSuccess).catch(handleApiError);
-export const getMedicineRecordByPatientId = (patientId) => apiService.getMedicineRecordByPatientId(patientId).then(handleApiSuccess).catch(handleApiError);
-export const createMedicineRecord = (recordData) => apiService.createMedicineRecord(recordData).then(handleApiSuccess).catch(handleApiError);
-
-// Room simplified functions
-export const getRooms = () => apiService.getRooms().then(handleApiSuccess).catch(handleApiError);
-
-// Medical Service simplified functions
-export const getMedicalServices = () => apiService.getMedicalServices().then(handleApiSuccess).catch(handleApiError);
-export const getMedicalServiceById = (id) => apiService.getMedicalServiceById(id).then(handleApiSuccess).catch(handleApiError);
-
-// Service Order simplified functions
-export const getServiceOrders = () => apiService.getServiceOrders().then(handleApiSuccess).catch(handleApiError);
-export const getServiceOrdersByDoctorId = (doctorId) => apiService.getServiceOrdersByDoctorId(doctorId).then(handleApiSuccess).catch(handleApiError);
-export const createServiceOrder = (orderData) => apiService.createServiceOrder(orderData).then(handleApiSuccess).catch(handleApiError);
-
-// Service Order Item simplified functions
-export const getServiceOrderItems = () => apiService.getServiceOrderItems().then(handleApiSuccess).catch(handleApiError);
-export const getServiceOrderItemsByDoctorId = (doctorId) => apiService.getServiceOrderItemsByDoctorId(doctorId).then(handleApiSuccess).catch(handleApiError);
-export const getServiceOrderItemsByOrderId = (orderId) => apiService.getServiceOrderItemsByOrderId(orderId).then(handleApiSuccess).catch(handleApiError);
-export const createServiceOrderItem = (itemData) => apiService.createServiceOrderItem(itemData).then(handleApiSuccess).catch(handleApiError);
-
-// Results Of Paraclinical Services simplified functions
-export const getResultsOfParaclinicalServices = () => apiService.getResultsOfParaclinicalServices().then(handleApiSuccess).catch(handleApiError);
-export const getResultByServiceOrderItemId = (serviceOrderItemId) => apiService.getResultByServiceOrderItemId(serviceOrderItemId).then(handleApiSuccess).catch(handleApiError);
-export const createParaclinicalResult = (resultData) => apiService.createParaclinicalResult(resultData).then(handleApiSuccess).catch(handleApiError);
-
-// Medicine simplified functions
-export const getMedicines = () => apiService.getMedicines().then(handleApiSuccess).catch(handleApiError);
-export const getMedicineById = (id) => apiService.getMedicineById(id).then(handleApiSuccess).catch(handleApiError);
-
-// Prescription simplified functions
-export const getPrescriptions = () => apiService.getPrescriptions().then(handleApiSuccess).catch(handleApiError);
-export const getPrescriptionsByDoctorId = (doctorId) => apiService.getPrescriptionsByDoctorId(doctorId).then(handleApiSuccess).catch(handleApiError);
-export const getPrescriptionsByMedicineRecordId = (medicineRecordId) => apiService.getPrescriptionsByMedicineRecordId(medicineRecordId).then(handleApiSuccess).catch(handleApiError);
-export const createPrescription = (prescriptionData) => apiService.createPrescription(prescriptionData).then(handleApiSuccess).catch(handleApiError);
-export const updatePrescription = (id, prescriptionData) => apiService.updatePrescription(id, prescriptionData).then(handleApiSuccess).catch(handleApiError);
-
-// Medicine Details simplified functions
-export const getMedicineDetails = () => apiService.getMedicineDetails().then(handleApiSuccess).catch(handleApiError);
-export const getMedicineDetailsByPrescriptionInvoiceId = (prescriptionInvoiceId) => apiService.getMedicineDetailsByPrescriptionInvoiceId(prescriptionInvoiceId).then(handleApiSuccess).catch(handleApiError);
-export const createMedicineDetail = (medicineDetailData) => apiService.createMedicineDetail(medicineDetailData).then(handleApiSuccess).catch(handleApiError);
-
-// Prescription Invoice simplified functions
-export const getPrescriptionInvoices = () => apiService.getPrescriptionInvoices().then(handleApiSuccess).catch(handleApiError);
-export const getPrescriptionInvoiceByPrescriptionId = (prescriptionId) => apiService.getPrescriptionInvoiceByPrescriptionId(prescriptionId).then(handleApiSuccess).catch(handleApiError);
-export const createPrescriptionInvoice = (invoiceData) => apiService.createPrescriptionInvoice(invoiceData).then(handleApiSuccess).catch(handleApiError);
-
-// Invoice simplified functions
-export const getInvoices = () => apiService.getInvoices().then(handleApiSuccess).catch(handleApiError);
-export const getInvoiceById = (id) => apiService.getInvoiceById(id).then(handleApiSuccess).catch(handleApiError);
-export const getInvoicesByPatientId = (patientId) => apiService.getInvoicesByPatientId(patientId).then(handleApiSuccess).catch(handleApiError);
-export const getInvoicesByMedicineRecordId = (medicineRecordId) => apiService.getInvoicesByMedicineRecordId(medicineRecordId).then(handleApiSuccess).catch(handleApiError);
-export const createInvoice = (invoiceData) => apiService.createInvoice(invoiceData).then(handleApiSuccess).catch(handleApiError);
-export const updateInvoice = (id, invoiceData) => apiService.updateInvoice(id, invoiceData).then(handleApiSuccess).catch(handleApiError);
-
-// Service Invoice simplified functions
-export const getServiceInvoices = () => apiService.getServiceInvoices().then(handleApiSuccess).catch(handleApiError);
-export const getServiceInvoiceById = (id) => apiService.getServiceInvoiceById(id).then(handleApiSuccess).catch(handleApiError);
-export const getServiceInvoicesByInvoiceId = (invoiceId) => apiService.getServiceInvoicesByInvoiceId(invoiceId).then(handleApiSuccess).catch(handleApiError);
-export const getServiceInvoicesByServiceOrderItemId = (serviceOrderItemId) => apiService.getServiceInvoicesByServiceOrderItemId(serviceOrderItemId).then(handleApiSuccess).catch(handleApiError);
-export const createServiceInvoice = (serviceInvoiceData) => apiService.createServiceInvoice(serviceInvoiceData).then(handleApiSuccess).catch(handleApiError);
-export const updateServiceInvoice = (id, serviceInvoiceData) => apiService.updateServiceInvoice(id, serviceInvoiceData).then(handleApiSuccess).catch(handleApiError);
-
-// Payment simplified functions
-export const getPayments = () => apiService.getPayments().then(handleApiSuccess).catch(handleApiError);
-export const getPaymentById = (id) => apiService.getPaymentById(id).then(handleApiSuccess).catch(handleApiError);
-export const getPaymentsByInvoiceId = (invoiceId) => apiService.getPaymentsByInvoiceId(invoiceId).then(handleApiSuccess).catch(handleApiError);
-export const createPayment = (paymentData) => apiService.createPayment(paymentData).then(handleApiSuccess).catch(handleApiError);
-export const updatePayment = (id, paymentData) => apiService.updatePayment(id, paymentData).then(handleApiSuccess).catch(handleApiError);
-
-// Patient-specific helper functions
-export const getPatientAppointments = (appointments, patientId) => {
-    return appointments
-        .filter(appointment => appointment.patient_id === patientId)
-        .sort((a, b) => new Date(b.appointment_datetime) - new Date(a.appointment_datetime));
-};
-
-export const getPatientDiagnosis = (diagnosis, patientId) => {
-    // For diagnosis, we need to find matching through medicineRecord_id or patient relation
-    // Since we don't have direct patient_id in diagnosis, we'll return all for now
-    return diagnosis.slice(0, 5); // Return first 5 diagnosis as example
-};
-
-export const getPatientStats = (appointments, diagnosis, patientId) => {
-    const patientAppointments = getPatientAppointments(appointments, patientId);
-    const patientDiagnosis = getPatientDiagnosis(diagnosis, patientId);
-    
-    return {
-        totalAppointments: patientAppointments.length,
-        completedAppointments: patientAppointments.filter(apt => apt.status === 'Completed').length,
-        pendingAppointments: patientAppointments.filter(apt => apt.status === 'Pending').length,
-        confirmedAppointments: patientAppointments.filter(apt => apt.status === 'Confirmed').length,
-        totalDiagnosis: patientDiagnosis.length
-    };
-};
-
-export const getSystemLogs = async () => {
-  try {
-    const [staffLogs, patientLogs, pharmacistLogs] = await Promise.all([
-      api.get('/SystemLog_Staff'),
-      api.get('/SystemLog_Patient'),
-      api.get('/SystemLog_Pharmacist'),
-    ]);
-    // Gộp và sắp xếp theo thời gian giảm dần (nếu có trường timestamp)
-    const allLogs = [
-      ...staffLogs.data.map(log => ({ ...log, type: 'staff' })),
-      ...patientLogs.data.map(log => ({ ...log, type: 'patient' })),
-      ...pharmacistLogs.data.map(log => ({ ...log, type: 'pharmacist' })),
-    ];
-    // Nếu có trường timestamp, sắp xếp giảm dần
-    allLogs.sort((a, b) => new Date(b.timestamp || b.time || 0) - new Date(a.timestamp || a.time || 0));
-    return { success: true, data: allLogs };
-  } catch (error) {
-    return handleApiError(error);
-  }
-};
-
-export default api; 
+}; 

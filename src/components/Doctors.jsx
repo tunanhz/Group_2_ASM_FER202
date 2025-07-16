@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDoctors, apiService } from '../services/api';
+import { getDoctors, getAccountStaff } from '../services/api';
 
 const Doctors = () => {
     const [doctors, setDoctors] = useState([]);
@@ -9,22 +9,16 @@ const Doctors = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDepartment, setSelectedDepartment] = useState('all');
 
-    // Fetch doctors and account staff data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const [doctorsResponse, accountStaffResponse] = await Promise.all([
+                const [doctorsData, accountStaffData] = await Promise.all([
                     getDoctors(),
-                    apiService.getAccountStaff()
+                    getAccountStaff()
                 ]);
-
-                if (doctorsResponse.success && accountStaffResponse.data) {
-                    setDoctors(doctorsResponse.data);
-                    setAccountStaff(accountStaffResponse.data);
-                } else {
-                    setError('Không thể tải dữ liệu bác sĩ');
-                }
+                setDoctors(doctorsData || []);
+                setAccountStaff(accountStaffData || []);
             } catch (err) {
                 setError('Có lỗi xảy ra khi tải dữ liệu');
                 console.error('Error fetching data:', err);
@@ -32,11 +26,9 @@ const Doctors = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
 
-    // Combine doctor data with account staff data
     const getCombinedDoctorData = () => {
         return doctors.map(doctor => {
             const accountInfo = accountStaff.find(staff => 
@@ -46,7 +38,7 @@ const Doctors = () => {
                 ...doctor,
                 accountInfo: accountInfo || null
             };
-        }).filter(doctor => doctor.accountInfo?.status === 'Enable'); // Only show enabled doctors
+        }).filter(doctor => doctor.accountInfo?.status === 'Enable');
     };
 
     // Get unique departments for filter

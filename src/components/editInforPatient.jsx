@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import imageCompression from 'browser-image-compression';
+import { getPatients, getAccountPatients, updatePatient, updateAccountPatient } from '../services/api';
 
 const EditPatient = ({ patientId = '1', onSave = () => {}, onCancel = () => {} }) => {
   const [formData, setFormData] = useState({
@@ -19,26 +20,18 @@ const EditPatient = ({ patientId = '1', onSave = () => {}, onCancel = () => {} }
     const fetchData = async () => {
       try {
         setLoading(true);
-        const patientResponse = await fetch(`http://localhost:9999/Patient/${patientId}`);
-        if (!patientResponse.ok) {
-          throw new Error('Không thể tải thông tin bệnh nhân');
-        }
-        const patientData = await patientResponse.json();
-
-        const accountResponse = await fetch(`http://localhost:9999/AccountPatient/${patientId}`);
-        if (!accountResponse.ok) {
-          throw new Error('Không thể tải thông tin tài khoản');
-        }
-        const accountData = await accountResponse.json();
-
+        const patients = await getPatients();
+        const patientData = patients.find(p => p.id === patientId);
+        const accounts = await getAccountPatients();
+        const accountData = accounts.find(a => a.id === patientId);
         setFormData({
-          full_name: patientData.full_name || '',
-          dob: patientData.dob || '',
-          gender: patientData.gender || '',
-          phone: patientData.phone || '',
-          address: patientData.address || '',
+          full_name: patientData?.full_name || '',
+          dob: patientData?.dob || '',
+          gender: patientData?.gender || '',
+          phone: patientData?.phone || '',
+          address: patientData?.address || '',
           img: null,
-          imgPreview: accountData.img || 'default.png',
+          imgPreview: accountData?.img || 'default.png',
         });
       } catch (err) {
         setError(err.message);
@@ -46,7 +39,6 @@ const EditPatient = ({ patientId = '1', onSave = () => {}, onCancel = () => {} }
         setLoading(false);
       }
     };
-
     fetchData();
   }, [patientId]);
 
@@ -83,40 +75,17 @@ const EditPatient = ({ patientId = '1', onSave = () => {}, onCancel = () => {} }
     e.preventDefault();
     try {
       setLoading(true);
-      const patientResponse = await fetch(`http://localhost:9999/Patient/${patientId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: patientId,
-          full_name: formData.full_name,
-          dob: formData.dob,
-          gender: formData.gender,
-          phone: formData.phone,
-          address: formData.address,
-        }),
+      await updatePatient(patientId, {
+        full_name: formData.full_name,
+        dob: formData.dob,
+        gender: formData.gender,
+        phone: formData.phone,
+        address: formData.address,
       });
-
-      if (!patientResponse.ok) {
-        throw new Error('Không thể cập nhật thông tin bệnh nhân');
-      }
-
       if (formData.img) {
-        const formDataToSend = new FormData();
-        formDataToSend.append('img', formData.img);
-        const accountResponse = await fetch(`http://localhost:9999/AccountPatient/${patientId}`, {
-          method: 'PUT',
-          body: formDataToSend,
-        });
-
-        if (!accountResponse.ok) {
-          throw new Error('Không thể cập nhật ảnh tài khoản');
-        }
+        await updateAccountPatient(patientId, { img: formData.img });
       }
-
-      const updatedPatient = await patientResponse.json();
-      onSave(updatedPatient);
+      onSave({ ...formData });
     } catch (err) {
       setError(err.message);
     } finally {

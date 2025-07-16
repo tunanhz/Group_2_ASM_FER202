@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import imageCompression from 'browser-image-compression';
+import { getReceptionists, getAccountStaff, updateReceptionist, updateAccountStaff } from '../services/api';
 
 const EditReceptionist = ({ receptionistId = '1', onSave = () => {}, onCancel = () => {} }) => {
   const [formData, setFormData] = useState({
@@ -16,28 +17,16 @@ const EditReceptionist = ({ receptionistId = '1', onSave = () => {}, onCancel = 
     const fetchData = async () => {
       try {
         setLoading(true);
-        const receptionistResponse = await fetch(`http://localhost:9999/Receptionist/${receptionistId}`);
-        if (!receptionistResponse.ok) {
-          throw new Error(`Không thể tải thông tin lễ tân: ${receptionistResponse.status}`);
-        }
-        const receptionistData = await receptionistResponse.json();
-
-        if (!receptionistData.account_staff_id) {
-          throw new Error('Không tìm thấy account_staff_id của lễ tân');
-        }
-
-        const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${receptionistData.account_staff_id}`);
-        if (!accountResponse.ok) {
-          const errorText = await accountResponse.text();
-          throw new Error(`Không thể tải thông tin tài khoản: ${accountResponse.status} - ${errorText}`);
-        }
-        const accountData = await accountResponse.json();
-
+        const receptionists = await getReceptionists();
+        const receptionistData = receptionists.find(r => r.id === receptionistId);
+        if (!receptionistData?.account_staff_id) throw new Error('Không tìm thấy account_staff_id của lễ tân');
+        const accountStaff = await getAccountStaff();
+        const accountData = accountStaff.find(a => a.id === receptionistData.account_staff_id);
         setFormData({
           full_name: receptionistData.full_name || '',
           phone: receptionistData.phone || '',
           img: null,
-          imgPreview: accountData.img || 'default.png',
+          imgPreview: accountData?.img || 'default.png',
         });
       } catch (err) {
         setError(err.message);
@@ -45,7 +34,6 @@ const EditReceptionist = ({ receptionistId = '1', onSave = () => {}, onCancel = 
         setLoading(false);
       }
     };
-
     fetchData();
   }, [receptionistId]);
 
@@ -82,40 +70,18 @@ const EditReceptionist = ({ receptionistId = '1', onSave = () => {}, onCancel = 
     e.preventDefault();
     try {
       setLoading(true);
-      const receptionistResponse = await fetch(`http://localhost:9999/Receptionist/${receptionistId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: receptionistId,
-          full_name: formData.full_name,
-          phone: formData.phone,
-        }),
+      await updateReceptionist(receptionistId, {
+        full_name: formData.full_name,
+        phone: formData.phone,
       });
-
-      if (!receptionistResponse.ok) {
-        throw new Error(`Không thể cập nhật thông tin lễ tân: ${receptionistResponse.status}`);
-      }
-
-      const receptionistData = await receptionistResponse.json();
       if (formData.img) {
-        const formDataToSend = new FormData();
-        formDataToSend.append('img', formData.img);
-        console.log('Uploading image for AccountStaff ID:', receptionistData.account_staff_id);
-        const accountResponse = await fetch(`http://localhost:9999/AccountStaff/${receptionistData.account_staff_id}`, {
-          method: 'PUT',
-          body: formDataToSend,
-        });
-
-        if (!accountResponse.ok) {
-          const errorText = await accountResponse.text();
-          throw new Error(`Không thể cập nhật ảnh tài khoản: ${accountResponse.status} - ${errorText}`);
+        const receptionists = await getReceptionists();
+        const receptionistData = receptionists.find(r => r.id === receptionistId);
+        if (receptionistData?.account_staff_id) {
+          await updateAccountStaff(receptionistData.account_staff_id, { img: formData.img });
         }
       }
-
-      const updatedReceptionist = receptionistData;
-      onSave(updatedReceptionist);
+      onSave({ ...formData });
     } catch (err) {
       setError(err.message);
     } finally {

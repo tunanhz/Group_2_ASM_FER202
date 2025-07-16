@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { addMedicalService } from '../services/api';
 
 const AddService = () => {
     const [form, setForm] = useState({ name: '', price: '', description: '' });
@@ -16,13 +17,7 @@ const AddService = () => {
             alert("Vui lòng nhập đầy đủ tên và giá");
             return;
         }
-
-        await fetch('http://localhost:9999/ListOfMedicalService', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
-        });
-
+        await addMedicalService(form);
         navigate('/services');
     };
 

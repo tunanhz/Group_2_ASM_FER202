@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getMedicalServices, addMedicalService, updateMedicalService, deleteMedicalService } from '../services/api';
 
 
 const ServiceManager = () => {
@@ -7,9 +8,8 @@ const ServiceManager = () => {
     const [editingId, setEditingId] = useState(null);
 
     const fetchServices = async () => {
-        const res = await fetch('http://localhost:9999/ListOfMedicalService');
-        const data = await res.json();
-        setServices(data);
+        const services = await getMedicalServices();
+        setServices(services || []);
     };
 
     useEffect(() => {
@@ -26,17 +26,9 @@ const ServiceManager = () => {
         if (!form.name || !form.price) return alert('Vui lòng nhập đầy đủ tên và giá');
 
         if (editingId) {
-            await fetch(`http://localhost:9999/ListOfMedicalService/${editingId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form)
-            });
+            await updateMedicalService(editingId, form);
         } else {
-            await fetch('http://localhost:9999/ListOfMedicalService', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form)
-            });
+            await addMedicalService(form);
         }
 
         setForm({ name: '', price: '', description: '' });
@@ -55,9 +47,7 @@ const ServiceManager = () => {
 
     const handleDelete = async (id) => {
         if (window.confirm('Xác nhận xoá?')) {
-            await fetch(`http://localhost:9999/ListOfMedicalService/${id}`, {
-                method: 'DELETE'
-            });
+            await deleteMedicalService(id);
             fetchServices();
         }
     };

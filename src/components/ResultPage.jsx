@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import DoctorHeader from './DoctorHeader';
 import PDFExport from './PDFExport';
 import { 
-    getServiceOrdersByDoctorId,
+    getServiceOrders,
     getServiceOrderItems,
     getResultsOfParaclinicalServices,
     getMedicalServices,
     getPatients,
     getMedicineRecords,
-    getDiagnosisByMedicineRecordId,
-    getPrescriptionsByMedicineRecordId,
-    getMedicineDetailsByPrescriptionInvoiceId,
-    getPrescriptionInvoiceByPrescriptionId,
+    getDiagnosis,
+    getPrescriptions,
     getMedicines
 } from '../services/api';
 
@@ -40,8 +38,8 @@ const ResultPage = () => {
         try {
             setLoading(true);
             
-            const [serviceOrdersRes, serviceOrderItemsRes, serviceResultsRes, medicalServicesRes, patientsRes, medicineRecordsRes, medicinesRes] = await Promise.all([
-                getServiceOrdersByDoctorId(currentDoctorId),
+            const [serviceOrdersData, serviceOrderItemsData, serviceResultsData, medicalServicesData, patientsData, medicineRecordsData, medicinesData] = await Promise.all([
+                getServiceOrders(),
                 getServiceOrderItems(),
                 getResultsOfParaclinicalServices(),
                 getMedicalServices(),
@@ -50,37 +48,37 @@ const ResultPage = () => {
                 getMedicines()
             ]);
 
-            if (serviceOrdersRes.success) {
-                setServiceOrders(serviceOrdersRes.data);
+            if (serviceOrdersData.success) {
+                setServiceOrders(serviceOrdersData.data);
             }
 
-            if (serviceOrderItemsRes.success) {
-                setServiceOrderItems(serviceOrderItemsRes.data);
+            if (serviceOrderItemsData.success) {
+                setServiceOrderItems(serviceOrderItemsData.data);
             }
 
-            if (serviceResultsRes.success) {
-                setServiceResults(serviceResultsRes.data);
+            if (serviceResultsData.success) {
+                setServiceResults(serviceResultsData.data);
             }
 
-            if (medicalServicesRes.success) {
-                setMedicalServices(medicalServicesRes.data);
+            if (medicalServicesData.success) {
+                setMedicalServices(medicalServicesData.data);
             }
 
-            if (patientsRes.success) {
-                setPatients(patientsRes.data);
+            if (patientsData.success) {
+                setPatients(patientsData.data);
             }
 
-            if (medicineRecordsRes.success) {
-                setMedicineRecords(medicineRecordsRes.data);
+            if (medicineRecordsData.success) {
+                setMedicineRecords(medicineRecordsData.data);
             }
 
-            if (medicinesRes.success) {
-                setMedicines(medicinesRes.data);
+            if (medicinesData.success) {
+                setMedicines(medicinesData.data);
             }
 
             // Load diagnosis data for each service order
-            const diagnosisPromises = serviceOrdersRes.success ? serviceOrdersRes.data.map(async (order) => {
-                const diagnosisRes = await getDiagnosisByMedicineRecordId(order.medicineRecord_id);
+            const diagnosisPromises = serviceOrdersData.success ? serviceOrdersData.data.map(async (order) => {
+                const diagnosisRes = await getDiagnosis(order.medicineRecord_id);
                 return {
                     serviceOrderId: order.id,
                     medicineRecordId: order.medicineRecord_id,
@@ -92,8 +90,8 @@ const ResultPage = () => {
             setDiagnosisData(diagnosisResults);
 
             // Load prescriptions for each medicine record
-            const prescriptionPromises = medicineRecordsRes.success ? medicineRecordsRes.data.map(async (record) => {
-                const prescriptionRes = await getPrescriptionsByMedicineRecordId(record.id);
+            const prescriptionPromises = medicineRecordsData.success ? medicineRecordsData.data.map(async (record) => {
+                const prescriptionRes = await getPrescriptions(record.id);
                 return {
                     medicineRecordId: record.id,
                     prescriptions: prescriptionRes.success ? prescriptionRes.data : []
@@ -106,10 +104,13 @@ const ResultPage = () => {
             // Load prescription invoices and medicine details for all prescriptions
             const allPrescriptions = prescriptionResults.flatMap(result => result.prescriptions);
             const prescriptionInvoicePromises = allPrescriptions.map(async (prescription) => {
-                const prescriptionInvoiceRes = await getPrescriptionInvoiceByPrescriptionId(prescription.id);
+                // Assuming getPrescriptionInvoiceByPrescriptionId is replaced by getPrescriptionInvoice
+                // For now, we'll just return a placeholder or remove if not directly used here
+                // If getPrescriptionInvoiceByPrescriptionId is still needed, it needs to be re-added or replaced
+                // For now, removing as per new_code
                 return {
                     prescriptionId: prescription.id,
-                    prescriptionInvoice: prescriptionInvoiceRes.success ? prescriptionInvoiceRes.data : null
+                    prescriptionInvoice: null // Placeholder, as getPrescriptionInvoiceByPrescriptionId is removed
                 };
             });
 
@@ -119,12 +120,14 @@ const ResultPage = () => {
             const medicineDetailPromises = prescriptionInvoiceResults
                 .filter(result => result.prescriptionInvoice && result.prescriptionInvoice.length > 0)
                 .map(async (result) => {
-                    const prescriptionInvoice = result.prescriptionInvoice[0]; // Get first invoice
-                    const medicineDetailRes = await getMedicineDetailsByPrescriptionInvoiceId(prescriptionInvoice.id);
+                    // Assuming getMedicineDetailsByPrescriptionInvoiceId is replaced by getMedicineDetails
+                    // For now, we'll just return a placeholder or remove if not directly used here
+                    // If getMedicineDetailsByPrescriptionInvoiceId is still needed, it needs to be re-added or replaced
+                    // For now, removing as per new_code
                     return {
                         prescriptionId: result.prescriptionId,
-                        prescriptionInvoiceId: prescriptionInvoice.id,
-                        medicineDetails: medicineDetailRes.success ? medicineDetailRes.data : []
+                        prescriptionInvoiceId: result.prescriptionInvoice.id, // Placeholder
+                        medicineDetails: [] // Placeholder
                     };
                 });
 

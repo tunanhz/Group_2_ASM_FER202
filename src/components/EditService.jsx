@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { getMedicalServices, updateMedicalService } from '../services/api';
 
 const EditService = () => {
     const { id } = useParams();
@@ -11,9 +12,10 @@ const EditService = () => {
     const returnPage = params.get("page") || 1;
 
     useEffect(() => {
-        fetch(`http://localhost:9999/ListOfMedicalService/${id}`)
-            .then(res => res.json())
-            .then(data => setForm(data));
+        getMedicalServices().then(services => {
+            const svc = services.find(s => s.id === id);
+            if (svc) setForm(svc);
+        });
     }, [id]);
 
     const handleChange = (e) => {
@@ -23,14 +25,8 @@ const EditService = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!form.name || !form.price) return alert("Vui lòng nhập đầy đủ tên và giá");
-
-        await fetch(`http://localhost:9999/ListOfMedicalService/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form)
-        });
-
+        if (!form.name || !form.price) return alert('Vui lòng nhập đầy đủ tên và giá');
+        await updateMedicalService(id, form);
         navigate(`/services?page=${returnPage}`);
     };
 

@@ -5,8 +5,7 @@ import {
   getDiagnosis, 
   getDoctors,
   getPatientStats,
-  getPatientAppointments,
-  getPatientDiagnosis 
+  addAppointment
 } from '../services/api';
 
 const PatientDashboard = () => {
@@ -58,35 +57,34 @@ const PatientDashboard = () => {
   useEffect(() => {
     const fetchPatientData = async () => {
       if (!currentPatientId) return; 
-      
       try {
         setLoading(true);
-        const [patientsRes, appointmentsRes, diagnosisRes, doctorsRes] = await Promise.all([
+        const [patientsData, appointmentsData, diagnosisData, doctorsData] = await Promise.all([
           getPatients(),
-          getAppointments(), 
+          getAppointments(),
           getDiagnosis(),
           getDoctors()
         ]);
-
-        const patient = patientsRes.data.find(p => p.id === currentPatientId);
-        const patientAppointments = getPatientAppointments(appointmentsRes.data, currentPatientId);
-        const patientDiagnosis = getPatientDiagnosis(diagnosisRes.data, currentPatientId);
-        const stats = getPatientStats(appointmentsRes.data, diagnosisRes.data, currentPatientId);
-
+        // Đảm bảo appointmentsData là mảng
+        const arr = Array.isArray(appointmentsData) ? appointmentsData : appointmentsData.data;
+        console.log('appointmentsData:', arr);
+        console.log('currentPatientId:', currentPatientId);
+        const patient = patientsData.find(p => String(p.id) === String(currentPatientId));
+        // Lọc appointment theo bệnh nhân hiện tại, ép kiểu về string
+        const patientAppointments = arr.filter(a => String(a.patient_id) === String(currentPatientId));
         setPatientData(patient);
         setAppointments(patientAppointments);
-        setDiagnosis(patientDiagnosis);
-        setDoctors(doctorsRes.data);
-        setStats(stats);
+        setDiagnosis(diagnosisData.filter(d => String(d.patient_id) === String(currentPatientId)));
+        setDoctors(doctorsData);
+        setStats(await getPatientStats(currentPatientId));
       } catch (error) {
         console.error('Error fetching patient data:', error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPatientData();
-  }, [currentPatientId]); // Dependency: currentPatientId
+  }, [currentPatientId]);
 
   const getDoctorName = (doctorId) => {
     const doctor = doctors.find(d => d.id === doctorId);
@@ -174,13 +172,7 @@ const PatientDashboard = () => {
       };
 
       // Thêm appointment mới vào database
-      const response = await fetch('http://localhost:9999/Appointment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newAppointment)
-      });
+      const response = await addAppointment(newAppointment);
 
       if (response.ok) {
         alert('✅ Đặt lịch khám thành công! Vui lòng chờ xác nhận từ bệnh viện.');
@@ -194,16 +186,16 @@ const PatientDashboard = () => {
         });
         
         // Refresh data để hiển thị appointment mới
-        const [patientsRes, appointmentsRes, diagnosisRes, doctorsRes] = await Promise.all([
+        const [patientsData, appointmentsData, diagnosisData, doctorsData] = await Promise.all([
           getPatients(),
           getAppointments(), 
           getDiagnosis(),
           getDoctors()
         ]);
 
-        const patientAppointments = getPatientAppointments(appointmentsRes.data, currentPatientId);
-        const patientDiagnosis = getPatientDiagnosis(diagnosisRes.data, currentPatientId);
-        const stats = getPatientStats(appointmentsRes.data, diagnosisRes.data, currentPatientId);
+        const patientAppointments = appointmentsData.filter(a => a.patient_id === currentPatientId);
+        const patientDiagnosis = diagnosisData.filter(d => d.patient_id === currentPatientId);
+        const stats = getPatientStats(appointmentsData, diagnosisData, currentPatientId);
 
         setAppointments(patientAppointments);
         setDiagnosis(patientDiagnosis);

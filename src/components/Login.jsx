@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getAccountPatients, getAccountStaff, getAccountPharmacist } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -7,93 +9,67 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setLoading(true);
-
     try {
-      const endpoints = [
-        { type: "patient", url: "http://localhost:9999/AccountPatient" },
-        { type: "staff", url: "http://localhost:9999/AccountStaff" },
-        { type: "pharmacist", url: "http://localhost:9999/AccountPharmacist" },
-      ];
-
-      let matchedUser = null;
-      let userType = "";
-
-      for (const endpoint of endpoints) {
-        const res = await fetch(endpoint.url);
-        const data = await res.json();
-        const found = data.find(
-          (user) => user.email === email && user.password === password
-        );
-
-        if (found) {
-          matchedUser = found;
-          userType = endpoint.type;
-          break;
-        }
-      }
-
-      if (matchedUser) {
-        if (matchedUser.status === "Disable") {
-          setError("❌ Tài khoản đã bị vô hiệu hóa.");
+        const [patients, staff, pharmacists] = await Promise.all([
+            getAccountPatients(),
+            getAccountStaff(),
+            getAccountPharmacist ? getAccountPharmacist() : Promise.resolve([])
+        ]);
+        let matchedUser = null;
+        let userType = "";
+        const foundPatient = patients.find(user => user.email === email && user.password === password);
+        if (foundPatient) {
+            matchedUser = foundPatient;
+            userType = "patient";
         } else {
-          setSuccess("✅ Đăng nhập thành công!");
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              ...matchedUser,
-              userType,
-              loginTime: new Date().toISOString(),
-            })
-          );
-
-          setTimeout(() => {
-            if (userType === "staff") {
-              switch (matchedUser.role) {
-                case "Doctor":
-                  window.location.href = "/doctor-dashboard";
-                  break;
-                case "Nurse":
-                  window.location.href = "/nurse-dashboard";
-                  break;
-                case "Receptionist":
-                  window.location.href = "/receptionist-dashboard";
-                  break;
-                case "AdminSys":
-                  window.location.href = "/dashboard";
-                  break;
-                case "AdminBusiness":
-                  window.location.href = "/business-dashboard";
-                  break;
-                case "Pharmacist":
-                  window.location.href = "/pharmacist-dashboard";
-                  break;
-                default:
-                  window.location.href = "/staff-dashboard";
-              }
-            } else if (userType === "pharmacist") {
-              window.location.href = "/pharmacist-dashboard";
+            const foundStaff = staff.find(user => user.email === email && user.password === password);
+            if (foundStaff) {
+                matchedUser = foundStaff;
+                userType = "staff";
+            } else if (pharmacists && pharmacists.length) {
+                const foundPharmacist = pharmacists.find(user => user.email === email && user.password === password);
+                if (foundPharmacist) {
+                    matchedUser = foundPharmacist;
+                    userType = "pharmacist";
+                }
             }
-            else {
-              window.location.href = "/patient-dashboard";
-            }
-          }, 1000);
         }
-      } else {
-        setError("❌ Email hoặc mật khẩu không đúng.");
-      }
+        if (matchedUser) {
+            if (matchedUser.status === "Disable") {
+                setError("❌ Tài khoản đã bị vô hiệu hóa.");
+            } else {
+                setSuccess("✅ Đăng nhập thành công!");
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify({
+                        ...matchedUser,
+                        userType,
+                        loginTime: new Date().toISOString(),
+                    })
+                );
+                setTimeout(() => {
+                  if (userType === "patient") navigate("/patient-dashboard");
+                  else if (userType === "staff") navigate("/doctor-dashboard");
+                  else if (userType === "pharmacist") navigate("/pharmacist-dashboard");
+                  else navigate("/");
+                }, 800);
+            }
+        } else {
+            setError("❌ Sai thông tin đăng nhập.");
+        }
     } catch (err) {
-      setError("❌ Lỗi khi đọc dữ liệu.");
-      console.error(err);
+        setError("❌ Lỗi đăng nhập.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">

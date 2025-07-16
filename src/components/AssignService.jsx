@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DoctorHeader from './DoctorHeader';
 import SimplePDFExport from './SimplePDFExport';
-import { 
-    getServiceOrderItemsByDoctorId,
-    getMedicalServices,
-    getServiceOrders,
-    getPatients,
-    getMedicineRecords,
-    getResultsOfParaclinicalServices,
-    getResultByServiceOrderItemId,
-    createParaclinicalResult
-} from '../services/api';
+import { getServiceOrderItems, getMedicalServices, getServiceOrders, getPatients, getMedicineRecords, getResultsOfParaclinicalServices, addParaclinicalResult } from '../services/api';
 
 const AssignService = () => {
     const [assignedServices, setAssignedServices] = useState([]);
@@ -38,8 +29,8 @@ const AssignService = () => {
         try {
             setLoading(true);
             
-            const [servicesRes, medicalServicesRes, serviceOrdersRes, patientsRes, medicineRecordsRes, resultsRes] = await Promise.all([
-                getServiceOrderItemsByDoctorId(currentDoctorId),
+            const [assignedServicesData, medicalServicesData, serviceOrdersData, patientsData, medicineRecordsData, serviceResultsData] = await Promise.all([
+                getServiceOrderItems(),
                 getMedicalServices(),
                 getServiceOrders(),
                 getPatients(),
@@ -47,28 +38,28 @@ const AssignService = () => {
                 getResultsOfParaclinicalServices()
             ]);
 
-            if (servicesRes.success) {
-                setAssignedServices(servicesRes.data);
+            if (assignedServicesData.success) {
+                setAssignedServices(assignedServicesData.data);
             }
 
-            if (medicalServicesRes.success) {
-                setMedicalServices(medicalServicesRes.data);
+            if (medicalServicesData.success) {
+                setMedicalServices(medicalServicesData.data);
             }
 
-            if (serviceOrdersRes.success) {
-                setServiceOrders(serviceOrdersRes.data);
+            if (serviceOrdersData.success) {
+                setServiceOrders(serviceOrdersData.data);
             }
 
-            if (patientsRes.success) {
-                setPatients(patientsRes.data);
+            if (patientsData.success) {
+                setPatients(patientsData.data);
             }
 
-            if (medicineRecordsRes.success) {
-                setMedicineRecords(medicineRecordsRes.data);
+            if (medicineRecordsData.success) {
+                setMedicineRecords(medicineRecordsData.data);
             }
 
-            if (resultsRes.success) {
-                setServiceResults(resultsRes.data);
+            if (serviceResultsData.success) {
+                setServiceResults(serviceResultsData.data);
             }
 
         } catch (error) {
@@ -141,7 +132,7 @@ const AssignService = () => {
                 created_at: new Date().toISOString()
             };
 
-            const resultRes = await createParaclinicalResult(resultData);
+            const resultRes = await addParaclinicalResult(resultData);
             
             if (resultRes.success) {
                 alert('✅ Đã lưu kết quả dịch vụ thành công!');

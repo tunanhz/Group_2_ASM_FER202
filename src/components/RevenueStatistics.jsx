@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+import { getInvoices, getAccountPatients } from '../services/api';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -30,12 +31,10 @@ const RevenueStatistics = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const invoiceRes = await fetch("http://localhost:9999/Invoice");
-                const patientRes = await fetch("http://localhost:9999/AccountPatient");
-
-                const invoiceData = await invoiceRes.json();
-                const patientData = await patientRes.json();
-
+                const [invoiceData, patientData] = await Promise.all([
+                    getInvoices(),
+                    getAccountPatients()
+                ]);
                 setInvoices(invoiceData);
                 setPatients(patientData);
                 setFiltered(invoiceData);
