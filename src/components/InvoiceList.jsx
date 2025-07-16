@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchJsonBinData } from '../services/api';
 
 const formatDate = (isoDate) => {
     if (!isoDate) return "Không rõ";
@@ -15,19 +16,13 @@ const InvoiceList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const invoiceRes = await fetch("http://localhost:9999/Invoice");
-                const patientRes = await fetch("http://localhost:9999/AccountPatient");
-
-                const invoiceData = await invoiceRes.json();
-                const patientData = await patientRes.json();
-
-                setInvoices(invoiceData);
-                setPatients(patientData);
+                const data = await fetchJsonBinData();
+                setInvoices(data.Invoice || []);
+                setPatients(data.AccountPatient || []);
             } catch (err) {
                 console.error("Lỗi khi tải dữ liệu:", err);
             }
         };
-
         fetchData();
     }, []);
 

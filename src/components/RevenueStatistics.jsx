@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+import { fetchJsonBinData } from '../services/api';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -30,15 +31,10 @@ const RevenueStatistics = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const invoiceRes = await fetch("http://localhost:9999/Invoice");
-                const patientRes = await fetch("http://localhost:9999/AccountPatient");
-
-                const invoiceData = await invoiceRes.json();
-                const patientData = await patientRes.json();
-
-                setInvoices(invoiceData);
-                setPatients(patientData);
-                setFiltered(invoiceData);
+                const data = await fetchJsonBinData();
+                setInvoices(data.Invoice || []);
+                setPatients(data.AccountPatient || []);
+                setFiltered(data.Invoice || []);
             } catch (err) {
                 console.error("Lỗi khi tải dữ liệu:", err);
             }

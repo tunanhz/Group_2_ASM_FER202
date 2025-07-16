@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { fetchJsonBinData } from '../services/api';
 
 // Format ngày theo dd/MM/yyyy
 const formatDate = (isoDate) => {
@@ -16,14 +17,9 @@ const PrescriptionList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const presRes = await fetch("http://localhost:9999/Prescription");
-                const docRes = await fetch("http://localhost:9999/Doctor");
-
-                const presData = await presRes.json();
-                const docData = await docRes.json();
-
-                setPrescriptions(presData.filter(p => p.status === "Pending"));
-                setDoctors(docData);
+                const data = await fetchJsonBinData();
+                setPrescriptions((data.Prescription || []).filter(p => p.status === "Pending"));
+                setDoctors(data.Doctor || []);
             } catch (err) {
                 console.error("Lỗi khi tải dữ liệu:", err);
             }

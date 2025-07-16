@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { fetchJsonBinData } from '../services/api';
 
 const ServiceList = () => {
     const [services, setServices] = useState([]);
@@ -9,9 +10,8 @@ const ServiceList = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch("http://localhost:9999/ListOfMedicalService")
-            .then((res) => res.json())
-            .then((data) => setServices(data));
+        fetchJsonBinData()
+            .then((data) => setServices(data.ListOfMedicalService || []));
     }, []);
 
     useEffect(() => {
@@ -37,12 +37,8 @@ const ServiceList = () => {
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm("Xác nhận xoá?")) {
-            await fetch(`http://localhost:9999/ListOfMedicalService/${id}`, {
-                method: "DELETE"
-            });
-            setServices(prev => prev.filter(s => s.id !== id));
-        }
+        alert('Chức năng xóa không hỗ trợ trên jsonbin.io.');
+        return;
     };
 
     return (

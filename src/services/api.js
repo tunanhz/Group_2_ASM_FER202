@@ -427,4 +427,16 @@ export const getSystemLogs = async () => {
   }
 };
 
+// Hàm fetch toàn bộ data từ jsonbin.io
+export const fetchJsonBinData = async () => {
+    const response = await fetch('https://api.jsonbin.io/v3/b/6877e21c3052b733d10d9809', {
+        headers: {
+            'X-Master-Key': '$2a$10$eoMup44jxUPqEc6cZyCuUuTxGevIzxtr3W6Ap7BHzZsIU2ywXCJ4G'
+        }
+    });
+    if (!response.ok) throw new Error('Không thể lấy dữ liệu từ jsonbin.io');
+    const data = await response.json();
+    return data.record;
+};
+
 export default api; 

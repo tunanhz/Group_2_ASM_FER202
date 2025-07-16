@@ -6,7 +6,8 @@ import {
   getDoctors,
   getPatientStats,
   getPatientAppointments,
-  getPatientDiagnosis 
+  getPatientDiagnosis,
+  fetchJsonBinData
 } from '../services/api';
 
 const PatientDashboard = () => {

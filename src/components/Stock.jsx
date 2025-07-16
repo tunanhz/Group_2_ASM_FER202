@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { fetchJsonBinData } from '../services/api';
 
 const Stock = () => {
     const [stocks, setStocks] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:9999/Stocks")
-            .then((res) => res.json())
-            .then((data) => setStocks(data))
+        fetchJsonBinData()
+            .then((data) => setStocks(data.Stocks || []))
             .catch((err) => console.error("Lỗi khi tải kho thuốc:", err));
     }, []);
 

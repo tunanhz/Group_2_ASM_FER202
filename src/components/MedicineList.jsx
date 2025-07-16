@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { fetchJsonBinData } from '../services/api';
 
 const MedicineList = () => {
     const [medicines, setMedicines] = useState([]);
@@ -9,9 +10,8 @@ const MedicineList = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch("http://localhost:9999/Medicine")
-            .then((res) => res.json())
-            .then((data) => setMedicines(data))
+        fetchJsonBinData()
+            .then((data) => setMedicines(data.Medicine || []))
             .catch((err) => console.error("Lỗi khi tải danh sách thuốc:", err));
     }, []);
 

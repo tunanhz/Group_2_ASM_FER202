@@ -5,6 +5,7 @@ import EditDoctor from "./editInforDoctor";
 import EditNurse from "./editInforNurse";
 import EditReceptionist from "./editInforReceptionist";
 import { useLocation } from 'react-router-dom';
+import { fetchJsonBinData } from '../services/api';
 
 const AccountList = () => {
   const [accounts, setAccounts] = useState({ patients: [], staff: [] });
@@ -44,13 +45,8 @@ const AccountList = () => {
 
   const fetchAccounts = async () => {
     try {
-      const [patientsRes, staffRes] = await Promise.all([
-        fetch('http://localhost:9999/AccountPatient'),
-        fetch('http://localhost:9999/AccountStaff')
-      ]);
-      const patients = await patientsRes.json();
-      const staff = await staffRes.json();
-      setAccounts({ patients, staff });
+      const data = await fetchJsonBinData();
+      setAccounts({ patients: data.AccountPatient, staff: data.AccountStaff });
     } catch (error) {
       console.error("Error fetching accounts:", error);
     } finally {

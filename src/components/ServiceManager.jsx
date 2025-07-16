@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { fetchJsonBinData } from '../services/api';
 
 
 const ServiceManager = () => {
@@ -7,9 +8,8 @@ const ServiceManager = () => {
     const [editingId, setEditingId] = useState(null);
 
     const fetchServices = async () => {
-        const res = await fetch('http://localhost:9999/ListOfMedicalService');
-        const data = await res.json();
-        setServices(data);
+        const data = await fetchJsonBinData();
+        setServices(data.ListOfMedicalService || []);
     };
 
     useEffect(() => {
@@ -26,17 +26,13 @@ const ServiceManager = () => {
         if (!form.name || !form.price) return alert('Vui lòng nhập đầy đủ tên và giá');
 
         if (editingId) {
-            await fetch(`http://localhost:9999/ListOfMedicalService/${editingId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form)
-            });
+            // Các thao tác thêm/sửa/xóa cần disable hoặc thông báo không hỗ trợ vì jsonbin chỉ GET
+            alert('Chức năng cập nhật không hỗ trợ trên jsonbin.io.');
+            return;
         } else {
-            await fetch('http://localhost:9999/ListOfMedicalService', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form)
-            });
+            // Các thao tác thêm/sửa/xóa cần disable hoặc thông báo không hỗ trợ vì jsonbin chỉ GET
+            alert('Chức năng thêm mới không hỗ trợ trên jsonbin.io.');
+            return;
         }
 
         setForm({ name: '', price: '', description: '' });
@@ -55,10 +51,9 @@ const ServiceManager = () => {
 
     const handleDelete = async (id) => {
         if (window.confirm('Xác nhận xoá?')) {
-            await fetch(`http://localhost:9999/ListOfMedicalService/${id}`, {
-                method: 'DELETE'
-            });
-            fetchServices();
+            // Các thao tác thêm/sửa/xóa cần disable hoặc thông báo không hỗ trợ vì jsonbin chỉ GET
+            alert('Chức năng xóa không hỗ trợ trên jsonbin.io.');
+            return;
         }
     };
 

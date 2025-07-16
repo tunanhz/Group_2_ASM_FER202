@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchJsonBinData } from '../services/api';
 
 const ForgetPassword = () => {
   const [username, setUsername] = useState("");
@@ -11,10 +12,8 @@ const ForgetPassword = () => {
   const handleReset = async (e) => {
     e.preventDefault();
     try {
-      // Tìm tài khoản theo username + email
-      const accRes = await fetch("http://localhost:9999/AccountPatient");
-      const accData = await accRes.json();
-
+      const data = await fetchJsonBinData();
+      const accData = data.AccountPatient || [];
       const matchedAcc = accData.find(
         (acc) => acc.username === username && acc.email === email
       );
@@ -23,17 +22,8 @@ const ForgetPassword = () => {
         return alert("Không tìm thấy tài khoản với tên đăng nhập và email đã nhập");
       }
 
-      // Cập nhật mật khẩu mới
-      const updateRes = await fetch(`http://localhost:9999/AccountPatient/${matchedAcc.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: newPassword })
-      });
-
-      if (!updateRes.ok) throw new Error("Cập nhật mật khẩu thất bại");
-
-      alert("Đặt lại mật khẩu thành công!");
-      navigate("/login");
+      alert('Chức năng đặt lại mật khẩu không hỗ trợ trên jsonbin.io.');
+      return;
     } catch (err) {
       alert("Có lỗi xảy ra khi đặt lại mật khẩu: " + err.message);
     }
