@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Base URL cho JSON Server (chạy trên port 9999)
-const BASE_URL = 'http://localhost:9999';
+// Lấy BASE_URL từ biến môi trường, fallback về localhost nếu chưa có
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:9999';
 
 // Create axios instance
 const api = axios.create({
