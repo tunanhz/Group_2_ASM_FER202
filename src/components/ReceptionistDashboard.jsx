@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiService, dataHelpers, handleApiError, handleApiSuccess, deleteAppointment } from '../services/api';
 import EditReceptionist from './editInforReceptionist';
+import CreateInvoice from './CreateInvoice';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -895,6 +896,10 @@ const ReceptionistDashboard = () => {
                         transform: scale(1.01);
                     }
                 `}</style>
+            </div>
+            {/* Nhúng CreateInvoice ở cuối dashboard */}
+            <div className="container-fluid py-4" style={{ position: 'relative', zIndex: 2 }}>
+                <CreateInvoice />
             </div>
         </div>
     );

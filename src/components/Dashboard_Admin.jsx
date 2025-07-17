@@ -130,10 +130,22 @@ const Dashboard = () => {
 
   const getUserTypeBadge = (userType) => {
     switch(userType) {
-      case "Staff": return <Badge bg="primary" className="ms-1">Staff</Badge>;
-      case "Patient": return <Badge bg="success" className="ms-1">Patient</Badge>;
-      case "Pharmacist": return <Badge bg="warning" className="ms-1">Pharmacist</Badge>;
-      default: return <Badge bg="secondary" className="ms-1">{userType}</Badge>;
+      case "AdminSys":
+        return <Badge bg="danger" className="ms-1">AdminSys</Badge>;
+      case "Doctor":
+        return <Badge bg="success" className="ms-1">Doctor</Badge>;
+      case "Nurse":
+        return <Badge bg="info" className="ms-1">Nurse</Badge>;
+      case "Receptionist":
+        return <Badge bg="dark" className="ms-1">Receptionist</Badge>;
+      case "Pharmacist":
+        return <Badge bg="warning" className="ms-1">Pharmacist</Badge>;
+      case "Patient":
+        return <Badge bg="secondary" className="ms-1">Patient</Badge>;
+      case "Staff":
+        return <Badge bg="primary" className="ms-1">Staff</Badge>;
+      default:
+        return <Badge bg="secondary" className="ms-1">{userType}</Badge>;
     }
   };
 

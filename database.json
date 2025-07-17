@@ -6149,6 +6149,15 @@
       "issue_date": "2025-05-25",
       "total_amount": "970000",
       "status": "Paid"
+    },
+    {
+      "id": "1007",
+      "patient_id": "52",
+      "medicineRecord_id": "5ded",
+      "issue_date": "2025-07-17",
+      "total_amount": "227000",
+      "status": "Pending",
+      "notes": ""
     }
   ],
   "PrescriptionInvoice": [
@@ -6909,6 +6918,15 @@
       "service_order_item_id": "46",
       "quantity": "3",
       "unit_price": "175000"
+    },
+    {
+      "id": "af81",
+      "invoice_id": "1007",
+      "service_order_item_id": "f1f6",
+      "service_name": "Dịch vụ khám",
+      "service_price": "200000",
+      "quantity": 1,
+      "total_price": "200000"
     }
   ],
   "ResultsOfParaclinicalServices": [
